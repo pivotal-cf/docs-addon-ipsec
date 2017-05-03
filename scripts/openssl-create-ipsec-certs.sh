@@ -54,6 +54,8 @@ openssl req -newkey rsa:2048 -days 365 -nodes -sha256 -subj /CN=PCF\ IPsec\ peer
 openssl x509 -req -in pcf-ipsec-peer-req.pem -days 365 -extfile openssl.cnf -extensions v3_req -CA pcf-ipsec-ca-cert.pem -CAkey pcf-ipsec-ca-key.pem -set_serial 01 -out pcf-ipsec-peer-cert.pem
 openssl x509 -inform pem -in pcf-ipsec-peer-cert.pem -text
 openssl x509 -inform pem -in pcf-ipsec-ca-cert.pem  -text
+openssl pkcs12 -export -out pcf-ipsec-peer.pfx -inkey pcf-ipsec-peer-key.pem -in pcf-ipsec-peer-cert.pem
+base64 -b 64 -i pcf-ipsec-peer.pfx -o pcf-ipsec-peer.pfx.b64
 
 rm -f openssl.cnf
 rm -f pcf-ipsec-peer-req.pem
