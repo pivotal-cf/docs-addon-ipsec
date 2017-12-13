@@ -285,7 +285,9 @@ releases:
            ... <strong>\<SECOND ROOT\></strong>
            -----END CERTIFICATE-----
     </pre>
-    <p class="note"><strong>Note</strong>: The root and the intermediate certificates cannot have the same subject/common name. The root <b>must</b> be the first certificate of the chain.</p>
+    <p class="note"><strong>Note</strong>: The root and the intermediate certificates cannot have the same subjectName,
+       (also called the common name and set with <code>CN=</code>).<br>
+       Also, the root certificate <b>must</b> be the first certificate of the chain.</p>
 
   * <code>prestart\_timeout</code>: You can modify the 30 second default prestart timeout value. This value limits the number of seconds allowed for IPsec to start before failing the attempt.
   * <code>esp\_proposals</code>: <a name="esp_proposals"></a> You can modify the ESP (Quick Mode) encryption and integrity algorithms.
