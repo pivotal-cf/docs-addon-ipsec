@@ -17,9 +17,11 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
 
 1. Log in to BOSH Director.
 
-2. Run the following command to download your runtime configuration YAML file:
-
-    <code>bosh2 runtime-config > PATH-TO-FILE/YOUR-RUNTIME-CONFIG.yml</code>
+2. Run one of the following commands to download your runtime configuration YAML file:
+  * **For Ops Manager v1.10 or earlier:** 
+    `bosh runtime-config > PATH_TO_SAVE_THE_RUNTIME_CONFIG`<br><br>
+  * **For Ops Manager v1.11 or later:**
+    `bosh2 -e BOSH_ENVIRONMENT runtime-config > PATH_TO_SAVE_THE_RUNTIME_CONFIG`
 
     For example, 
     <pre class='terminal'>bosh2 runtime-config > /tmp/my-runtime-config.yml</pre>

@@ -88,24 +88,36 @@ This issue occurs when monit job priorities are asynchronous. Because the order 
 
 #### Solution
 
-1. `bosh ssh` into the stuck instance:
-<pre class="terminal">
-$ bosh ssh JOB INDEX
-</pre>
+1. BOSH `ssh` into the stuck instance by running one of the following commands:
+  * **For Ops Manager v1.10 or earlier:** <br>
+  `bosh ssh VM_INDEX`
+  * **For Ops Manager v1.11 or later:** 
+  `bosh2 -e BOSH_ENVIRONMENT -d DEPLOYMENT_NAME ssh VM_INDEX`
+
 1. Authenticate as root and use the `sv stop agent` command to kill the BOSH Agent:
-<pre class="terminal">
-$ sudo su
-# sv stop agent
-</pre>
-1. Run `bosh cloudcheck` to detect the missing monit job VM.
-<pre class="terminal">
- # bosh cloudcheck
-  VM with cloud ID `vm-3e37133c-bc33-450e-98b1-f86d5b63502a' missing:
-  <br>
-  <span>-</span> Ignore problem
-  <span>-</span> Recreate VM using last known apply spec
-  <span>-</span> Delete VM reference (DANGEROUS!)
-</pre>
+
+    <pre class="terminal">
+    $ sudo su
+    # sv stop agent
+    </pre>
+
+1. Run the following command to detect the missing monit job VM.
+  * **For Ops Manager v1.10 or earlier:** <br>
+  `bosh cloudcheck`
+  * **For Ops Manager v1.11 or later:** 
+  `bosh2 -e ENVIRONMENT_NAME -d DEPLOYMENT_NAME cloud-check`
+   
+    For example,
+
+    <pre class="terminal">
+    # bosh cloudcheck
+      VM with cloud ID `vm-3e37133c-bc33-450e-98b1-f86d5b63502a' missing:
+      <br>
+      <span>-</span> Ignore problem
+      <span>-</span> Recreate VM using last known apply spec
+      <span>-</span> Delete VM reference (DANGEROUS!)
+    </pre>
+
 1. Choose `Recreate VM using last known apply spec`.
 
 1. Continue with your deploy procedure.

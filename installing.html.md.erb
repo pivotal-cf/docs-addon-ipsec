@@ -438,24 +438,69 @@ Enter password: ******************
 Logged in as 'director'
 </pre>
 
-1. Upload your release.
+1. Log in to the BOSH Director.
+  * **For Ops Manager v1.10 or earlier:**
+  <ol  type="i">
+    <li>
+      On the Ops Manager VM, target the internal IP address of your BOSH Director. When prompted, enter your BOSH Director credentials. To retrieve your BOSH Director credentials, navigate to Ops Manager, click the **Credentials** tab, and click **Link to Credential** next to **Director Credentials**. For example:
+      <pre class="terminal">
+      $ bosh --ca-cert /var/tempest/workspaces/default/root\_ca\_certificate target YOUR-BOSH-DIRECTOR-INTERNAL-IP
+      Target set to 'p-bosh'
+      Your username: director
+      Enter password: ******************
+      Logged in as 'director'
+      </pre>
+    </li>
+  </ol>
+  * **For Ops Manager v1.11 or later:**
+  <ol type="i">
+    <li>
+      On the Ops Manager VM, create an alias in the BOSH CLI for your Ops Manager Director IP address. For example:
+      <pre class="terminal">$ bosh2 alias-env my-env -e 10.0.0.3</pre>
+    </li>
+    <li>
+      Log in to the BOSH Director, specifying the newly created alias. 
+      For example:
+      <pre class="terminal">$ bosh2 -e my-env log-in</pre>
+    </li>
+  </ol>
+
+1. Upload your release, specifying the path to the tarballed IPsec binary, by running one of the following commands:
+  * **For Ops Manager v1.10 or earlier:**
 <pre class="terminal">$ bosh upload release PATH-TO-BINARY/BINARY-NAME.tar</pre>
+  * **For Ops Manager v1.11 or later:**
+<pre class="terminal">$ bosh2 -e my-env upload-release PATH-TO-BINARY/BINARY-NAME.tar</pre>
 
-1. Optionally, from the command line, confirm that the upload of the IPsec software binary completed. You should see the IPsec binary file.
-<pre class="terminal">$ bosh releases</pre>
+1. List the releases by running one of the following commands, and confirm that the IPsec binary file appears:
+  * **For Ops Manager v1.10 or earlier:**
+    <pre class="terminal">$ bosh releases</pre>
+  * **For Ops Manager v1.11 or later:**
+    <pre class="terminal">$ bosh2 -e my-env releases</pre>
 
-1. Download your current runtime config and save as `bosh-manifest.yml`.
+1. Download your current runtime config and save as `bosh-manifest.yml` by running one of the following commands:
+  * **For Ops Manager v1.10 or earlier:**
 <pre class="terminal">$ bosh runtime-config > bosh-manifest.yml</pre>
+  * **For Ops Manager v1.11 or later:**
+<pre class="terminal">$ bosh2 -e my-env runtime-config > bosh-manifest.yml</pre>
 
 1. Append the contents of your IPsec manifest `ipsec-addon.yml` to `bosh-manifest.yml`.
 
 1. Update your runtime configuration to include the IPsec add-on.
+  * **For Ops Manager v1.10 or earlier:**
 <pre class="terminal">$ bosh update runtime-config PATH/bosh-manifest.yml</pre>
+  * **For Ops Manager v1.11 or later:**
+<pre class="terminal">$ bosh2 -e my-env update-runtime-config PATH/bosh-manifest.yml</pre>
 
 1. Verify your runtime configuration changes match what you specified in the IPsec manifest file.
+  * **For Ops Manager v1.10 or earlier:**
+<pre class="terminal"> $ bosh runtime-config</pre>
+  * **For Ops Manager v1.11 or later:**
+<pre class="terminal"> $ bosh2 -e my-env runtime-config</pre>
+
+    For example:
 
     <pre class="terminal">
-    $ bosh runtime-config
+    $ bosh2 -e my-env runtime-config
     Acting as user 'admin' on 'micro'
 
     releases:
@@ -478,7 +523,12 @@ Logged in as 'director'
   1. Click **Apply Changes**
   1. Wait for the installation to complete.
   1. Set the `optional` flag to `false`.
-  1. Update the runtime config. <pre class="terminal">$ bosh update runtime-config PATH/bosh-manifest.yml</pre>
+  1. Update the runtime config. 
+      * **For Ops Manager v1.10 or earlier:**
+      <pre class="terminal">$ bosh update runtime-config PATH/bosh-manifest.yml</pre>
+      * **For Ops Manager v1.11 or later:**
+      <pre class="terminal">$ bosh2 -e my-env update-runtime-config PATH/bosh-manifest.yml</pre>
+
   1. Navigate to your **Installation Dashboard**.
   1. Click **Apply Changes**.
 
@@ -494,9 +544,19 @@ Logged in as 'director'
 
 After installing IPsec and deploying PAS (or Elastic Runtime), perform the following steps to verify your IPsec installation:
 
-1. Run `bosh vms` to list the job VMs in your deployment. Choose the job name and index of any VM. The exact VM does not matter, because installing the IPsec add-on loads IPsec on all VMs deployed by Ops Manager.
+1. List the job VMs in your deployment by running one of the following commands:
+  * **For Ops Manager v1.10 or earlier:**<br>
+  `bosh vms`<br><br>
+  * **For Ops Manager v1.11 or later:**
+  `bosh2 -e BOSH_ENVIRONMENT vms`
 
-1. Run `bosh ssh JOB-NAME/INDEX` to open an SSH connection into the VM.
+1. Open an SSH connection into the VM, using the job name and index of any VM found above, by running one of the following commands:
+  * **For Ops Manager v1.10 or earlier:**<br>
+  `bosh ssh JOB-NAME/INDEX`<br><br>
+  * **For Ops Manager v1.11 or later:**
+  `bosh2 -e BOSH_ENVIRONMENT -d DEPLOYMENT_NAME ssh JOB-NAME/INDEX`
+
+    <p class="note"><strong>Note</strong>: The exact VM does not matter, because installing the IPsec add-on loads IPsec on all VMs deployed by Ops Manager.</p>
 
 1. Run `sudo su -` to enter the root environment with root privileges.
 
