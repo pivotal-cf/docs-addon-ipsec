@@ -421,10 +421,10 @@ After deploying Ops Manager, perform the following steps to download the IPsec b
 1. Download the IPsec add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 1. Copy the software binary to your Ops Manager instance. 
-<pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+<pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. Copy the IPsec manifest file to your Ops Manager instance.
-<pre class="terminal">$ scp -i PATH/TO/PRIVATE/KEY ipsec-addon.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+<pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-addon.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. SSH into Ops Manager.
  <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
