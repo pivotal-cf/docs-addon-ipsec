@@ -429,15 +429,6 @@ Perform the following steps to download the IPsec binary, add your IPsec manifes
 <pre class="terminal">
 $ cd PATH-TO-BINARY</pre>
 
-1. On the Ops Manager VM, target the internal IP address of your BOSH Director. When prompted, enter your BOSH Director credentials. To retrieve your BOSH Director credentials, navigate to Ops Manager, click the **Credentials** tab, and click **Link to Credential** next to **Director Credentials**. 
-<pre class="terminal">
-$ bosh --ca-cert /var/tempest/workspaces/default/root\_ca\_certificate target YOUR-BOSH-DIRECTOR-INTERNAL-IP
-Target set to 'p-bosh'
-Your username: director
-Enter password: ******************
-Logged in as 'director'
-</pre>
-
 1. Log in to the BOSH Director.
   * **For Ops Manager v1.10 or earlier:**
   <ol  type="i">
@@ -546,13 +537,13 @@ After installing IPsec and deploying PAS (or Elastic Runtime), perform the follo
 
 1. List the job VMs in your deployment by running one of the following commands:
   * **For Ops Manager v1.10 or earlier:**<br>
-  `bosh vms`<br><br>
-  * **For Ops Manager v1.11 or later:**
+  `bosh vms`
+  * **For Ops Manager v1.11 or later:**<br>
   `bosh2 -e BOSH_ENVIRONMENT vms`
 
 1. Open an SSH connection into the VM, using the job name and index of any VM found above, by running one of the following commands:
   * **For Ops Manager v1.10 or earlier:**<br>
-  `bosh ssh JOB-NAME/INDEX`<br><br>
+  `bosh ssh JOB-NAME/INDEX`
   * **For Ops Manager v1.11 or later:**
   `bosh2 -e BOSH_ENVIRONMENT -d DEPLOYMENT_NAME ssh JOB-NAME/INDEX`
 
