@@ -194,7 +194,7 @@ To add IPsec to VMs in your deployment, you must create a manifest file named `i
 1. Create an IPsec manifest file `ipsec-addon.yml`, with the code below as a template.
 <pre>releases:
 \- name: ipsec
-  version: 1.0.0
+&nbsp; version: 1.0.0
 addons:
 </pre>
 2. Add properties to the `ipsec-addon.yml` file as described below for [Linux VMs](#linux) and [Windows VMs](#windows).
@@ -257,16 +257,35 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
   * <code><strong>releases: - version</strong></code>: Specify the version number of your IPsec download from Pivotal Network.
   * <code><strong>jobs: - name</strong></code>: Do not change the name of this job. It must be `ipsec`.
   * <code><strong>include: stemcell - os</strong></code>: IPsec for Linux is only supported on `ubuntu-trusty`.
-  * <code><strong>optional</strong></code>: <a name="optional"></a> This value makes IPsec enforcement optional. To add IPsec, set this flag to `true`. After IPsec has been successfully installed, set this flag back to `false` and redeploy.
-  * <code><strong>ipsec\_subnets</strong></code>: <a name="ipsec_subnets"></a> List the subnets that you want to be encrypted. You can include the entire deployment or a portion of the network. Encrypt any network that handles business-sensitive data.
-  * <code><strong>no\_ipsec\_subnets</strong></code>: <a name="no_ipsec_subnets"></a> List the IP address of your BOSH Director and Ops Manager VM, along with any other IP addresses in your PCF deployment that you want to communicate without encryption. Pivotal recommends that you list the subnets that are used for PCF managed services. <strong>Subnets for PCF managed services that do not support IPsec, such as Pivotal Ops Manager, must be listed under `no_ipsec_subnets`</strong>.
-  <p class="note"><strong>Note</strong>: An external load balancer such as F5 should be added to the <code><strong>no\_ipsec\_subnets</strong></code> property. If you want to include it in the <code><strong>ipsec_subnet</strong></code>, you need to configure it manually.</p>
-  <p class="note"><strong>Note</strong>: In GCP, if you use the default router for DNS instead of the Google public DNS at <code>8.8.8.8</code>, you must add the IP address of the default router in your subnet to <code><strong>no\_ipsec\_subnets</strong></code>. For example, <code>10.0.0.1/32</code>.</p>
-  * <code><strong>instance\_certificate</strong></code>: <a name="instance_certificate"></a> Copy in the signed certificate that will be used by all your instance VMs. You must use one of the CAs in the <code>ca\_certificates</code> property to sign this certificate. For a development or test environment, you can use a self-signed certificate. For more information, see [Generate a Self-Signed Certificate](#self-signed) above.
-  * <code><strong>instance\_private\_key</strong></code>: <a name="instance_private_key"></a> Copy in the private key that corresponds to the <code>instance\_certificate</code> above. This key must not use a pass phrase.
-  * <code><strong>ca\_certificates</strong></code>: Copy in CA certificates for the instance VM to trust during the validation process. In most cases, you only need the CA certificate used to sign the instance certificate. During CA credential rotation, you need two CA certificates.
+  * <code><strong>optional</strong></code>: <a name="optional"></a> This value makes IPsec enforcement optional.
+          To add IPsec, set this flag to `true`.
+          After IPsec has been successfully installed, set this flag back to `false` and redeploy.
+  * <code><strong>ipsec\_subnets</strong></code>: <a name="ipsec_subnets"></a> List the subnets that you want to be encrypted.
+          You can include the entire deployment or a portion of the network.
+          Encrypt any network that handles business-sensitive data.
+  * <code><strong>no\_ipsec\_subnets</strong></code>: <a name="no_ipsec_subnets"></a> List the IP address of your BOSH Director and Ops Manager VM,
+          along with any other IP addresses in your PCF deployment that you want to communicate without encryption.
+          Pivotal recommends that you list the subnets that are used for PCF managed services.
+          <strong>Subnets for PCF managed services that do not support IPsec, such as Pivotal Ops Manager, must be listed under `no_ipsec_subnets`</strong>.
+  <p class="note"><strong>Note</strong>: An external load balancer such as F5 should be added
+     to the <code><strong>no\_ipsec\_subnets</strong></code> property.
+     If you want to include it in the <code><strong>ipsec_subnet</strong></code>, you need to configure it manually.</p>
+  <p class="note"><strong>Note</strong>: In GCP, if you use the default router for DNS instead of the Google public DNS at <code>8.8.8.8</code>,
+     you must add the IP address of the default router in your subnet to <code><strong>no\_ipsec\_subnets</strong></code>.
+     For example, <code>10.0.0.1/32</code>.</p>
+  * <code><strong>instance\_certificate</strong></code>: <a name="instance_certificate"></a> Copy in the signed certificate that will be used by all your instance VMs.
+          You must use one of the CAs in the <code>ca\_certificates</code> property to sign this certificate.
+          For a development or test environment, you can use a self-signed certificate.
+          For more information, see [Generate a Self-Signed Certificate](#self-signed) above.
+  * <code><strong>instance\_private\_key</strong></code>: <a name="instance_private_key"></a> Copy in the private key that corresponds to the <code>instance\_certificate</code> above.
+          This key must not use a pass phrase.
+  * <code><strong>ca\_certificates</strong></code>: <a name="ca-certs"></a> Copy in CA certificates for the instance VM to trust during the validation process.
+          In most cases, you only need the CA certificate used to sign the instance certificate.
+          During CA credential rotation, you need two CA certificates.
   <br><br>
-  IPsec v1.8.10+ supports the CA certificate chain. Concatenate the contents of the root and the intermediate certificates as one of the list items in <strong>ca_certificates</strong>, with the root CA at the top:
+  IPsec v1.8.10 and later supports the CA certificate chain.
+  Concatenate the contents of the root and the intermediate certificates as one of the list items in <strong>ca_certificates</strong>,
+  with the root CA at the top:
     <pre>
        <strong>ca\_certificates</strong>:
          \- |
@@ -285,7 +304,9 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
            ... <strong>\<SECOND ROOT\></strong>
            -----END CERTIFICATE-----
     </pre>
-    <p class="note"><strong>Note</strong>: The root and the intermediate certificates cannot have the same subject/common name. The root <b>must</b> be the first certificate of the chain.</p>
+    <p class="note"><strong>Note</strong>: The root and the intermediate certificates cannot have the same subjectName,
+       also called the common name and set with <code>CN=</code>.
+       The root <b>must</b> be the first certificate of the chain.</p>
   * <code><strong>prestart\_timeout</strong></code>: You can modify the 30 second default prestart timeout value. This value limits the number of seconds allowed for IPsec to start before failing the attempt.
   * <code><strong>esp\_proposals</strong></code>: <a name="esp_proposals"></a> You can modify the ESP (Quick Mode) encryption and integrity algorithms.
   The default, `aes128gcm16!`, is 128 bit AES-GCM with 128 bit ICV for both encryption and integrity.
@@ -350,7 +371,7 @@ Perform the following steps to add IPsec to Windows VMs in your deployment:
   * <code><strong>no\_ipsec\_subnets</strong></code>: Copy and paste the value from [no\_ipsec\_subnets](#no_ipsec_subnets) for Linux.
   * <code><strong>instance\_certificate</strong></code>: Copy and paste the value from [instance\_certificate](#instance_certificate) for Linux.
   * <code><strong>instance\_private\_key</strong></code>: Copy and paste the value from [instance\_private\_key](#instance_private_key) for Linux.
-  * <code><strong>ca\_certificates</strong></code>: Copy and paste the value from [ca\_certificates](#ca_certificates) for Linux.
+  * <code><strong>ca\_certificates</strong></code>: Copy and paste the value from [ca\_certificates](#ca-certs) for Linux.
   * <code><strong>optional</strong></code>: Copy and paste the value from [optional](#optional) for Linux.
   * <code><strong>quick\_mode\_proposals</strong></code>: This is an array of Quick Mode algorithms for encryption and integrity. This value must match the list specified in [esp_proposals](#esp_proposals) for Linux. See the following default entry that matches the Linux default:
     <pre>
