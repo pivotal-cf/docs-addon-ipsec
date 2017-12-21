@@ -198,7 +198,7 @@ You see unencrypted app messages in the logs.
 #### Explanation: `etcd` Split Brain
 
 #### Solution
-1. Check for split brain etcd by connecting with `bosh ssh` into each etcd node: <pre class="terminal">$ curl localhost:4001/v2/members</p>
+1. Check for split brain etcd by connecting with BOSH `ssh` into each etcd node: <pre class="terminal">$ curl localhost:4001/v2/members</p>
 1. Check if the members are consistent on all of etcd. If a node has only itself as a member, it has formed its own cluster and developed "split brain." To fix this issue, SSH into the split brain VM and run the following commands:
 	1. <pre class="terminal">$ sudo su -</p>
 	1. <pre class="terminal"># monit stop etcd</p>
