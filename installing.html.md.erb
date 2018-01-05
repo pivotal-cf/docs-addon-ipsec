@@ -28,7 +28,7 @@ To complete the IPsec installation, verify that you have satisfied the following
     (or Elastic Runtime) and each service tile to different isolated subnets.
     Alternatively, you can minimally deploy all service tiles to a single isolated subnet, 
     apart from the PAS (or Elastic Runtime) subnet.
-    Some service tiles might not support IPsec,
+    Some service tiles do not support IPsec
     and must be placed in a non-IPsec subnet. 
   * For IPsec on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS. These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>. If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>, see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the IPsec Add-on for PCF topic to adjust MTU values.
   * For IPsec on Windows VMs, Pivotal recommends the Windows stemcells for AWS, GCP, or Azure available on <a href="https://network.pivotal.io/products/stemcells-windows-server">Pivotal Network</a>.  
@@ -284,7 +284,8 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
           During CA credential rotation, you need two CA certificates.
   <br><br>
   IPsec v1.8.12 and later supports the CA certificate chain.
-  Concatenate the contents of the root and the intermediate certificates as one of the list items in <strong>ca\_certificates</strong>,
+  Concatenate the contents of the root and the intermediate certificates
+  as one of the list items in <strong>ca\_certificates</strong>,
   with the root CA at the top:
     <pre>
        <strong>ca\_certificates</strong>:
