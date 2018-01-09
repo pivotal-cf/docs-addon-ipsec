@@ -33,6 +33,7 @@ To complete the IPsec installation, verify that you have satisfied the following
   * For IPsec on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS. These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>. If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>, see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the IPsec Add-on for PCF topic to adjust MTU values.
   * For IPsec on Windows VMs, Pivotal recommends the Windows stemcells for AWS, GCP, or Azure available on <a href="https://network.pivotal.io/products/stemcells-windows-server">Pivotal Network</a>.  
 
+<hr>
 ##<a id="config-network"></a>Step 1: Configure Network Security
 
 Perform the steps in the appropriate section below to configure your IaaS network security.
@@ -187,6 +188,7 @@ To configure your Mirantis OpenStack environment for IPsec, perform the followin
   </tr>
   </table>
 
+<hr>
 ##<a id="create-mfest"></a>Step 2: Create the IPsec Manifest
 
 To add IPsec to VMs in your deployment, you must create a manifest file named `ipsec-addon.yml` that configures IPsec add-on properties for Linux VMs, Windows VMs, or both. Perform the following steps:
@@ -209,7 +211,7 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
   <pre>\- name: ipsec-addon
   <strong>releases</strong>:
   \- name: ipsec
-      <strong>version</strong>: 1.0.0
+      <strong>version</strong>: 1.X.X
   addons:
   \- name: ipsec-addon
       <strong>jobs</strong>:
@@ -255,8 +257,6 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
 
 1. Replace the values listed in the template as follows:
   * <code><strong>releases: - version</strong></code>: Specify the version number of your IPsec download from Pivotal Network.
-  * <code><strong>jobs: - name</strong></code>: Do not change the name of this job. It must be `ipsec`.
-  * <code><strong>include: stemcell - os</strong></code>: IPsec for Linux is only supported on `ubuntu-trusty`.
   * <code><strong>optional</strong></code>: <a name="optional"></a> This value makes IPsec enforcement optional.
           To add IPsec, set this flag to `true`.
           After IPsec has been successfully installed, set this flag back to `false` and redeploy.
@@ -266,11 +266,11 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
   * <code><strong>no\_ipsec\_subnets</strong></code>: <a name="no_ipsec_subnets"></a> List the IP address of your BOSH Director and Ops Manager VM,
           along with any other IP addresses in your PCF deployment that you want to communicate without encryption.
           Pivotal recommends that you list the subnets that are used for PCF managed services.
-          <strong>Subnets for PCF managed services that do not support IPsec, such as Pivotal Ops Manager, must be listed under `no_ipsec_subnets`</strong>.
-  <p class="note"><strong>Note</strong>: An external load balancer such as F5 should be added
+          Subnets for PCF managed services that do not support IPsec (such as an Pivotal Ops Manager) must be listed under `no_ipsec_subnets`.
+  <p class="note warning"><strong>Warning</strong>: An external load balancer such as F5 should be added
      to the <code><strong>no\_ipsec\_subnets</strong></code> property.
      If you want to include it in the <code><strong>ipsec_subnet</strong></code>, you need to configure it manually.</p>
-  <p class="note"><strong>Note</strong>: In GCP, if you use the default router for DNS instead of the Google public DNS at <code>8.8.8.8</code>,
+  <p class="note warning"><strong>Warning</strong>: In GCP, if you use the default router for DNS instead of the Google public DNS at <code>8.8.8.8</code>,
      you must add the IP address of the default router in your subnet to <code><strong>no\_ipsec\_subnets</strong></code>.
      For example, <code>10.0.0.1/32</code>.</p>
   * <code><strong>instance\_certificate</strong></code>: <a name="instance_certificate"></a> Copy in the signed certificate that will be used by all your instance VMs.
@@ -283,7 +283,7 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
           In most cases, you only need the CA certificate used to sign the instance certificate.
           During CA credential rotation, you need two CA certificates.
   <br><br>
-  IPsec v1.8.12 and later supports the CA certificate chain.
+  IPsec <strong>v1.8.12</strong> and later supports the CA certificate chain.
   Concatenate the contents of the root and the intermediate certificates
   as one of the list items in <strong>ca\_certificates</strong>,
   with the root CA at the top:
@@ -305,22 +305,33 @@ Perform the following steps to add IPsec to Linux VMs in your deployment:
            ... <strong>\<SECOND ROOT\></strong>
            -----END CERTIFICATE-----
     </pre>
-    <p class="note"><strong>Note</strong>: The root and the intermediate certificates cannot have the same subjectName,
-       also called the common name and set with <code>CN=</code>.
-       The root <b>must</b> be the first certificate of the chain.</p>
-  * <code><strong>prestart\_timeout</strong></code>: You can modify the 30 second default prestart timeout value. This value limits the number of seconds allowed for IPsec to start before failing the attempt.
-  * <code><strong>esp\_proposals</strong></code>: <a name="esp_proposals"></a> You can modify the ESP (Quick Mode) encryption and integrity algorithms.
-  The default, `aes128gcm16!`, is 128 bit AES-GCM with 128 bit ICV for both encryption and integrity.
-  * <code><strong>ike\_proposals</strong></code>: <a name="ike_proposals"></a> You can modify the IKE (Main Mode) encryption and integrity algorithms, and the Diffie-Hellman group.
-  The default, `aes128-sha256-modp2048!`, is 128 bit AES-CBC for encryption, SHA2\_256\_128 HMAC for integrity, and Group 14 for Diffie-Hellman. 
-  * <code><strong>log\_level</strong></code>: <a name="log\_level"></a> You can specify the IKE daemon numerical log level, ranging from -1 to 4.
+  <p class="note"><strong>Note</strong>: The root and the intermediate certificates cannot have the same subjectName,
+     also called the common name and set with <code>CN=</code>.
+     The root <b>must</b> be the first certificate of the chain.</p>
+  * <code><strong>prestart\_timeout</strong></code>: You can modify the 30-second default prestart timeout value. This value limits the number of seconds allowed for IPsec to start before failing the attempt.
+  * <code><strong>log\_level</strong></code>: <a name="log\_level"></a> You can specify the IKE daemon numerical log level, ranging from `-1` to `4`.
   For more information, see [Logger Configuration](https://wiki.strongswan.org/projects/strongswan/wiki/LoggerConfiguration) in the strongSwan documentation.
+  * <code><strong>optional\_warn\_interval</strong></code>: <a name="optional\_warn\_interval"></a> The interval in hours of warning when `optional` property is set to true. It prints the warning message `{Date} - IPsec is set to "Optional"` in the file `/var/vcap/sys/log/ipsec/ipsec.stdout.log` for Linux.
 
 ### <a id="windows"></a> Add Windows VM Support to Your Manifest
 
 Perform the following steps to add IPsec to Windows VMs in your deployment:
 
-1. Add the following YAML under `addons:` to your `ipsec-addon.yml` file. Add it under the `ipsec-addon` section for Linux, if you included one [above](#linux).
+1. In the `ipsec-addon.yml` created during the previous section, modify/add the following <strong>properties in bold</strong> under the `ipsec` key.
+  <pre>
+  \- name: ipsec-addon
+      ...
+      properties:
+        ipsec:
+          .
+          .
+          .
+          <strong>ike_version</strong>: ikev1
+          <strong>dpdaction</strong>: none
+  </pre>
+
+1. Add the following YAML under `addons:` to your `ipsec-addon.yml` file.
+   Add it under the `ipsec-addon` section for Linux, if you included one [above](#linux).
   <pre>
   \- name: ipsec-windows-addon
       jobs:
@@ -366,35 +377,40 @@ Perform the following steps to add IPsec to Windows VMs in your deployment:
               hash: SHA256
               keyexchange: DH14</pre>
 1. Replace the values listed in the template as follows:
-  * <code><strong>jobs: - name</strong></code>: Do not change the name of this job. It must be `ipsec-win`.
-  * <code><strong>include: stemcell - os</strong></code>: IPsec for Windows is only supported on `windows2012R2`.
   * <code><strong>ipsec\_subnets</strong></code>: Copy and paste the value from [ipsec\_subnets](#ipsec_subnets) for Linux.
   * <code><strong>no\_ipsec\_subnets</strong></code>: Copy and paste the value from [no\_ipsec\_subnets](#no_ipsec_subnets) for Linux.
   * <code><strong>instance\_certificate</strong></code>: Copy and paste the value from [instance\_certificate](#instance_certificate) for Linux.
   * <code><strong>instance\_private\_key</strong></code>: Copy and paste the value from [instance\_private\_key](#instance_private_key) for Linux.
   * <code><strong>ca\_certificates</strong></code>: Copy and paste the value from [ca\_certificates](#ca-certs) for Linux.
   * <code><strong>optional</strong></code>: Copy and paste the value from [optional](#optional) for Linux.
-  * <code><strong>quick\_mode\_proposals</strong></code>: This is an array of Quick Mode algorithms for encryption and integrity. This value must match the list specified in [esp_proposals](#esp_proposals) for Linux. See the following default entry that matches the Linux default:
+
+###<a id="proposals"></a> Optional: Custom Linux/Windows Mixed Deployment Proposals
+
+A default proposal set is already choosen for the `ipsec-addon.yml`. If you would like to use different proposals, consult the following table to modify the `ipsec-addon.yml`.
+
+* <code><strong>esp\_proposals</strong></code>: <a name="esp_proposals"></a> You can modify the ESP (Quick Mode) encryption and integrity algorithms.
+The default, `aes128gcm16!`, is 128 bit AES-GCM with 128 bit ICV for both encryption and integrity.
+* <code><strong>ike\_proposals</strong></code>: <a name="ike_proposals"></a> You can modify the IKE (Main Mode) encryption and integrity algorithms, and the Diffie-Hellman group.
+The default, `aes128-sha256-modp2048!`, is 128 bit AES-CBC for encryption, SHA2\_256\_128 HMAC for integrity, and Group 14 for Diffie-Hellman. 
+* <code><strong>quick\_mode\_proposals</strong></code>: This is an array of Quick Mode algorithms for encryption and integrity. This value must match the list specified in [esp_proposals](#esp_proposals) for Linux. Consult the following table for proposal sets for both Linux and Windows. The default entry that matches the Linux default is:
     <pre>
     \- encryption: AESGCM128
          hash: AESGMAC128
     </pre>
-  * <code><strong>main\_mode\_proposals</strong></code>: This is an array of Main Mode algorithms for encryption, integrity, and key exchange. This value must match the list specified in [ike_proposals](#ike_proposals) for Linux. See the following default entry that matches the Linux default:
+* <code><strong>main\_mode\_proposals</strong></code>: This is an array of Main Mode algorithms for encryption, integrity, and key exchange. This value must match the list specified in [ike_proposals](#ike_proposals) for Linux. Consult the following table for proposal sets for both Linux and Windows. The default entry that matches the Linux default is:
     <pre>
     \- encryption: AES128
          hash: SHA256
          keyexchange: DH14
     </pre>
 
-###<a id="proposals"></a> Linux and Windows Mixed Deployment Proposal Sets
-
-Consult the following table for proposal sets for both Linux and Windows.
+Select the ecryption type and replace the properties from that row into `ipsec-addon.yml` accordingly.
 
 <table>
   <tr>
     <th rowspan="2">Encryption Type</th>
-    <th colspan="2">Linux IPsec Property</th>
-    <th colspan="2">Windows IPsec Property</th>
+    <th colspan="2">Linux (ipsec-addon)</th>
+    <th colspan="2">Windows (ipsec-win-addon)</th>
   </tr>
   <tr>
     <th>ike_proposals</th>
@@ -432,7 +448,8 @@ Consult the following table for proposal sets for both Linux and Windows.
   </tr>
 </table>
 
-##<a id="download-deploy"></a>Step 3: Download and Deploy the IPsec Add-on
+<hr>
+##<a id="download-deploy"></a> Step 3: Download and Deploy the IPsec Add-on
 
 Perform the following steps to download the IPsec binary, add your IPsec manifest to your BOSH manifest, and deploy the IPsec add-on:
 
@@ -553,7 +570,8 @@ $ cd PATH-TO-BINARY</pre>
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information.  When the deployment process is completed, be sure to remove any unneeded copies of these files from the local workstation. Pivotal recommends that any archival copies of manifest files to be retained should be appropriately secured via encryption and/or logical access controls.
 
-##<a id="verify"></a>Step 4: Verify Your IPsec Installation
+<hr>
+##<a id="verify"></a> Step 4: Verify Your IPsec Installation
 
 After installing IPsec and deploying PAS (or Elastic Runtime), perform the following steps to verify your IPsec installation:
 
@@ -625,7 +643,7 @@ ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
 
 ##<a id="self-signed"></a>Generate a Self-Signed Certificate
 
-<p class="note"><strong>Note</strong>: Use a self-signed certificate only for development or test environments. We recommend against using self-signed certificates for production deployments. The script below generate private keys in a <code>certs</code> subdirectory.</p>
+<p class="note warning"><strong>Warning</strong>: Use a self-signed certificate only for development or test environments. We recommend against using self-signed certificates for production deployments. The script below generate private keys in a <code>certs</code> subdirectory.</p>
 
 Follow the instructions to generate a self-signed certificate for your IPsec manifest.
 
