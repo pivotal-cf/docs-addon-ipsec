@@ -6,20 +6,20 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 Pivotal Cloud Foundry (PCF) products and tiles that are released after July 2018 require
-Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells. 
+Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells.
 You need to verify that your IPsec Add-on for PCF deployment is configured correctly to support PCF products running on Xenial.
 
 This topic describes how to determine if your existing deployment of IPsec Add-on can be deployed to VMs that run on Xenial.
 This topic also explains how to update your IPsec Add-on if it does not support Xenial.
 
-Follow the instructions on this page if you use IPsec Add-on with any PCF products or tiles 
+Follow the instructions on this page if you use IPsec Add-on with any PCF products or tiles
 that use Xenial stemcells.
 See [Product Tiles that Use Xenial Stemcells](#which) below.
 
-##<a id="who-me"></a> Do I Need to Modify the IPsec Add-on? 
+##<a id="who-me"></a> Do I Need to Modify the IPsec Add-on?
 
 IPsec Add-on v1.9.9 runs correctly on Xenial-based VMs if the IPsec runtime config
-includes the `ubuntu-xenial` property. 
+includes the `ubuntu-xenial` property.
 
 Review the following table and make any required changes before you upgrade to Xenial stemcells.
 
@@ -30,7 +30,7 @@ Review the following table and make any required changes before you upgrade to X
     <th>do the following…</td>
     <tr>
       <td>1.9.9</td>
-      <td>Verify that your runtime config file, <code>ipsec-addon.yml</code>, includes 
+      <td>Verify that your runtime config file, <code>ipsec-addon.yml</code>, includes
 <pre>
 stemcell:
 - os: ubuntu-trusty
@@ -44,7 +44,7 @@ stemcell:
           </tr>
 </table>
 
-If you use IPsec Add-on without adding the `ubuntu-xenial` property to the runtime config, 
+If you use IPsec Add-on without adding the `ubuntu-xenial` property to the runtime config,
 the VMs running on Xenial are not able to communicate with the rest of the system.
 
 ## <a id="which"></a> Product Tiles that Use Xenial Stemcells
@@ -52,18 +52,18 @@ the VMs running on Xenial are not able to communicate with the rest of the syste
 Ensure that you have added the `ubuntu-xenial` property to the IPsec Add-on runtime config
 before you install any product tiles that use Xenial stemcells.
 
-For a list of PCF tile releases that now use Xenial, 
+For a list of PCF tile releases that now use Xenial,
 see [Tiles Using Xenial Stemcells in PCF](https://docs.pivotal.io/pivotalcf/stemcells/xenial-tiles.html).
 
 
 ##<a id="add"></a> Add the Xenial Stemcell Property to the IPsec Add-on
 
-If you use IPsec Add-on v1.9.9 without the `ubuntu-xenial` 
+If you use IPsec Add-on v1.9.9 without the `ubuntu-xenial`
 property in the runtime config, then you must add it to your
 existing `ipsec-addon.yml` and redeploy.  Follow these steps:
 
-1. SSH into the Ops Manager VM.
-   For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+1. SSH into the <%= vars.ops_manager %> VM.
+   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 2. To retrieve and save the IPsec add-on runtime config, run the following command:
 
@@ -75,7 +75,7 @@ existing `ipsec-addon.yml` and redeploy.  Follow these steps:
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml </pre> 
+    <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml </pre>
 
 
 3. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-xenial` under 
@@ -103,12 +103,12 @@ existing `ipsec-addon.yml` and redeploy.  Follow these steps:
 
     For example:
 
-    <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec-addon /tmp/ipsec-addon.yml</pre> 
+    <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec-addon /tmp/ipsec-addon.yml</pre>
 
-5. Navigate to the Installation Dashboard in Ops Manager.
+5. Navigate to the Installation Dashboard in <%= vars.ops_manager %>.
 
-6. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**. 
-   For more information about this Ops Manager page, 
+6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
+   For more information about this <%= vars.ops_manager %> page,
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
 
 7. Click **Apply Changes**.

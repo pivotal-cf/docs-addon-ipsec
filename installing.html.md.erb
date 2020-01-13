@@ -31,7 +31,7 @@ For more information, see [IPsec Load Balancer Issues](./troubleshooting.html#ip
 
 * Pivotal Cloud Foundry (PCF) operator administration rights
 
-* BOSH deployed through Ops Manager v1.8 or later.
+* BOSH deployed through <%= vars.ops_manager %> v1.8 or later.
 
 * The Maximum Transmission Unit (MTU) for your IaaS set in the Pivotal Application Service (PAS) tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
@@ -100,7 +100,7 @@ To configure your Google Cloud Platform (GCP) environment for IPsec, do the foll
   1. Click **Firewall rules**.
   1. Click **Create Firewall Rule**.
   1. For **Name**, enter `ipsec`.
-  1. For **Network**, select the network where Ops Manager is deployed. For example, **opsmgr**.
+  1. For **Network**, select the network where <%= vars.ops_manager %> is deployed. For example, **opsmgr**.
   1. For **Source filter**, select **Allow from any source (0.0.0.0/0)**.
   1. For **Allowed protocols and ports**, enter `udp:500; ah; esp`.
   1. Click **Create**.
@@ -370,10 +370,10 @@ YAML:
       <td><code><strong>no\_ipsec\_subnets</strong></code></td>
       <td>
         <a name="no_ipsec_subnets"></a>
-        List the IP address of your BOSH Director and Ops Manager VM,
+        List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
         along with any other IP addresses in your PCF deployment to which you want to communicate without encryption.
         Pivotal recommends that you list the subnets that are used for PCF managed services.
-        Subnets for PCF managed services that do not support IPsec, such as Ops Manager or service tiles,
+        Subnets for PCF managed services that do not support IPsec, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
           If you have an external load balancer such as F5, add it to the
@@ -755,20 +755,20 @@ follow the steps below.
 
 1. Download the IPsec add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
-1. Copy the software binary to your Ops Manager instance.
+1. Copy the software binary to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. Copy the IPsec runtime config file to your Ops Manager instance.
+1. Copy the IPsec runtime config file to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-addon.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. SSH into Ops Manager.
+1. SSH into <%= vars.ops_manager %>.
 <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
 
-1. On the Ops Manager VM, navigate to the software binary location in your working directory.
+1. On the <%= vars.ops_manager %> VM, navigate to the software binary location in your working directory.
 <pre class="terminal">$ cd PATH-TO-BINARY</pre>
 
 1. Log in to the BOSH Director.
-  1. On the Ops Manager VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
+  1. On the <%= vars.ops_manager %> VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
       <pre class="terminal">$ bosh alias-env my-env -e 10.0.0.3</pre>
   1. Log in to the BOSH Director, specifying the newly created alias.
       For example:
@@ -811,9 +811,9 @@ follow the steps below.
 
 1. If you have already deployed PAS or are adding IPsec to an existing deployment:
   1. Set the `optional` flag to `true`.
-  1. Navigate to your **Installation Dashboard** in Ops Manager.
-  1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
-  For more information about this Ops Manager page,
+  1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+  1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
+  For more information about this <%= vars.ops_manager %> page,
   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
   1. Click **Apply Changes**
   1. Wait for the installation to complete.
@@ -822,12 +822,12 @@ follow the steps below.
       <pre class="terminal">$ bosh -e my-env update-runtime-config --name=ipsec PATH/bosh-manifest.yml</pre>
 
 1. Navigate to your **Installation Dashboard**.
-1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
 1. Click **Apply Changes**.
 
 1. If the PAS tile is not yet installed:
-  1. Navigate to your **Installation Dashboard** in Ops Manager.
-  1. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**.
+  1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+  1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
   1. Deploy PAS by following the installation instructions for your IaaS.
      For more information, see [Installing Pivotal Cloud Foundry](http://docs.pivotal.io/pivotalcf/installing/index.html).
@@ -844,7 +844,7 @@ After installing IPsec and deploying PAS, perform the following steps to verify 
 1. Open an SSH connection into the VM, using the job name and index of any VM found above, by running the following command:
   `bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX`
 
-  <p class="note"><strong>Note</strong>: The exact VM does not matter, because installing the IPsec add-on loads IPsec on all VMs deployed by Ops Manager.</p>
+  <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing the IPsec add-on loads IPsec on all VMs deployed by <%= vars.ops_manager %>.</p>
 
 1. Run `sudo su -` to enter the root environment with root privileges.
 

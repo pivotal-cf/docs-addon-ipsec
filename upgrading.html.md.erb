@@ -7,13 +7,13 @@ owner: Security Engineering
 
 This topic describes how to upgrade the IPsec Add-on for PCF.
 
-##<a id="assume"></a>Assumption about Ops Manager Versions
+##<a id="assume"></a>Assumption about <%= vars.ops_manager %> Versions
 
-This topic assumes the following about your Ops Manager, BOSH CLI, and runtime config.
+This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, and runtime config.
 
 <table>
   <tr>
-    <th>Ops Manager Version</th>
+    <th><%= vars.ops_manager %> Version</th>
     <th>BOSH CLI Version</th>
     <th>Runtime Config</th>
     <th>More information</th>
@@ -43,7 +43,7 @@ To upgrade the IPsec add-on to a later version, do the following:
 1. Download the IPsec add-on software binary
    from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
-2. To copy the software binary to your Ops Manager VM, run the following command:
+2. To copy the software binary to your <%= vars.ops_manager %> VM, run the following command:
 
     ```
     scp -i PATH-TO-PRIVATE-KEY ipsec-VERSION.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:
@@ -51,10 +51,10 @@ To upgrade the IPsec add-on to a later version, do the following:
 
     For example:
 
-    <pre class="terminal">$ cp -i ~/.ssh/my-key.pem ~/Downloads/ipsec-1.8.14.tgz ubuntu<span>@</span>192.168.0.2: </pre> 
+    <pre class="terminal">$ cp -i ~/.ssh/my-key.pem ~/Downloads/ipsec-1.8.14.tgz ubuntu<span>@</span>192.168.0.2: </pre>
 
-3. SSH into the Ops Manager VM.
-   For how to do this, see [SSH into Ops Manager](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+3. SSH into the <%= vars.ops_manager %> VM.
+   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
 4. Retrieve the latest runtime config by running the following command:
 
@@ -67,7 +67,7 @@ To upgrade the IPsec add-on to a later version, do the following:
     <pre class="terminal">bosh -e my-env runtime-config  --name ipsec > /tmp/ipsec.yml</pre>
 
 5. Upload the latest IPsec release:
-  
+
     ```
     bosh -e BOSH-ENVIRONMENT upload-release PATH-TO-NEW-IPSEC-RELEASE
     ```
@@ -83,7 +83,7 @@ To upgrade the IPsec add-on to a later version, do the following:
      releases:
      \- {name: ipsec, version: <strong>1.8.14</strong>} </pre>
 
-7. Update the runtime config: 
+7. Update the runtime config:
     ```
     bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
@@ -92,10 +92,10 @@ To upgrade the IPsec add-on to a later version, do the following:
 
     <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec /tmp/ipsec.yml </pre>
 
-8. Navigate to your **Installation Dashboard** in Ops Manager.
+8. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
 
-9. If you are using Ops Manager v2.3 or later, click **Review Pending Changes**. 
-   For more information about this Ops Manager page, 
+9. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
+   For more information about this <%= vars.ops_manager %> page,
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
 
 10. Click **Apply Changes**.
