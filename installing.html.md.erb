@@ -77,10 +77,6 @@ Pivotal recommends the following MTU values:
     These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>.
     If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
     see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the IPsec Add-on for PCF topic to adjust MTU values.
-  * For IPsec on Windows VMs, Pivotal recommends the Windows 2012 R2 stemcells for AWS, GCP,
-    or Azure available on <a href="https://network.pivotal.io/products/stemcells-windows-server">Pivotal Network</a>.
-
-
 
 ##<a id="config-network"></a>Configure Network Security
 
@@ -251,27 +247,9 @@ To configure your Mirantis OpenStack environment for IPsec, perform the followin
 ##<a id="create-mfest"></a>Create the IPsec Manifest
 
 To add IPsec to VMs in your deployment, you must create a runtime config file named `ipsec-addon.yml`.
-The `ipsec-addon.yml` configures IPsec add-on properties for Linux VMs and,
-if you are using Pivotal Application Service for Windows (PASW) 2012 R2, Windows VMs.
+The `ipsec-addon.yml` configures IPsec add-on properties for Linux VMs.
 
-To create the IPsec Manifest, do the following:
-
-1. [Add Linux VM Support to Your Runtime Config](#linux).
-
-1. If you have Windows VMs, do one of the following:
-  - [Add Windows 2012 VMs to the IPsec Mesh](#include-windows) (Windows 2012 only)
-  - [Exclude Windows VMs from the IPsec Mesh](#exclude-windows)
-
-    <p class="note"><strong>Note</strong>:
-      PASW VMs connect to Linux VMs.
-      Enabling IPsec for Windows adds IPsec security to Windows VMs that users can
-      create after installing the
-      <a href="https://docs.pivotal.io/pivotalcf/2-5/windows2012r2/index.html">Pivotal Application Service for Windows 2012 R2</a> tile.
-    </p>
-
-### <a id="linux"></a> Add Linux VM Support to Your Runtime Config
-
-To add IPsec to Linux VMs in your deployment, do the following:
+To create the IPsec manifest, add IPsec to Linux VMs in your deployment:
 
 1. Create an IPsec runtime config file called `ipsec-addon.yml` and add the following
 YAML:
@@ -522,117 +500,6 @@ YAML:
   </table>
 
 
-###<a id="include-windows"></a> Add Windows 2012 VMs to the IPsec Mesh
-
-If you are using PASW 2012 R2, you can add IPsec to the Windows
-Server 2012 R2 VMs in your deployment. To do so, do the following:
-
-1. If you have not already done so, create an `ipsec-addon.yml` file and add support for Linux VMs
-by following the steps in the [Add Linux VM Support to Your Runtime Config](#linux)
-section above.
-  <p class="note"><strong>Note: </strong>
-    Because PASW VMs connect to Linux VMs, your manifest must include the
-    <code>ipsec-addon</code> section for Linux VM support.
-  </p>
-
-1. Modify the `ipsec-addon.yml` to add the properties indicated in bold in the snippet below.
-Add the properties under the `ipsec` key.
-<pre>
-\- name: ipsec-addon
-    ...
-    properties:
-      ipsec:
-        .
-        .
-        .
-        <strong>ike_version</strong>: ikev1
-        <strong>dpdaction</strong>: none
-</pre>
-
-1. Add the following YAML under `addons:` to your `ipsec-addon.yml` file.
- Add it under the `ipsec-addon` section for Linux.
-<pre>
-\- name: ipsec-windows-addon
-    jobs:
-    \- <strong>name</strong>: ipsec-win
-      release: ipsec
-      properties:
-        ipsec:
-          <strong>optional</strong>: false
-          <strong>ipsec\_subnets</strong>:
-          \- 10.0.1.1/20
-          <strong>no\_ipsec\_subnets</strong>:
-          \- 10.0.1.10/32  # bosh director
-          \- 10.0.1.4/32 # ops manager
-          <strong>instance\_certificate</strong>: |
-            -----BEGIN CERTIFICATE-----
-            EXAMPLExCERTIFICATExEXAMPLExCERTIFICATExEXAMPLExCERTIFICATE
-            ...
-            -----END CERTIFICATE-----
-          <strong>instance\_private\_key</strong>: |
-            -----BEGIN EXAMPLE RSA PRIVATE KEY-----
-            EXAMPLExRSAxPRIVATExKEYxDATAxEXAMPLExRSAxPRIVATExKEYxDATA
-            ...
-            -----END EXAMPLE RSA PRIVATE KEY-----
-          <strong>ca\_certificates</strong>:
-            \- |
-              -----BEGIN CERTIFICATE-----
-              EXAMPLExCERTIFICATExEXAMPLExCERTIFICATExEXAMPLExCERTIFICATE
-              ...
-              -----END CERTIFICATE-----
-            \- |
-              -----BEGIN CERTIFICATE-----
-              EXAMPLExCERTIFICATExEXAMPLExCERTIFICATExEXAMPLExCERTIFICATE
-              ...
-              -----END CERTIFICATE-----
-          <strong>quick\_mode\_proposals</strong>:
-            \- encryption: AESGCM128
-              hash: AESGMAC128
-          <strong>main\_mode\_proposals</strong>:
-            \- encryption: AES128
-              hash: SHA256
-              keyexchange: DH14
-    include:
-      stemcell:
-        \- <strong>os</strong>: windows2012R2
-</pre>
-
-1. Replace the values listed in the template as follows:
-  <table>
-    <tr>
-      <th>Property</th>
-      <th>Instructions</th>
-    </tr>
-    <tr>
-      <td><code><strong>ipsec\_subnets</strong></code></td>
-      <td>Copy and paste the value from <a href="#ipsec_subnets">ipsec\_subnets</a> for Linux.</td>
-    </tr>
-    <tr>
-      <td><code><strong>no\_ipsec\_subnets</strong></code></td>
-      <td>Copy and paste the value from <a href="#no_ipsec_subnets">no\_ipsec\_subnets</a> for Linux.</td>
-    </tr>
-    <tr>
-      <td><code><strong>instance\_certificate</strong></code></td>
-      <td>Copy and paste the value from <a href="#instance_certificate">instance\_certificate</a> for Linux.</td>
-    </tr>
-    <tr>
-      <td><code><strong>instance\_private\_key</strong></code></td>
-      <td>Copy and paste the value from <a href="#instance_private_key">instance\_private\_key</a> for Linux.</td>
-    </tr>
-    <tr>
-      <td><code><strong>ca\_certificates</strong></code></td>
-      <td>Copy and paste the value from <a href="#ca-certs">ca\_certificates</a> for Linux.</td>
-    </tr>
-    <tr>
-      <td><code><strong>optional</strong></code></td>
-      <td>Copy and paste the value from <a href="#optional">optional</a> for Linux.</td>
-  </table>
-  <p class="note warning"><strong>Warning:</strong> Communication between existing components fails
-    if you try to add IPsec to an existing deployment
-    without setting <code>optional</code> to <code>true</code> for both Linux and Windows.
-  </p>
-
-
 ####<a id="proposals"></a>(Optional) Configure Custom Deployment Proposals
 
 The manifest templates given above configure a default proposal for the `ipsec-addon.yml`.
@@ -643,41 +510,20 @@ If you want to use different proposals, modify the `ipsec-addon.yml` using the f
     <tr>
       <th rowspan="2">Encryption Type</th>
       <th colspan="2">Linux (ipsec-addon)</th>
-      <th colspan="2">Windows (ipsec-win-addon)</th>
     </tr>
     <tr>
       <th>ike\_proposals</th>
       <th>esp\_proposals</th>
-      <th>main\_mode\_proposals</th>
-      <th>quick\_mode\_proposals</th>
     </tr>
     <tr>
       <td>128 Bit Encryption (default)</td>
       <td><pre>aes128-sha256-modp2048!</pre></td>
       <td><pre>aes128gcm16!</pre></td>
-      <td>
-      <pre>- encryption: AES128
-    hash: SHA256
-    keyexchange: DH14</pre>
-      </td>
-      <td>
-        <pre>- encryption: AESGCM128
-    hash: AESGMAC128</pre>
-       </td>
     </tr>
     <tr>
       <td>256 Bit Encryption</td>
       <td><pre>aes256-sha256-modp2048!</pre></td>
       <td><pre>aes256gcm16!</pre></td>
-      <td>
-        <pre>- encryption: AES256
-    hash: SHA256
-    keyexchange: DH14</pre>
-      </td>
-      <td>
-        <pre>- encryption: AESGCM256
-    hash: AESGMAC256</pre>
-       </td>
     </tr>
   </table>
 
@@ -700,52 +546,7 @@ See the `ipsec-addon.yml` file example above.
       <td>You can modify the ESP (Quick Mode) encryption and integrity algorithms.
         The default, <code>aes128gcm16!</code>, is 128 bit AES-GCM with 128 bit ICV for both encryption and integrity.</td>
     </tr>
-    <tr>
-      <td><code><strong>main\_mode\_proposals</strong></code></td>
-      <td>This is an array of Main Mode algorithms for encryption, integrity, and key exchange.
-        This value must match the list specified in **ike_proposals** for Linux.
-        See the table for proposal sets for both Linux and Windows.
-        The default entry that matches the Linux default is:
-          <pre>
-          \- encryption: AES128
-               hash: SHA256
-               keyexchange: DH14
-          </pre>
-      </td>
-    </tr>
-    <tr>
-      <td><code><strong>quick\_mode\_proposals</strong></code></td>
-      <td>This is an array of Quick Mode algorithms for encryption and integrity.
-        This value must match the list specified in **esp_proposals** for Linux.
-        See the table for proposal sets for both Linux and Windows.
-        The default entry that matches the Linux default is:
-          <pre>
-          \- encryption: AESGCM128
-               hash: AESGMAC128
-          </pre>
-      </td>
-    <tr>
   </table>
-
-
-### <a id="exclude-windows"></a> Exclude Windows VMs from the IPsec Mesh
-
-IPsec only supports Windows Server 2012 R2 VMs.
-If you are using PASW and have VMs that are not on Windows Server 2012 R2, you
-must exclude these Windows VMs from the IPsec mesh. To do so, do the following:
-
-1. If you have not already done so, create an `ipsec-addon.yml` file and add support for Linux VMs
-support by following the steps in the [Add Linux VM Support to Your Runtime Config](#linux)
-section above.
-  <p class="note"><strong>Note: </strong>
-    Because PASW VMs connect to Linux VMs, your manifest must include the
-    <code>ipsec-addon</code> section for Linux VM support.
-  </p>
-1. Create a new subnet under the PAS Runtime Network.
-For instructions, see [Expanding Your Network with Additional Subnets](https://docs.pivotal.io/pivotalcf/2-6/customizing/add-subnets.html).
-2. Assign the new subnet in the PAS Windows Tile.
-For instructions, see [Configure the Tile](https://docs.pivotal.io/pivotalcf/2-6/windows/installing.html#config).
-3. Add the subnet CIDR to the <code>no\_ipsec\_subnets</code> property in `ipsec-addon.yml`.
 
 ##<a id="download-deploy"></a>Download and Deploy the IPsec Add-on
 
@@ -789,25 +590,22 @@ follow the steps below.
 1. Verify your runtime configuration changes match what you specified in the IPsec manifest file.
 <pre class="terminal"> $ bosh -e my-env runtime-config --name=ipsec</pre>
 
-  For example:
+    For example:
 
-  <pre class="terminal">
-  $ bosh -e my-env runtime-config --name=ipsec
-  Acting as user 'admin' on 'micro'
+    <pre class="terminal">
+    $ bosh -e my-env runtime-config --name=ipsec
+    Acting as user 'admin' on 'micro'
 
-  releases:
-   <span>-</span> {name: ipsec, version: 1.9.9}
+    releases:
+     <span>-</span> {name: ipsec, version: 1.9.9}
 
-  addons:
-   name: ipsec-addon
-    jobs:
-    <span>-</span> name: ipsec
-      release: ipsec
-      ...
-    <span>-</span> name: ipsec-win  # if using Windows
-      release: ipsec
-      ...
-  </pre>
+    addons:
+     name: ipsec-addon
+      jobs:
+      <span>-</span> name: ipsec
+        release: ipsec
+        ...
+    </pre>
 
 1. If you have already deployed PAS or are adding IPsec to an existing deployment:
   1. Set the `optional` flag to `true`.
@@ -891,11 +689,6 @@ ipsec-10.10.4.0/24[459]: ESTABLISHED 13 seconds ago, 10.10.5.66[CN=test-cert-1-c
 ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
 ...
 </pre>
-
-1. If you installed IPsec for Windows, follow these steps:
-  1. From any Windows VM, open **Windows Firewall with Advanced Security**.
-  1. Click **Connection Security Rules**.
-  1. Confirm that you see rules for each `ipsec` and `no-ipsec` subnet that you listed in your manifest.
 
 ##<a id="self-signed"></a>Generate a Self-Signed Certificate with OpenSSL
 
