@@ -5,12 +5,15 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that strongSwan-based IPsec works with your Pivotal Cloud Foundry (PCF) deployment and also general recommendations for troubleshooting IPsec.
+This topic provides instructions to verify that strongSwan-based <%= vars.product_old %> works
+with your <%= vars.platform_name %> deployment and also general recommendations
+for troubleshooting <%= vars.product_short %>.
 
-## <a id='verify-ipsec'></a>Verify that IPsec Works with PCF
-To verify that IPsec works between two hosts, you can check that traffic is encrypted in the deployment with `tcpdump`, perform the ping test, and check the logs with the steps below.
+## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with <%= vars.platform_code %>
 
-1. Check traffic encryption and perform the ping test. Select two hosts in your deployment with IPsec enabled and note their IP addresses. These are referenced below as `IP-ADDRESS-1` and `IP-ADDRESS-2`.
+To verify that <%= vars.product_short %> works between two hosts, you can check that traffic is encrypted in the deployment with `tcpdump`, perform the ping test, and check the logs with the steps below.
+
+1. Check traffic encryption and perform the ping test. Select two hosts in your deployment with <%= vars.product_short %> enabled and note their IP addresses. These are referenced below as `IP-ADDRESS-1` and `IP-ADDRESS-2`.
 	1. SSH into `IP-ADDRESS-1`.
 	<pre class="terminal">$ ssh IP-ADDRESS-1</pre>
 	1. On the first host, run the following, and allow it to continue running.
@@ -22,22 +25,22 @@ To verify that IPsec works between two hosts, you can check that traffic is encr
 	1. Verify that the packet type is ESP. If the traffic shows `ESP` as the packet type, traffic is successfully encrypted. The output from `tcpdump` looks similar to the following:
 	<pre class="terminal">03:01:15.242731 IP IP-ADDRESS-2 > IP-ADDRESS-1: ESP(spi=0xcfdbb261,seq=0x3), length 100</pre>
 1. Open the `/var/log/daemon.log` file to obtain a detailed report, including information pertaining to the type of certificates you use, and to verify an established connection exists.
-1. Navigate to your Installation Dashboard, and click **Recent Install Logs** to view information regarding your most recent deployment. Search for "ipsec" and the status of the IPsec job.
-1. Run `ipsec statusall` to return a detailed status report regarding your connections. The typical path for this binary: `/var/vcap/packages/strongswan-x.x.x/sbin`. `x.x.x` represents the version of strongSwan packaged into the IPsec.
+1. Navigate to your Installation Dashboard, and click **Recent Install Logs** to view information regarding your most recent deployment. Search for "ipsec" and the status of the <%= vars.product_short %> job.
+1. Run `ipsec statusall` to return a detailed status report regarding your connections. The typical path for this binary: `/var/vcap/packages/strongswan-x.x.x/sbin`. `x.x.x` represents the version of strongSwan packaged into the <%= vars.product_short %>.
 
-If you experience symptoms that IPsec does not establish a secure connection, return to the [Installing the IPsec Add-on for PCF](./installing.html) topic and review your installation.
+If you experience symptoms that <%= vars.product_short %> does not establish a secure connection, return to the [Installing the <%= vars.product_old %>](./installing.html) topic and review your installation.
 
-If you encounter issues with installing IPsec, refer to the [Troubleshoot IPsec](#troubleshoot-ipsec) section of this topic below.
+If you encounter issues with installing <%= vars.product_short %>, refer to the [Troubleshoot <%= vars.product_short %>](#troubleshoot-ipsec) section of this topic below.
 
-## <a id='troubleshoot-ipsec'></a>Troubleshoot IPsec
+## <a id='troubleshoot-ipsec'></a>Troubleshoot <%= vars.product_short %>
 
-### <a id="ipsec-installation-issues"></a> IPsec Installation Issues
+### <a id="ipsec-installation-issues"></a> <%= vars.product_short %> Installation Issues
 
 #### Symptom
 Unresponsive applications or incomplete responses, particularly for large payloads
 
 #### Explanation: Packet Loss
-IPsec packet encryption increases the size of packet payloads on host VMs.
+<%= vars.product_short %> packet encryption increases the size of packet payloads on host VMs.
 If the size of the larger packets exceeds the maximum transmission unit (MTU) size of the host VM,
 packet loss may occur when the VM forwards those packets.
 
@@ -79,7 +82,7 @@ Do one of the following:
 Unresponsive applications or incomplete responses, particularly for large payloads
 
 #### Explanation: Network Degradation
-IPsec data encryption increases the size of packet payloads. If the number of requests and the size of your files are large, the network might degrade.
+<%= vars.product_short %> data encryption increases the size of packet payloads. If the number of requests and the size of your files are large, the network might degrade.
 
 #### Solution
 Scale your deployment by allocating more processing power to your VM CPU or GPUs, which, additionally, decreases the packet encryption time. One way to increase network performance is to compress the data before encryption. This approach increases performance by reducing the amount of data transferred.
@@ -87,12 +90,12 @@ Scale your deployment by allocating more processing power to your VM CPU or GPUs
 <hr>
 ####<a name='duplicate'></a> Symptom
 
-IPsec fails to deploy with one of the following errors:
+<%= vars.product_short %> fails to deploy with one of the following errors:
 
-* `IPsec detected that the CA certificate and instance certificate have the same serial number.
+* `<%= vars.product_short %> detected that the CA certificate and instance certificate have the same serial number.
   Ensure that the serial numbers are not the same and redeploy.`
 
-* `IPsec detected that the CA certificate and instance certificate have the same subject.
+* `<%= vars.product_short %> detected that the CA certificate and instance certificate have the same subject.
    Ensure that the subjects are not the same and redeploy.`
 
 * `Invalid CA/instance certificate.
@@ -114,7 +117,7 @@ to generate a new chain of certificates and replace the old chain.
 When you generate the new certificates, ensure no certificates have a duplicate serial numbers or common names.
 
 <hr>
-### <a id="ipsec-runtime-issues"></a>IPsec Runtime Issues
+### <a id="ipsec-runtime-issues"></a><%= vars.product_short %> Runtime Issues
 
 #### Symptom
 * App fails to start with the following message:
@@ -147,10 +150,10 @@ Confirm this diagnosis by checking the `peers.json` file from /var/vcap/store/co
 You see that communication is not encrypted between two VMs.
 
 #### Explanation: Error in Network Configuration
-The IPsec BOSH job is not running on either VM. This problem could happen if both IPsec jobs crash, both IPsec jobs fail to start, or the subnet configuration is incorrect. There is a momentary gap between the time when an instance is created and when BOSH sets up IPsec. During this time, data can be sent unencrypted. This length of time depends on the instance type, IAAS, and other factors. For example, on a t2.micro on Amazon Web Services (AWS), the time from networking start to IPsec connection was measured at 95.45 seconds.
+The <%= vars.product_short %> BOSH job is not running on either VM. This problem could happen if both <%= vars.product_short %> jobs crash, both <%= vars.product_short %> jobs fail to start, or the subnet configuration is incorrect. There is a momentary gap between the time when an instance is created and when BOSH sets up <%= vars.product_short %>. During this time, data can be sent unencrypted. This length of time depends on the instance type, IAAS, and other factors. For example, on a t2.micro on Amazon Web Services (AWS), the time from networking start to <%= vars.product_short %> connection was measured at 95.45 seconds.
 
 #### Solution
-Set up a networking restriction on host VMs to only allow IPsec protocol and block the normal TCP/UDP traffic. For example, in AWS, configure a network security group with the minimal networking setting as shown below and block all other TCP and UDP ports.
+Set up a networking restriction on host VMs to only allow <%= vars.product_short %> protocol and block the normal TCP/UDP traffic. For example, in AWS, configure a network security group with the minimal networking setting as shown below and block all other TCP and UDP ports.
 
 <table border='1' class='nice'>
 	<caption>Additional AWS Configuration</caption>
@@ -180,7 +183,7 @@ Set up a networking restriction on host VMs to only allow IPsec protocol and blo
 </tr>
 </table>
 
-<p class="note"><strong>Note</strong>: When configuring a network security group, IPsec adds an additional layer to the original communication protocol. If a certain connection is targeting a port number, for example port 8080 with TCP, it actually uses IP protocol 50/51 instead. Due to this detail, traffic targeted at a blocked port might be able to go through.</p>
+<p class="note"><strong>Note</strong>: When configuring a network security group, <%= vars.product_short %> adds an additional layer to the original communication protocol. If a certain connection is targeting a port number, for example port 8080 with TCP, it actually uses IP protocol 50/51 instead. Due to this detail, traffic targeted at a blocked port might be able to go through.</p>
 
 <hr>
 
@@ -203,7 +206,7 @@ You see unencrypted app messages in the logs.
 
 #### Symptom
 
-IPsec deployment fails with <code>Error filling in template 'pre-start.erb'</code>
+<%= vars.product_short %> deployment fails with <code>Error filling in template 'pre-start.erb'</code>
 
 <pre class="terminal">
 Error 100: Unable to render instance groups for deployment. Errors are:
@@ -264,18 +267,18 @@ The error message shown above indicating a problem with the <code>each\_with\_in
 #### Symptom
 Complete system outage with no warning.
 
-#### Explanation: IPsec Certificates Might Have Expired
-Expired IPsec certificates can cause a sudden system outage.
+#### Explanation: <%= vars.product_short %> Certificates Might Have Expired
+Expired <%= vars.product_short %> certificates can cause a sudden system outage.
 For example, the self-signed certificates generated by the script provided in the installation instructions have a lifetime of 365 days.
-IPsec certificates expire if you do not rotate them within their lifetime.
+<%= vars.product_short %> certificates expire if you do not rotate them within their lifetime.
 
 #### Solution
-Renew expired IPsec certificates.
-To avoid future downtime due to expired IPsec certificates,
+Renew expired <%= vars.product_short %> certificates.
+To avoid future downtime due to expired <%= vars.product_short %> certificates,
 set a calendar reminder to rotate the certificates before they expire.
 
-For how to renew certificates, see [Renewing Expired IPsec Certificates](./renewing.html).
-For how to rotate them, see [Rotating IPsec Certificates](./credentials.html).
+For how to renew certificates, see [Renewing Expired <%= vars.product_short %> Certificates](./renewing.html).
+For how to rotate them, see [Rotating <%= vars.product_short %> Certificates](./credentials.html).
 
 <hr>
 
@@ -283,19 +286,19 @@ For how to rotate them, see [Rotating IPsec Certificates](./credentials.html).
 BOSH shows a VM in a failing state.
 On the failing VM, `monit summary` shows `ipsec` with a status of `Does not exist`.
 
-#### Explanation: IPsec stopped/crashed and Monit Cannot Automatically Bring it Back Up.
-IPsec is required to be the first process to start and the last process to stop.
+#### Explanation: <%= vars.product_short %> stopped/crashed and Monit Cannot Automatically Bring it Back Up.
+<%= vars.product_short %> is required to be the first process to start and the last process to stop.
 As a result, the start and stop scripts are located in `pre-start` and `post-stop`,
 which is a concept to BOSH, but not to Monit.
-Monit is not able to bring IPsec back up automatically because it does not know what `pre-start` is.
-After you run the `pre-start` manually, then Monit is able to detect IPsec as healthy.
+Monit is not able to bring <%= vars.product_short %> back up automatically because it does not know what `pre-start` is.
+After you run the `pre-start` manually, then Monit is able to detect <%= vars.product_short %> as healthy.
 
 #### Solution
 1. From the failing VM, run the following command as root: `/var/vcap/jobs/ipsec/bin/pre-start`
 1. Run `monit summary`.
 If the restart is successful, Monit shows `ipsec` with a status of `Running`.
 
-### <a id="ipsec-load-balancer-issues"></a>IPsec Load Balancer Issues
+### <a id="ipsec-load-balancer-issues"></a><%= vars.product_short %> Load Balancer Issues
 
 #### Symptom
 Smoke test errand fails with error:
@@ -317,15 +320,15 @@ No future change is possible.  Bailing out early after 0.001s.
 
 #### Explanation
 
-Clock global is trying to call an API of an app hosted in PCF.
+Clock global is trying to call an API of an app hosted in <%= vars.platform_code %>.
 This API call is routed through your external load balancer to Gorouter, which
 fails if you are using Network Load Balancers (NLB).
 
 This is because of how NLBs manipulate the packet.
 They make the source IP in the IP header the clock global's IP instead of the load balancer's IP.
-When clock global communicates with the NLB, it does not use IPsec because the NLB's IP is outside the IPsec subnet.
-However, when Gorouter sees that the source IP of the packet is clock global, it expects the packet to be encrypted with IPsec.
-It then drops the packet because it is not encrypted with IPsec, resulting in a timeout.
+When clock global communicates with the NLB, it does not use <%= vars.product_short %> because the NLB's IP is outside the <%= vars.product_short %> subnet.
+However, when Gorouter sees that the source IP of the packet is clock global, it expects the packet to be encrypted with <%= vars.product_short %>.
+It then drops the packet because it is not encrypted with <%= vars.product_short %>, resulting in a timeout.
 
 #### Solution
 

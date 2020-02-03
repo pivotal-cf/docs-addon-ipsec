@@ -5,22 +5,22 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to check the expiration dates of IPsec certificates. 
+This topic describes how to check the expiration dates of <%= vars.product_old %> certificates.
 
 The following procedure describes how to download the runtime configuration file and
-extract the two IPsec certificates into temporary files. Then, the files are input to the OpenSSL tool.
-The OpenSSL tool decodes the certificates and displays the expiration dates. 
+extract the two <%= vars.product_short %> certificates into temporary files. Then, the files are input to the OpenSSL tool.
+The OpenSSL tool decodes the certificates and displays the expiration dates.
 
 ## <a id="check-dates"></a> Check Certificate Dates
 
-Follow the steps below to determine the expiration dates of your IPsec certificates.
+Follow the steps below to determine the expiration dates of your <%= vars.product_short %> certificates.
 
 1. Log in to BOSH Director.
 
 2. Run the following command to download your runtime configuration YAML file:
     `bosh -e BOSH-ENVIRONMENT runtime-config --name=ipsec > PATH-TO-SAVE-THE-RUNTIME-CONFIG`
 
-    For example, 
+    For example,
     <pre class='terminal'>bosh runtime-config > /tmp/my-runtime-config.yml</pre>
 
 3. Display the runtime configuration YAML file so that you can copy from it.
@@ -28,8 +28,8 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
     For example,
     <pre class='terminal'> $ cat  /tmp/my-runtime-config.yml </pre>
 
-4. Identify the section of the file that contains IPsec properties, and locate the certificates:
-   
+4. Identify the section of the file that contains <%= vars.product_short %> properties, and locate the certificates:
+
     ```
     addons:
     - include:
@@ -45,7 +45,7 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
               -----BEGIN CERTIFICATE-----
               MIIE/TCCAuWgAwIBAgIBATANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDEwNjYTEw
                HhcNMTYwNTI2MjI1MDMzWhcNMjYwNTI2MjI1MDQyWjAOMQwwCgYDVQQDEwNjYTEw
-               ...     
+               ...
                Axu2pbEoT1PrMd3HlAZ3AH8ZrMR3ScJKCW3wQFRX/Plj
               -----END CERTIFICATE-----
             instance_certificate: |
@@ -53,7 +53,7 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
               MIIEGTCCAgGgAwIBAgIQDlqK1V54BEknnblVPXu5lzANBgkqhkiG9w0BAQsFADAO
               MQwwCgYDVQQDEwNjYTEwHhcNMTYwNTI2MjI1MTAzWhcNMTgwNTI2MjI1MTAzWjAQ
               MQ4wDAYDVQQDEwVjZXJ0MTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
-              ... 
+              ...
               4Q6P/cDn9QvW2QbbWkApP2uuMk04jWJV7p79CfX4pipPqiSofjFyFqsjjvir
               -----END CERTIFICATE-----
       name: ipsec
@@ -81,7 +81,7 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
 
     Where `/PATH/FILENAME.pem` is the path to and filename of the file you saved in the step above.
 
-    For example, 
+    For example,
 
     <pre class='terminal'>
     $ openssl x509 -text -inform pem -in /tmp/my-ipsec-ca-cert.pem | grep "Not After"
@@ -89,7 +89,7 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
     </pre>
 
     If the PEM file is correctly formatted,
-    the output shows a line with the `Not After` date. 
+    the output shows a line with the `Not After` date.
 
     If the PEM file is not correctly formatted,
     The output shows `unable to load certificate`.
@@ -100,7 +100,7 @@ Follow the steps below to determine the expiration dates of your IPsec certifica
 
     Keep in mind the lead time to obtain new certificates and the time to perform a deployment to apply them.
 
-    For information, see [Rotating Active IPsec Certificates](credentials.html).
+    For information, see [Rotating Active <%= vars.product_short %> Certificates](credentials.html).
 
 10. For security hygiene, delete three temporary files that you created:
    the downloaded copy of the `runtime-config.yml` which contains the private key

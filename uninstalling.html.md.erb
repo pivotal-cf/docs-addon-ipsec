@@ -5,16 +5,16 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to uninstall the IPsec Add-on for PCF from your deployment and how to verify the uninstallation.
+This topic describes how to uninstall the <%= vars.product_old %> from your deployment and how to verify the uninstallation.
 
 
-##<a id="uninstall"></a>Uninstall IPsec Add-on
-To uninstall the IPsec Add-on, follow the steps below:
+##<a id="uninstall"></a>Uninstall <%= vars.product_short %> Add-on
+To uninstall the <%= vars.product_short %> Add-on, follow the steps below:
 
 
 ###<a id="uninstall-flag"></a>(Optional) Set Optional Flag to True
-When uninstalling IPsec, the `optional` flag must be set to `true` in the runtime config of the current deployment before the properties can be removed.
-If your flag is already set this way, you can continue with the uninstallation with the procedure [Remove IPsec Properties](#uninstall-properties) below.
+When uninstalling <%= vars.product_short %>, the `optional` flag must be set to `true` in the runtime config of the current deployment before the properties can be removed.
+If your flag is already set this way, you can continue with the uninstallation with the procedure [Remove <%= vars.product_short %> Properties](#uninstall-properties) below.
 
 To set the `optional` flag to `true`, do the following:
 
@@ -30,7 +30,7 @@ To set the `optional` flag to `true`, do the following:
       $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
-1. In the runtime config, set the `optional` flag to `true` under IPsec properties.
+1. In the runtime config, set the `optional` flag to `true` under <%= vars.product_short %> properties.
 
 1. Update the runtime config by running the following command:
     <pre>
@@ -55,10 +55,10 @@ To set the `optional` flag to `true`, do the following:
 1. Wait for the installation to complete.
 
 
-###<a id="uninstall-properties"></a>Remove IPsec Properties
+###<a id="uninstall-properties"></a>Remove <%= vars.product_short %> Properties
 
 After your `optional` flag is set to `true` in your runtime config,
-then you can proceed with the removal of the IPsec properties.
+then you can proceed with the removal of the <%= vars.product_short %> properties.
 
 To do this, follow the steps below:
 
@@ -74,7 +74,7 @@ To do this, follow the steps below:
       $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
-1. In the runtime config, remove all IPsec properties under the `releases:` and `addons:` sections.
+1. In the runtime config, remove all <%= vars.product_short %> properties under the `releases:` and `addons:` sections.
 
 1. Update the runtime config by running the following command:
     <pre>
@@ -98,11 +98,11 @@ To do this, follow the steps below:
 
 
 ## <a id='uninstall-verify'></a>Verify the Uninstallation
-To verify the uninstallation of the IPsec Add-on is successful, follow the steps below:
+To verify the uninstallation of the <%= vars.product_short %> Add-on is successful, follow the steps below:
 
 1. Use `bosh ssh` to SSH into one of the VMs in your deployment.
 For more information,
 see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
 
-1. Run `monit summary`. If IPsec has uninstalled successfully,
+1. Run `monit summary`. If <%= vars.product_short %> has uninstalled successfully,
 it does not show the `ipsec` process.
