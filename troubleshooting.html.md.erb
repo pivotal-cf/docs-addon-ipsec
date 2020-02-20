@@ -5,7 +5,7 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that strongSwan-based <%= vars.product_old %> works
+This topic provides instructions to verify that strongSwan-based <%= vars.product_full %> works
 with your <%= vars.platform_name %> deployment and also general recommendations
 for troubleshooting <%= vars.product_short %>.
 
@@ -28,7 +28,7 @@ To verify that <%= vars.product_short %> works between two hosts, you can check 
 1. Navigate to your Installation Dashboard, and click **Recent Install Logs** to view information regarding your most recent deployment. Search for "ipsec" and the status of the <%= vars.product_short %> job.
 1. Run `ipsec statusall` to return a detailed status report regarding your connections. The typical path for this binary: `/var/vcap/packages/strongswan-x.x.x/sbin`. `x.x.x` represents the version of strongSwan packaged into the <%= vars.product_short %>.
 
-If you experience symptoms that <%= vars.product_short %> does not establish a secure connection, return to the [Installing the <%= vars.product_old %>](./installing.html) topic and review your installation.
+If you experience symptoms that <%= vars.product_short %> does not establish a secure connection, return to the [Installing the <%= vars.product_full %>](./installing.html) topic and review your installation.
 
 If you encounter issues with installing <%= vars.product_short %>, refer to the [Troubleshoot <%= vars.product_short %>](#troubleshoot-ipsec) section of this topic below.
 

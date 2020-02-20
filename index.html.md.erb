@@ -5,7 +5,7 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This guide describes the <%= vars.product_old %>, which secures data transmissions
+This guide describes the <%= vars.product_full %>, which secures data transmissions
 inside [<%= vars.platform_name %>](https://network.pivotal.io/products/pivotal-cf).
 Topics covered in this guide include <%= vars.product_short %> installation and configuration,
 troubleshooting, and certificate rotation.
@@ -14,17 +14,17 @@ Your organization might require <%= vars.product_short %> if you transmit sensit
 
 ## <a id="overview"></a> Overview
 
-The <%= vars.product_old %> provides security to the network layer of the OSI model with a
+The <%= vars.product_full %> provides security to the network layer of the OSI model with a
 [strongSwan](https://www.strongswan.org/) implementation of <%= vars.product_short %>.
 The <%= vars.product_short %> Add-on provides a strongSwan job in FIPS mode to each BOSH-deployed VM.
 
 <%= vars.product_short %> encrypts IP data flow between hosts, between security gateways, between service tiles, and between security gateways and hosts.
-The <%= vars.product_old %> secures network traffic within a Cloud Foundry deployment
+The <%= vars.product_full %> secures network traffic within a Cloud Foundry deployment
 and provides internal system protection if a malicious actor breaches your firewall.
 
 ## <a id='snapshot'></a> Product Snapshot
 
-The following table provides version and version-support information about the <%= vars.product_old %>.
+The following table provides version and version-support information about the <%= vars.product_full %>.
 
 <table class="nice">
     <th>Element</th>
@@ -57,7 +57,7 @@ The following table provides version and version-support information about the <
 
 
 ## <a id="implementation"></a> <%= vars.product_short %> Implementation Details
-The <%= vars.product_old %> implements the following cryptographic suite:
+The <%= vars.product_full %> implements the following cryptographic suite:
 <table border='1' class='nice'>
 <tr>
 	<th>Key Agreement (Diffie-Hellman)</th>
@@ -87,7 +87,7 @@ The <%= vars.product_old %> implements the following cryptographic suite:
 
 ## <a id='limitations'></a> Limitation
 
-<%= vars.product_old %> has the following limitations:
+<%= vars.product_full %> has the following limitations:
 
 * <%= vars.product_short %> is not supported on VMware NSX-T.
 
