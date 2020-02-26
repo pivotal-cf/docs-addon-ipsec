@@ -25,7 +25,10 @@ it is important for the operations team to plan accordingly and remember to rota
 To renew expired <%= vars.product_short %> certificates, do the following:
 
 1. Retrieve the latest runtime config by running the following command:
-    `bosh -e BOSH-ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG`
+
+    ```
+    bosh -e BOSH-ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
+    ```
 
 2. Generate a new set of certificates.
    For development or test environments, you can use self-signed certificates.
@@ -57,7 +60,10 @@ To renew expired <%= vars.product_short %> certificates, do the following:
     </pre>
 
 4. Update the runtime config by running the following command:
-    `bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG`<br>
+
+    ```
+    bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
+    ```
 
 5. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
 6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.

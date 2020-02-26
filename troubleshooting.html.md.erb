@@ -229,7 +229,7 @@ Error 100: Unable to render instance groups for deployment. Errors are:
 #### Solution
 Check the deployment descriptor YAML syntax for the CA certificates entry:
 
-<pre class="terminal">
+```
 releases:
 - {name: ipsec, version: 1.9.9}
 
@@ -261,7 +261,7 @@ addons:
           BAMMElBDRiBJUHNlYyBBZGRPbiBDQTAeFw0xNjA4MTUxNzQwNDVaFw0xOTA4MTUx
           ...
           -----END CERTIFICATE-----
-</pre>
+```
 
 In the example above, the values that appear after the <code>ca_certificates</code>: key are contained within a list and are not just a single certificate.
 This entry must be followed by a line starting with <code>-</code>, and ending with <code>|</code>.  The lines following this contain the PEM encoded certificate(s).
