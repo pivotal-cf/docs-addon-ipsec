@@ -20,10 +20,10 @@ Your organization might require <%= vars.product_short %> if you transmit sensit
 
 <%= vars.product_full %> provides security to the network layer of the OSI model with a
 [strongSwan](https://www.strongswan.org/) implementation of <%= vars.product_short %>.
-<%= vars.product_short %> provides a strongSwan job in FIPS mode to each BOSH-deployed VM.
+It provides a strongSwan job in FIPS mode to each BOSH-deployed VM.
 
-<%= vars.product_short %> encrypts IP data flow between hosts, between security gateways, between service tiles, and between security gateways and hosts.
-<%= vars.product_full %> secures network traffic within a Cloud Foundry deployment
+<%= vars.product_full %> encrypts IP data flow between hosts, between security gateways, between service tiles, and between security gateways and hosts.
+It secures network traffic within a Cloud Foundry deployment
 and provides internal system protection if a malicious actor breaches your firewall.
 
 ## <a id='snapshot'></a> Product Snapshot
@@ -91,13 +91,13 @@ The following table provides version and version-support information about <%= v
 </tr>
 </table>
 
-## <a id='limitations'></a> Limitation
+## <a id='limitations'></a> Limitations
 
 <%= vars.product_full %> has the following limitations:
 
-* <%= vars.product_short %> is not supported on VMware NSX-T.
+* <%= vars.product_full %> is not supported on VMware NSX-T.
 
-* Pivotal recommends configuring <%= vars.product_short %> to use a self-signed certificate to sign instance certificates.
+* Pivotal recommends configuring <%= vars.product_full %> to use a self-signed certificate to sign instance certificates.
   Pivotal does not recommend using a certificate signed by a public or third-party CA.
 
-* <%= vars.product_short %> is not supported on Windows.
+* <%= vars.product_full %> is not supported on Windows.
