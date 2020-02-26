@@ -13,8 +13,8 @@ To uninstall <%= vars.product_short %>, follow the steps below:
 
 
 ###<a id="uninstall-flag"></a>(Optional) Set Optional Flag to True
-When uninstalling <%= vars.product_sho %>, the `optional` flag must be set to `true` in the runtime config of the current deployment before the properties can be removed.
-If your flag is already set this way, you can continue with the uninstallation with the procedure [Remove <%= vars.product_sho %> Properties](#uninstall-properties) below.
+When uninstalling <%= vars.product_short %>, the `optional` flag must be set to `true` in the runtime config of the current deployment before the properties can be removed.
+If your flag is already set this way, you can continue with the uninstallation with the procedure [Remove <%= vars.product_short %> Properties](#uninstall-properties) below.
 
 To set the `optional` flag to `true`, do the following:
 
@@ -30,7 +30,7 @@ To set the `optional` flag to `true`, do the following:
       $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
-1. In the runtime config, set the `optional` flag to `true` under <%= vars.product_sho %> properties.
+1. In the runtime config, set the `optional` flag to `true` under <%= vars.product_short %> properties.
 
 1. Update the runtime config by running the following command:
     <pre>
@@ -55,10 +55,10 @@ To set the `optional` flag to `true`, do the following:
 1. Wait for the installation to complete.
 
 
-###<a id="uninstall-properties"></a>Remove <%= vars.product_sho %> Properties
+###<a id="uninstall-properties"></a>Remove <%= vars.product_short %> Properties
 
 After your `optional` flag is set to `true` in your runtime config,
-then you can proceed with the removal of the <%= vars.product_sho %> properties.
+then you can proceed with the removal of the <%= vars.product_short %> properties.
 
 To do this, follow the steps below:
 
@@ -74,7 +74,7 @@ To do this, follow the steps below:
       $ bosh -e my-env runtime-config > /runtime/config/
     </pre>
 
-1. In the runtime config, remove all <%= vars.product_sho %> properties under the `releases:` and `addons:` sections.
+1. In the runtime config, remove all <%= vars.product_short %> properties under the `releases:` and `addons:` sections.
 
 1. Update the runtime config by running the following command:
     <pre>
@@ -104,5 +104,5 @@ To verify the uninstallation of <%= vars.product_short %> is successful, follow 
 For more information,
 see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
 
-1. Run `monit summary`. If <%= vars.product_sho %> has uninstalled successfully,
+1. Run `monit summary`. If <%= vars.product_short %> has uninstalled successfully,
 it does not show the `ipsec` process.

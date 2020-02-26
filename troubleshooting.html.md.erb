@@ -5,7 +5,9 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that strongSwan-based <%= vars.product_short %> works with your <%= vars.platform_name %> deployment and general recommendations for troubleshooting <%= vars.product_short %>.
+This topic provides instructions to verify that strongSwan-based <%= vars.product_full %>
+works with your <%= vars.platform_name %> deployment and general recommendations
+for troubleshooting <%= vars.product_short %>.
 
 ## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with <%= vars.platform_name %>
 To verify that <%= vars.product_short %> works between two hosts, you can check that traffic is encrypted in the deployment with `tcpdump`, perform the ping test, and check the logs with the steps below.
@@ -39,7 +41,7 @@ Unresponsive applications or incomplete responses, particularly for large payloa
 #### Explanation: Packet Loss
 <%= vars.product_short %> packet encryption increases the size of packet payloads on host VMs.
 If the size of the larger packets exceeds the maximum transmission unit (MTU) size of the host VM,
-packet loss may occur when the VM forwards those packets.
+packet loss might occur when the VM forwards those packets.
 
 If your VMs were created with an Amazon PV stemcell,
 the default MTU value is 1500 for both host VMs and the application containers.
@@ -79,7 +81,7 @@ Do one of the following:
 Unresponsive applications or incomplete responses, particularly for large payloads
 
 #### Explanation: Network Degradation
-<%= vars.product_short %> data encryption increases the size of packet payloads. If the number of requests and the size of your files are large, the network may degrade.
+<%= vars.product_short %> data encryption increases the size of packet payloads. If the number of requests and the size of your files are large, the network might degrade.
 
 #### Solution
 Scale your deployment by allocating more processing power to your VM CPU or GPUs, which, additionally, decreases the packet encryption time. One way to increase network performance is to compress the data prior to encryption. This approach increases performance by reducing the amount of data transferred.
@@ -101,7 +103,7 @@ Please ensure that the subjects are not the same and redeploy.`
 
 <pre class="terminal">
 Invalid CA/instance certificate.
-This may be caused by a duplicate subject or serial number.`
+This might be caused by a duplicate subject or serial number.`
 </pre>
 
 #### Explanation: Same Serial Number/Common Name
@@ -141,19 +143,19 @@ diego_database-partition-620982d595434269a96a/0 (a643c6c0-bc43-411b-b011-58f49fb
 This error indicates a “split brain” issue with Consul.
 
 #### Solution
-Confirm this diagnosis by checking the `peers.json` file from /var/vcap/store/consul\_agent/raft. If it is null, then there may be a split brain. To fix this problem, follow these steps:
+Confirm this diagnosis by checking the `peers.json` file from /var/vcap/store/consul\_agent/raft. If it is null, then there might be a split brain. To fix this problem, follow these steps:
 
 1. Run `monit stop` on all Consul servers:
 1. Run `rm -rf /var/vcap/store/consul_agent/` on all Consul servers.
 1. Run `monit start consul_agent` on all Consul servers one at a time.
-1. Restart the consul\_agent process on the Cloud Controller VM. You may need to restart consul\_agent on other VMs, as well.
+1. Restart the consul\_agent process on the Cloud Controller VM. You might need to restart consul\_agent on other VMs, as well.
 
 <hr>
 #### Symptom
 You see that communication is not encrypted between two VMs.
 
 #### Explanation: Error in Network Configuration
-The <%= vars.product_short %> BOSH job is not running on either VM. This problem could happen if both <%= vars.product_short %> jobs crash, both <%= vars.product_short %> jobs fail to start, or the subnet configuration is incorrect. There is a momentary gap between the time when an instance is created and when BOSH sets up <%= vars.product_short %>. During this time, data can be sent unencrypted. This length of time depends on the instance type, IAAS, and other factors. For example, on a t2.micro on AWS, the time from networking start to <%= vars.product_short %> connection was measured at 95.45 seconds.
+The <%= vars.product_short %> BOSH job is not running on either VM. This problem could happen if both <%= vars.product_short %> jobs crash, both <%= vars.product_short %> jobs fail to start, or the subnet configuration is incorrect. There is a momentary gap between the time when an instance is created and when BOSH sets up <%= vars.product_short %>. During this time, data can be sent unencrypted. This length of time depends on the instance type, IAAS, and other factors. For example, on a t2.micro on Amazon Web Services (AWS), the time from networking start to <%= vars.product_short %> connection was measured at 95.45 seconds.
 
 #### Solution
 Set up a networking restriction on host VMs to only allow <%= vars.product_short %> protocol and block the normal TCP/UDP traffic. For example, in AWS, configure a network security group with the minimal networking setting as shown below and block all other TCP and UDP ports.
@@ -186,7 +188,7 @@ Set up a networking restriction on host VMs to only allow <%= vars.product_short
 </tr>
 </table>
 
-<p class="note"><strong>Note</strong>: When configuring a network security group, <%= vars.product_short %> adds an additional layer to the original communication protocol. If a certain connection is targeting a port number, for example port 8080 with TCP, it actually uses IP protocol 50/51 instead. Due to this detail, traffic targeted at a blocked port may be able to go through.</p>
+<p class="note"><strong>Note</strong>: When configuring a network security group, <%= vars.product_short %> adds an additional layer to the original communication protocol. If a certain connection is targeting a port number, for example port 8080 with TCP, it actually uses IP protocol 50/51 instead. Due to this detail, traffic targeted at a blocked port might be able to go through.</p>
 
 <hr>
 
@@ -196,12 +198,12 @@ You see unencrypted app messages in the logs.
 #### Explanation: `etcd` Split Brain
 
 #### Solution
-1. Check for split brain etcd by connecting with BOSH `ssh` into each etcd node: <pre class="terminal">$ curl localhost:4001/v2/members</p>
+1. Check for split brain etcd by connecting with BOSH `ssh` into each etcd node: <pre class="terminal">$ curl localhost:4001/v2/members</pre>
 1. Check if the members are consistent on all of etcd. If a node has only itself as a member, it has formed its own cluster and developed "split brain." To fix this issue, SSH into the split brain VM and run the following commands:
-	1. <pre class="terminal">$ sudo su -</p>
-	1. <pre class="terminal"># monit stop etcd</p>
-	1. <pre class="terminal"># rm -r /var/vcap/store/etcd</p>
-	1. <pre class="terminal"># monit start etcd</p>
+	1. <pre class="terminal">$ sudo su -</pre>
+	1. <pre class="terminal"># monit stop etcd</pre>
+	1. <pre class="terminal"># rm -r /var/vcap/store/etcd</pre>
+	1. <pre class="terminal"># monit start etcd</pre>
 
 1. Check the logs to confirm the node rejoined the existing cluster.
 
