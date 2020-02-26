@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting the Pivotal IPsec
+title: Troubleshooting Pivotal IPsec
 owner: Security Engineering
 ---
 
@@ -25,9 +25,9 @@ To verify that <%= vars.product_short %> works between two hosts, you can check 
 	<pre class="terminal">03:01:15.242731 IP IP-ADDRESS-2 > IP-ADDRESS-1: ESP(spi=0xcfdbb261,seq=0x3), length 100</pre>
 1. Open the `/var/log/daemon.log` file to obtain a detailed report, including information pertaining to the type of certificates you use, and to verify an established connection exists.
 1. Navigate to your Installation Dashboard, and click **Recent Install Logs** to view information regarding your most recent deployment. Search for "ipsec" and the status of the <%= vars.product_short %> job.
-1. Run `ipsec statusall` to return a detailed status report regarding your connections. The typical path for this binary: `/var/vcap/packages/strongswan-x.x.x/sbin`. `x.x.x` represents the version of strongSwan packaged into the <%= vars.product_short %>.
+1. Run `ipsec statusall` to return a detailed status report regarding your connections. The typical path for this binary: `/var/vcap/packages/strongswan-x.x.x/sbin`. `x.x.x` represents the version of strongSwan packaged into <%= vars.product_short %>.
 
-If you experience symptoms that <%= vars.product_short %> does not establish a secure connection, return to the [Installing the <%= vars.product_full %>](./installing.html) topic and review your installation.
+If you experience symptoms that <%= vars.product_short %> does not establish a secure connection, return to the [Installing <%= vars.product_full %>](./installing.html) topic and review your installation.
 
 If you encounter issues with installing <%= vars.product_short %>, refer to the [Troubleshooting <%= vars.product_short %>](#troubleshoot-ipsec) section of this topic.
 
