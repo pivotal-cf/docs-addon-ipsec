@@ -35,7 +35,7 @@ For more information, see [<%= vars.product_short %> Load Balancer Issues](./tro
 
 * The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
-by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %> ** > **Networking**. <br><br>
+by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %>** > **Networking**. <br><br>
 Pivotal recommends the following MTU values:
 
     <table class="nice">
@@ -637,58 +637,79 @@ follow the steps below:
 After installing <%= vars.product_short %> and deploying <%= vars.app_runtime %> , perform the following steps to verify your <%= vars.product_short %> installation:
 
 1. List the job VMs in your deployment by running the following command:
-  `bosh -e BOSH-ENVIRONMENT vms`
+
+    ```
+    bosh -e BOSH-ENVIRONMENT vms
+    ```
 
 1. Open an SSH connection into the VM, using the job name and index of any VM found above, by running the following command:
-  `bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX`
 
-  <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
+    ```
+    bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX
+    ```
 
-1. Run `sudo su -` to enter the root environment with root privileges.
+    <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
 
-1. Run `monit summary` to confirm that your `ipsec` job is listed as a `bosh` job.
-<pre class="terminal">
-The Monit daemon 5.2.5 uptime: 18h 32m
-...
-Process 'ipsec'                     running
-System 'system\_localhost'           running
-</pre>
+1. Enter the root environment with root privileges by running:
+
+    ```
+    sudo su -
+    ```
+
+1. Confirm that your `ipsec` job is listed as a `bosh` job by running:
+
+    ```
+    monit summary
+    ```
+    For example:
+    <pre class="terminal">
+    $ monit summary
+    The Monit daemon 5.2.5 uptime: 18h 32m
+    ...
+    Process 'ipsec'                     running
+    System 'system\_localhost'           running
+    </pre>
 
 
-1. Run `PATH-TO-IPSEC/ipsec statusall` to confirm that <%= vars.product_short %> is running. If <%= vars.product_short %> is not running, this command produces no output.
-<pre class="terminal">
-$ /var/vcap/packages/strongswan-5.6.3/sbin/ipsec statusall
-Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86\_64):
-  uptime: 18 hours, since Mar 16 23:58:50 2016
-  malloc: sbrk 2314240, mmap 0, used 1182400, free 1131840
-  worker threads: 11 of 16 idle, 5/0/0/0 working, job queue: 0/0/0/0, scheduled: 206
-  loaded plugins: charon aes sha1 sha2 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pem gmp xcbc cmac hmac attr kernel-netlink socket-default stroke
-Listening IP addresses:
-  10.10.5.66
-Connections:
-ipsec-10.10.4.0/24:  %any...%any  IKEv1/2
-ipsec-10.10.4.0/24:   local:  [CN=test-cert-1-ca-1] uses public key authentication
-ipsec-10.10.4.0/24:    cert:  "CN=test-cert-1-ca-1"
-ipsec-10.10.4.0/24:   remote: uses public key authentication
-ipsec-10.10.9.0/24:   child:  10.10.5.66/32 === 10.10.9.0/24 TRANSPORT
-no-ipsec-10.10.4.1/32:  %any...%any  IKEv1/2
-no-ipsec-10.10.4.1/32:   local:  uses public key authentication
-no-ipsec-10.10.4.1/32:   remote: uses public key authentication
-no-ipsec-10.10.4.1/32:   child:  dynamic === 10.10.4.1/32 PASS
-Shunted Connections:
-no-ipsec-10.10.4.1/32:  dynamic === 10.10.4.1/32 PASS
-no-ipsec-10.10.5.1/32:  dynamic === 10.10.5.1/32 PASS
-no-ipsec-10.10.6.1/32:  dynamic === 10.10.6.1/32 PASS
-Routed Connections:
-ipsec-10.10.9.0/24{6}:  ROUTED, TRANSPORT, reqid 6
-ipsec-10.10.9.0/24{6}:   10.10.5.66/32 === 10.10.9.0/24
-ipsec-10.10.8.0/24{5}:  ROUTED, TRANSPORT, reqid 5
-ipsec-10.10.4.0/24{1}:   10.10.5.66/32 === 10.10.4.0/24
-Security Associations (45 up, 0 connecting):
-ipsec-10.10.4.0/24[459]: ESTABLISHED 13 seconds ago, 10.10.5.66[CN=test-cert-1-ca-1]...10.10.4.38[CN=test-cert-1-ca-1]
-ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
-...
-</pre>
+1. Confirm that <%= vars.product_short %> is running. If <%= vars.product_short %> is not running, this command produces no output.
+
+    ```
+    PATH-TO-IPSEC/ipsec statusall
+    ```
+    For example:
+    <pre class="terminal">
+    $ /var/vcap/packages/strongswan-5.6.3/sbin/ipsec statusall
+    Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86\_64):
+      uptime: 18 hours, since Mar 16 23:58:50 2016
+      malloc: sbrk 2314240, mmap 0, used 1182400, free 1131840
+      worker threads: 11 of 16 idle, 5/0/0/0 working, job queue: 0/0/0/0, scheduled: 206
+      loaded plugins: charon aes sha1 sha2 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pem gmp xcbc cmac hmac attr kernel-netlink socket-default stroke
+    Listening IP addresses:
+      10.10.5.66
+    Connections:
+    ipsec-10.10.4.0/24:  %any...%any  IKEv1/2
+    ipsec-10.10.4.0/24:   local:  [CN=test-cert-1-ca-1] uses public key authentication
+    ipsec-10.10.4.0/24:    cert:  "CN=test-cert-1-ca-1"
+    ipsec-10.10.4.0/24:   remote: uses public key authentication
+    ipsec-10.10.9.0/24:   child:  10.10.5.66/32 === 10.10.9.0/24 TRANSPORT
+    no-ipsec-10.10.4.1/32:  %any...%any  IKEv1/2
+    no-ipsec-10.10.4.1/32:   local:  uses public key authentication
+    no-ipsec-10.10.4.1/32:   remote: uses public key authentication
+    no-ipsec-10.10.4.1/32:   child:  dynamic === 10.10.4.1/32 PASS
+    Shunted Connections:
+    no-ipsec-10.10.4.1/32:  dynamic === 10.10.4.1/32 PASS
+    no-ipsec-10.10.5.1/32:  dynamic === 10.10.5.1/32 PASS
+    no-ipsec-10.10.6.1/32:  dynamic === 10.10.6.1/32 PASS
+    Routed Connections:
+    ipsec-10.10.9.0/24{6}:  ROUTED, TRANSPORT, reqid 6
+    ipsec-10.10.9.0/24{6}:   10.10.5.66/32 === 10.10.9.0/24
+    ipsec-10.10.8.0/24{5}:  ROUTED, TRANSPORT, reqid 5
+    ipsec-10.10.4.0/24{1}:   10.10.5.66/32 === 10.10.4.0/24
+    Security Associations (45 up, 0 connecting):
+    ipsec-10.10.4.0/24[459]: ESTABLISHED 13 seconds ago, 10.10.5.66[CN=test-cert-1-ca-1]...10.10.4.38[CN=test-cert-1-ca-1]
+    ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
+    ...
+    </pre>
 
 ##<a id="self-signed"></a>Generate a Self-Signed Certificate with OpenSSL
 
