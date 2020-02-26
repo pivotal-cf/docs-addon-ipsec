@@ -1,6 +1,6 @@
 # docs-addon-ipsec
 
-This repo contains the source materials for the Pivotal Cloud Foundry IPsec Add-on documentation.
+This repo contains the source materials for the Pivotal IPsec documentation.
 
 ## Branches
 
@@ -20,6 +20,6 @@ The book repo for this product is [docs-book-ipsec](https://github.com/pivotal-c
 
 ## Style Guide
 
-Product name is IPsec Add-on for PCF. Notice that the "s" is lowercase.
+Product name is Pivotal IPsec. Notice that the "s" is lowercase.
 
-It is okay to use "the IPsec add-on" for short after initial use of "IPsec Add-on for PCF" on the page.
+It is okay to use "IPsec" for short after initial use of "Pivotal IPsec" on the page.

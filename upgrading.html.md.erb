@@ -1,5 +1,5 @@
 ---
-title: Upgrading the IPsec Add-on for PCF
+title: Upgrading the Pivotal IPsec
 owner: Security Engineering
 ---
 
@@ -30,17 +30,17 @@ This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, a
 </table>
 
 
-<p class="note breaking"><strong>Breaking Change: </strong> If you are using PCF v1.12 or later,
+<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.platform_code %> v1.12 or later,
    you must use named runtime configs.
    If you have not already split your runtime config into multiple named files,
    do so before upgrading the <%= vars.product_full %>.
    For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Configs</a>.</p>
 
-##<a id="upgrade"></a>Upgrade <%= vars.product_short %> Add-on</a>
+##<a id="upgrade"></a>Upgrade <%= vars.product_short %></a>
 
-To upgrade the <%= vars.product_short %> add-on to a later version, do the following:
+To upgrade <%= vars.product_short %> to a later version, do the following:
 
-1. Download the <%= vars.product_short %> add-on software binary
+1. Download the <%= vars.product_short %> software binary
    from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 2. To copy the software binary to your <%= vars.ops_manager %> VM, run the following command:

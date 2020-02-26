@@ -1,12 +1,12 @@
 ---
-title: Installing the IPsec Add-on for PCF
+title: Installing the Pivotal IPsec
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to prepare your network for <%= vars.product_full %>, create an <%= vars.product_short %>
-runtime config, and add <%= vars.product_short %> to your deployment.
+This topic describes how to prepare your network for the <%= vars.product_full %>,
+create an <%= vars.product_short %> runtime config, and add <%= vars.product_short %> to your deployment.
 
 ##<a id="overview"></a>Overview
 
@@ -14,7 +14,7 @@ To install <%= vars.product_short %>, you must do the following:
 
   1. [Configure Network Security](#config-network)
   1. [Create the <%= vars.product_short %> Manifest](#create-mfest)
-  1. [Download and Deploy the <%= vars.product_short %> Add-on](#download-deploy)
+  1. [Download and Deploy <%= vars.product_short %>](#download-deploy)
   1. [Verify Your <%= vars.product_short %> Installation](#verify)
 
 
@@ -33,9 +33,9 @@ For more information, see [<%= vars.product_short %> Load Balancer Issues](./tro
 
 * BOSH deployed through <%= vars.ops_manager %> v1.8 or later.
 
-* The Maximum Transmission Unit (MTU) for your IaaS set in the Pivotal Application Service (PAS) tile.
+* The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
-by navigating to **<%= vars.ops_manager %>** > **Pivotal Application Service** > **Networking**. <br><br>
+by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %> ** > **Networking**. <br><br>
 Pivotal recommends the following MTU values:
 
     <table class="nice">
@@ -68,12 +68,11 @@ Pivotal recommends the following MTU values:
 
 ##<a id="bestpractices"></a>Best Practices
   * <%= vars.product_short %> might affect the functionality of other service tiles.
-    As a result, Pivotal recommends deploying PAS
+    As a result, Pivotal recommends deploying <%= vars.app_runtime %>
     and each service tile to different isolated subnets.
     Alternatively, you can minimally deploy all service tiles to a single isolated subnet,
-    apart from the PAS subnet.
-    Some service tiles do not support <%= vars.product_short %>
-    and must be placed in a non-<%= vars.product_short %> subnet.
+    apart from the <%= vars.app_runtime %>  subnet.
+    Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
   * For <%= vars.product_short %> on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
     These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>.
     If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
@@ -171,7 +170,7 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 
 1. Navigate to **EC2 Dashboard** > **Security Groups**.
 
-2. Select the Security Group with the description **<%= vars.platform_code %> VMs Security Group** and click **Edit**.
+2. Select the Security Group with the description **<%= vars.platform_name %> VMs Security Group** and click **Edit**.
 
 3. Create the following **Inbound Rules**.
 <table border="1" class="nice">
@@ -205,7 +204,7 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 </tr>
 </table>
 
-  <p class="note"><strong>Note:</strong> The default <strong><%= vars.platform_code %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>. If your <%= vars.platform_code %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
+  <p class="note"><strong>Note:</strong> The default <strong><%= vars.platform_name %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>. If your <%= vars.platform_name %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
 
 ###<a id="openstack"></a>Configure Network Security for OpenStack
 
@@ -328,7 +327,7 @@ YAML:
       <td>
         <a name="optional"></a>
         This value makes <%= vars.product_short %> enforcement optional.
-        To add <%= vars.product_short %> to an existing PAS deployment, set this flag to <code>true</code>.
+        To add <%= vars.product_short %> to an existing <%= vars.app_runtime %>  deployment, set this flag to <code>true</code>.
         After <%= vars.product_short %> has been successfully installed, set this flag back to <code>false</code> and redeploy.
         <p class="note warning"><strong>Warning:</strong> Communication between existing components fails
           if you try to add <%= vars.product_short %> to an existing deployment
@@ -350,9 +349,9 @@ YAML:
       <td>
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
-        along with any other IP addresses in your <%= vars.platform_code %> deployment to which you want to communicate without encryption.
-        Pivotal recommends that you list the subnets that are used for <%= vars.platform_code %> managed services.
-        Subnets for <%= vars.platform_code %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
+        along with any other IP addresses in your <%= vars.platform_name %> deployment to which you want to communicate without encryption.
+        Pivotal recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
+        Subnets for <%= vars.platform_name %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
           If you have an external load balancer such as F5, add it to the
@@ -549,13 +548,13 @@ See the `ipsec-addon.yml` file example above.
     </tr>
   </table>
 
-##<a id="download-deploy"></a>Download and Deploy the <%= vars.product_short %> Add-on
+##<a id="download-deploy"></a>Download and Deploy <%= vars.product_short %>
 
-To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your BOSH manifest, and deploy the <%= vars.product_short %> add-on,
-follow the steps below.
-<p class="note breaking"><strong>Breaking Change: </strong> If you are using PCF v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading the <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
+To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your BOSH manifest, and deploy <%= vars.product_short %>,
+follow the steps below:
+<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.platform_code %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading the <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
 
-1. Download the <%= vars.product_short %> add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
+1. Download the <%= vars.product_short %> software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 1. Copy the software binary to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
@@ -585,7 +584,7 @@ follow the steps below.
 1. Download your current runtime config and save as `bosh-manifest.yml` by running the following command:
 <pre class="terminal">$ bosh -e my-env runtime-config > bosh-manifest.yml</pre>
 
-1. Update your runtime configuration to include the <%= vars.product_short %> add-on.
+1. Update your runtime configuration to include <%= vars.product_short %>.
 <pre class="terminal">$ bosh -e my-env update-runtime-config --name=ipsec PATH/bosh-manifest.yml</pre>
 
 1. Verify your runtime configuration changes match what you specified in the <%= vars.product_short %> manifest file.
@@ -608,7 +607,7 @@ follow the steps below.
         ...
     </pre>
 
-1. If you have already deployed PAS or are adding <%= vars.product_short %> to an existing deployment:
+1. If you have already deployed <%= vars.app_runtime %>  or are adding <%= vars.product_short %> to an existing deployment:
   1. Set the `optional` flag to `true`.
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
@@ -624,18 +623,18 @@ follow the steps below.
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
 1. Click **Apply Changes**.
 
-1. If the PAS tile is not yet installed:
+1. If the <%= vars.app_runtime %>  tile is not yet installed:
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
-  1. Deploy PAS by following the installation instructions for your IaaS.
+  1. Deploy <%= vars.app_runtime %>  by following the installation instructions for your IaaS.
      For more information, see [Installing <%= vars.platform_name %>](http://docs.pivotal.io/pivotalcf/installing/index.html).
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. Pivotal recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
 ##<a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
-After installing <%= vars.product_short %> and deploying PAS, perform the following steps to verify your <%= vars.product_short %> installation:
+After installing <%= vars.product_short %> and deploying <%= vars.app_runtime %> , perform the following steps to verify your <%= vars.product_short %> installation:
 
 1. List the job VMs in your deployment by running the following command:
   `bosh -e BOSH-ENVIRONMENT vms`
@@ -643,7 +642,7 @@ After installing <%= vars.product_short %> and deploying PAS, perform the follow
 1. Open an SSH connection into the VM, using the job name and index of any VM found above, by running the following command:
   `bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX`
 
-  <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing the <%= vars.product_short %> add-on loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
+  <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
 
 1. Run `sudo su -` to enter the root environment with root privileges.
 
