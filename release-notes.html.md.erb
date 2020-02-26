@@ -5,7 +5,7 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic contains release notes for the IPsec Add-on for PCF.
+This topic contains release notes for the <%= vars.product_full %>.
 
 ##<a id="1-9-21"></a>  v1.9.21
 
@@ -15,7 +15,7 @@ This topic contains release notes for the IPsec Add-on for PCF.
 
 New features and changes in this release:
 
-* IPsec now restarts automatically when the host VM reboots.
+* <%= vars.product_short %> now restarts automatically when the host VM reboots.
   This now works for all IaaSes, including vSphere.
 
 ##<a id="1-9-19"></a>  v1.9.19
@@ -48,9 +48,9 @@ New features and changes in this release:
 
 This release fixes the following issues:
 
-* The IPsec Windows job failed if the instance certificate and CA certificate had
+* The <%= vars.product_short %> Windows job failed if the instance certificate and CA certificate had
 the same common name or serial number.
-Now, IPsec does not deploy if there are duplicate common names or serial
+Now, <%= vars.product_short %> does not deploy if there are duplicate common names or serial
 numbers in the certificate chain.
 For more information, see this troubleshooting [symptom](./troubleshooting.html#duplicate).
 
@@ -74,9 +74,9 @@ New features and changes in this release:
 This release fixes the following issues:
 
 * On Windows 2012 R2 where scheduled logging could not be created for the
-  enablement of the following alerts: certificate expiration and optional IPsec enforcement.
+  enablement of the following alerts: certificate expiration and optional <%= vars.product_short %> enforcement.
 
-* Subsequent deployments of IPsec did not start due to existing stale process IDs.
+* Subsequent deployments of <%= vars.product_short %> did not start due to existing stale process IDs.
 
 ##<a id="1-9-4"></a>  v1.9.4
 
@@ -87,7 +87,7 @@ This release fixes the following issues:
 New features and changes in this release:
 
 * Starting with BOSH Director v265.1.0, the BOSH job lifecycle includes a `post-stop` phase.
-  The `charon` IPsec daemon job is now stopped in the BOSH `post-stop` lifecycle
+  The `charon` <%= vars.product_short %> daemon job is now stopped in the BOSH `post-stop` lifecycle
   phase instead of the BOSH `stop` lifecycle phase.
   The `stop` phase is now a no-op.
   This ensures that the network remains available and secure while all other

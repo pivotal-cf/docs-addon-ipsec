@@ -1,41 +1,41 @@
 ---
-title: Installing the IPsec Add-on for PCF
+title: Installing the Pivotal IPsec
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to prepare your network for the IPsec Add-on for PCF,
-create an IPsec runtime config, and add IPsec to your deployment.
+This topic describes how to prepare your network for the <%= vars.product_full %>,
+create an <%= vars.product_short %> runtime config, and add <%= vars.product_short %> to your deployment.
 
 ##<a id="overview"></a>Overview
 
-To install IPsec, you must do the following:
+To install <%= vars.product_short %>, you must do the following:
 
   1. [Configure Network Security](#config-network)
-  1. [Create the IPsec Manifest](#create-mfest)
-  1. [Download and Deploy the IPsec Add-on](#download-deploy)
-  1. [Verify Your IPsec Installation](#verify)
+  1. [Create the <%= vars.product_short %> Manifest](#create-mfest)
+  1. [Download and Deploy <%= vars.product_short %>](#download-deploy)
+  1. [Verify Your <%= vars.product_short %> Installation](#verify)
 
 
 ##<a id="prereqs"></a>Prerequisites
 
-Before you install IPsec, you must have the following:
+Before you install <%= vars.product_short %>, you must have the following:
 
 * Google Cloud Platform (GCP), vSphere, Azure, Amazon Web Services (AWS),
 or OpenStack as your IaaS.
 
 * In your IaaS, external load balancers that are not Network Load Balancers (NLB).
-IPsec does not work with NLBs.
-For more information, see [IPsec Load Balancer Issues](./troubleshooting.html#ipsec-load-balancer-issues).
+<%= vars.product_short %> does not work with NLBs.
+For more information, see [<%= vars.product_short %> Load Balancer Issues](./troubleshooting.html#ipsec-load-balancer-issues).
 
-* Pivotal Cloud Foundry (PCF) operator administration rights
+* <%= vars.platform_name %> operator administration rights
 
 * BOSH deployed through <%= vars.ops_manager %> v1.8 or later.
 
-* The Maximum Transmission Unit (MTU) for your IaaS set in the Pivotal Application Service (PAS) tile.
+* The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
-by navigating to **<%= vars.ops_manager %>** > **Pivotal Application Service** > **Networking**. <br><br>
+by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %> ** > **Networking**. <br><br>
 Pivotal recommends the following MTU values:
 
     <table class="nice">
@@ -67,16 +67,16 @@ Pivotal recommends the following MTU values:
 
 
 ##<a id="bestpractices"></a>Best Practices
-  * IPsec might affect the functionality of other service tiles.
-    As a result, Pivotal recommends deploying PAS
+  * <%= vars.product_short %> might affect the functionality of other service tiles.
+    As a result, Pivotal recommends deploying <%= vars.app_runtime %>
     and each service tile to different isolated subnets.
     Alternatively, you can minimally deploy all service tiles to a single isolated subnet,
-    apart from the PAS subnet.
-    Some service tiles do not support IPsec and must be placed in a non-IPsec subnet.
-  * For IPsec on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
+    apart from the <%= vars.app_runtime %>  subnet.
+    Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
+  * For <%= vars.product_short %> on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
     These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>.
     If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
-    see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the IPsec Add-on for PCF topic to adjust MTU values.
+    see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the <%= vars.product_full %> topic to adjust MTU values.
 
 ##<a id="config-network"></a>Configure Network Security
 
@@ -90,7 +90,7 @@ To configure network security, do one of the following procedures for your IaaS:
 
 ###<a id="gcp"></a>Configure Network Security for Google Cloud Platform
 
-To configure your Google Cloud Platform (GCP) environment for IPsec, do the following:
+To configure your Google Cloud Platform (GCP) environment for <%= vars.product_short %>, do the following:
 
   1. Navigate to the **Networking** section of the GCP Console.
   1. Click **Firewall rules**.
@@ -100,13 +100,13 @@ To configure your Google Cloud Platform (GCP) environment for IPsec, do the foll
   1. For **Source filter**, select **Allow from any source (0.0.0.0/0)**.
   1. For **Allowed protocols and ports**, enter `udp:500; ah; esp`.
   1. Click **Create**.
-  1. Adjust the MTU value to `1354` by performing the procedure in the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the IPsec Add-on for PCF topic.
+  1. Adjust the MTU value to `1354` by performing the procedure in the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting the <%= vars.product_full %> topic.
 
 ###<a id="vsphere"></a>Configure Network Security for vSphere
 
-<p class="note"><strong>Note:</strong> IPsec is not supported on VMware NSX-T.</p>
+<p class="note"><strong>Note:</strong> <%= vars.product_short %> is not supported on VMware NSX-T.</p>
 
-To configure your vSphere environment for IPsec, confirm that your network allows
+To configure your vSphere environment for <%= vars.product_short %>, confirm that your network allows
 the protocols listed in the table below:
 
 <table>
@@ -135,7 +135,7 @@ the protocols listed in the table below:
 
 ###<a id="azure"></a>Configure Network Security for Azure
 
-To configure your Azure environment for IPsec, do the following:
+To configure your Azure environment for <%= vars.product_short %>, do the following:
 
 1. Confirm that your network allows the protocols listed in the table below.
 <table>
@@ -166,11 +166,11 @@ To configure your Azure environment for IPsec, do the following:
 
 ###<a id="aws"></a>Configure Network Security for AWS
 
-To configure your AWS environment for IPsec, do the following:
+To configure your AWS environment for <%= vars.product_short %>, do the following:
 
 1. Navigate to **EC2 Dashboard** > **Security Groups**.
 
-2. Select the Security Group with the description **PCF VMs Security Group** and click **Edit**.
+2. Select the Security Group with the description **<%= vars.platform_name %> VMs Security Group** and click **Edit**.
 
 3. Create the following **Inbound Rules**.
 <table border="1" class="nice">
@@ -204,13 +204,13 @@ To configure your AWS environment for IPsec, do the following:
 </tr>
 </table>
 
-  <p class="note"><strong>Note:</strong> The default <strong>PCF VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>. If your PCF subnet is deployed to a different CIDR block, adjust the source as needed.</p>
+  <p class="note"><strong>Note:</strong> The default <strong><%= vars.platform_name %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>. If your <%= vars.platform_name %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
 
 ###<a id="openstack"></a>Configure Network Security for OpenStack
 
 <p class="note"><strong>Note:</strong> The following network configuration is optimized for Mirantis OpenStack, but other OpenStack distributions have a similar workflow.</p>
 
-To configure your Mirantis OpenStack environment for IPsec, perform the following steps:
+To configure your Mirantis OpenStack environment for <%= vars.product_short %>, perform the following steps:
 
 1. Navigate to **Project / Access & Security**.
 
@@ -244,14 +244,14 @@ To configure your Mirantis OpenStack environment for IPsec, perform the followin
 </tr>
 </table>
 
-##<a id="create-mfest"></a>Create the IPsec Manifest
+##<a id="create-mfest"></a>Create the <%= vars.product_short %> Manifest
 
-To add IPsec to VMs in your deployment, you must create a runtime config file named `ipsec-addon.yml`.
-The `ipsec-addon.yml` configures IPsec add-on properties for Linux VMs.
+To add <%= vars.product_short %> to VMs in your deployment, you must create a runtime config file named `ipsec-addon.yml`.
+The `ipsec-addon.yml` configures <%= vars.product_short %> add-on properties for Linux VMs.
 
-To create the IPsec manifest, add IPsec to Linux VMs in your deployment:
+To create the <%= vars.product_short %> manifest, add <%= vars.product_short %> to Linux VMs in your deployment:
 
-1. Create an IPsec runtime config file called `ipsec-addon.yml` and add the following
+1. Create an <%= vars.product_short %> runtime config file called `ipsec-addon.yml` and add the following
 YAML:
   <pre>
   <strong>releases:</strong>
@@ -319,18 +319,18 @@ YAML:
       <td><code><strong>version</strong></code></td>
       <td>
         <a name="version"></a>
-        Specify the version number of your IPsec download from Pivotal Network.
+        Specify the version number of your <%= vars.product_short %> download from Pivotal Network.
       </td>
     </tr>
     <tr>
       <td><code><strong>optional</strong></code></td>
       <td>
         <a name="optional"></a>
-        This value makes IPsec enforcement optional.
-        To add IPsec to an existing PAS deployment, set this flag to <code>true</code>.
-        After IPsec has been successfully installed, set this flag back to <code>false</code> and redeploy.
+        This value makes <%= vars.product_short %> enforcement optional.
+        To add <%= vars.product_short %> to an existing <%= vars.app_runtime %>  deployment, set this flag to <code>true</code>.
+        After <%= vars.product_short %> has been successfully installed, set this flag back to <code>false</code> and redeploy.
         <p class="note warning"><strong>Warning:</strong> Communication between existing components fails
-          if you try to add IPsec to an existing deployment
+          if you try to add <%= vars.product_short %> to an existing deployment
           without setting <code>optional</code> to <code>true</code>.
         </p>
       </td>
@@ -349,9 +349,9 @@ YAML:
       <td>
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
-        along with any other IP addresses in your PCF deployment to which you want to communicate without encryption.
-        Pivotal recommends that you list the subnets that are used for PCF managed services.
-        Subnets for PCF managed services that do not support IPsec, such as <%= vars.ops_manager %> or service tiles,
+        along with any other IP addresses in your <%= vars.platform_name %> deployment to which you want to communicate without encryption.
+        Pivotal recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
+        Subnets for <%= vars.platform_name %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
           If you have an external load balancer such as F5, add it to the
@@ -399,7 +399,7 @@ YAML:
         Copy in CA certificates for the instance VM to trust during the validation process.
         In most cases, you only need the CA certificate used to sign the instance certificate. During CA credential rotation, you need two CA certificates.
         <br><br>
-        IPsec <strong>v1.8.12</strong> and later supports the CA certificate chain.
+        <%= vars.product_short %> <strong>v1.8.12</strong> and later supports the CA certificate chain.
         Concatenate the contents of the root and the intermediate certificates
         as one of the list items in <strong>ca\_certificates</strong>,
         with the root CA at the top:
@@ -430,14 +430,14 @@ YAML:
     </tr>
     <tr>
       <td><code><strong>prestart\_timeout</strong></code></td>
-      <td>Use this to modify the 30-second default prestart timeout value. This value limits the number of seconds allowed for IPsec to start before failing the attempt.</td>
+      <td>Use this to modify the 30-second default prestart timeout value. This value limits the number of seconds allowed for <%= vars.product_short %> to start before failing the attempt.</td>
     </tr>
     <tr>
       <td><code><strong>stop\_timeout</strong></code></td>
       <td>
         Use this to modify the 30-second default post stop timeout value.
-        When IPsec stops, communication between VMs is not encrypted and might cause errors.
-        By default, IPsec waits 30 seconds for all other running jobs to stop before stopping itself.
+        When <%= vars.product_short %> stops, communication between VMs is not encrypted and might cause errors.
+        By default, <%= vars.product_short %> waits 30 seconds for all other running jobs to stop before stopping itself.
       </td>
     </tr>
     <tr>
@@ -453,7 +453,7 @@ YAML:
       <td>
         <a name="optional_warn_interval"></a>
         The interval in hours of warning when <code>optional</code> property is set to true.
-        It prints the warning message <code>{Date} - IPsec is set to "Optional"</code> in the file
+        It prints the warning message <code>{Date} - <%= vars.product_short %> is set to "Optional"</code> in the file
         <code>/var/vcap/sys/log/ipsec/ipsec.stdout.log</code> for Linux.
       </td>
     </tr>
@@ -472,28 +472,28 @@ YAML:
     <tr>
       <td><code><strong>instance\_certificate<br>\_info\_period</strong></code></td>
       <td>
-        If the instance certificate expires during the set period in days, the IPsec
+        If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes an <code>[INFO]</code> message in the logs.
       </td>
     </tr>
     <tr>
       <td><code><strong>instance\_certificate<br>\_warn\_period</strong></code></td>
       <td>
-        If the instance certificate expires during the set period in days, the IPsec
+        If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes a <code>[WARN]</code> message in the logs.
       </td>
     </tr>
     <tr>
       <td><code><strong>instance\_certificate<br>\_error\_period</strong></code></td>
       <td>
-        If the instance certificate expires during the set period in days, the IPsec
+        If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes an <code>[ERROR]</code> message in the logs.
       </td>
     </tr>
     <tr>
       <td><code><strong>instance\_certificate<br>\_critical\_period</strong></code></td>
       <td>
-        If the instance certificate expires during the set period in days, the IPsec
+        If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes a <code>[CRITICAL]</code> message in the logs.
       </td>
     </tr>
@@ -548,18 +548,18 @@ See the `ipsec-addon.yml` file example above.
     </tr>
   </table>
 
-##<a id="download-deploy"></a>Download and Deploy the IPsec Add-on
+##<a id="download-deploy"></a>Download and Deploy <%= vars.product_short %>
 
-To download the IPsec binary, add your IPsec runtime config to your BOSH manifest, and deploy the IPsec add-on,
-follow the steps below.
-<p class="note breaking"><strong>Breaking Change: </strong> If you are using PCF v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading the IPsec Add-on for PCF. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
+To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your BOSH manifest, and deploy <%= vars.product_short %>,
+follow the steps below:
+<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.platform_code %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading the <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
 
-1. Download the IPsec add-on software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
+1. Download the <%= vars.product_short %> software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 1. Copy the software binary to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
-1. Copy the IPsec runtime config file to your <%= vars.ops_manager %> instance.
+1. Copy the <%= vars.product_short %> runtime config file to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-addon.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. SSH into <%= vars.ops_manager %>.
@@ -575,19 +575,19 @@ follow the steps below.
       For example:
       <pre class="terminal">$ bosh -e my-env log-in</pre>
 
-1. Upload your release, specifying the path to the tarballed IPsec binary, by running the following command:
+1. Upload your release, specifying the path to the tarballed <%= vars.product_short %> binary, by running the following command:
 <pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/BINARY-NAME.tar</pre>
 
-1. List the releases by running the following command, and confirm that the IPsec binary file appears:
+1. List the releases by running the following command, and confirm that the <%= vars.product_short %> binary file appears:
 <pre class="terminal">$ bosh -e my-env releases</pre>
 
 1. Download your current runtime config and save as `bosh-manifest.yml` by running the following command:
 <pre class="terminal">$ bosh -e my-env runtime-config > bosh-manifest.yml</pre>
 
-1. Update your runtime configuration to include the IPsec add-on.
+1. Update your runtime configuration to include <%= vars.product_short %>.
 <pre class="terminal">$ bosh -e my-env update-runtime-config --name=ipsec PATH/bosh-manifest.yml</pre>
 
-1. Verify your runtime configuration changes match what you specified in the IPsec manifest file.
+1. Verify your runtime configuration changes match what you specified in the <%= vars.product_short %> manifest file.
 <pre class="terminal"> $ bosh -e my-env runtime-config --name=ipsec</pre>
 
     For example:
@@ -607,7 +607,7 @@ follow the steps below.
         ...
     </pre>
 
-1. If you have already deployed PAS or are adding IPsec to an existing deployment:
+1. If you have already deployed <%= vars.app_runtime %>  or are adding <%= vars.product_short %> to an existing deployment:
   1. Set the `optional` flag to `true`.
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
@@ -623,18 +623,18 @@ follow the steps below.
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
 1. Click **Apply Changes**.
 
-1. If the PAS tile is not yet installed:
+1. If the <%= vars.app_runtime %>  tile is not yet installed:
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
-  1. Deploy PAS by following the installation instructions for your IaaS.
-     For more information, see [Installing Pivotal Cloud Foundry](http://docs.pivotal.io/pivotalcf/installing/index.html).
+  1. Deploy <%= vars.app_runtime %>  by following the installation instructions for your IaaS.
+     For more information, see [Installing <%= vars.platform_name %>](http://docs.pivotal.io/pivotalcf/installing/index.html).
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. Pivotal recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
-##<a id="verify"></a>Verify Your IPsec Installation
+##<a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
-After installing IPsec and deploying PAS, perform the following steps to verify your IPsec installation:
+After installing <%= vars.product_short %> and deploying <%= vars.app_runtime %> , perform the following steps to verify your <%= vars.product_short %> installation:
 
 1. List the job VMs in your deployment by running the following command:
   `bosh -e BOSH-ENVIRONMENT vms`
@@ -642,7 +642,7 @@ After installing IPsec and deploying PAS, perform the following steps to verify 
 1. Open an SSH connection into the VM, using the job name and index of any VM found above, by running the following command:
   `bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX`
 
-  <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing the IPsec add-on loads IPsec on all VMs deployed by <%= vars.ops_manager %>.</p>
+  <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
 
 1. Run `sudo su -` to enter the root environment with root privileges.
 
@@ -655,7 +655,7 @@ System 'system\_localhost'           running
 </pre>
 
 
-1. Run `PATH-TO-IPSEC/ipsec statusall` to confirm that IPsec is running. If IPsec is not running, this command produces no output.
+1. Run `PATH-TO-IPSEC/ipsec statusall` to confirm that <%= vars.product_short %> is running. If <%= vars.product_short %> is not running, this command produces no output.
 <pre class="terminal">
 $ /var/vcap/packages/strongswan-5.6.3/sbin/ipsec statusall
 Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86\_64):
@@ -692,7 +692,7 @@ ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
 
 ##<a id="self-signed"></a>Generate a Self-Signed Certificate with OpenSSL
 
-Follow these steps to generate a self-signed certificate for your IPsec manifest.
+Follow these steps to generate a self-signed certificate for your <%= vars.product_short %> manifest.
 
 1. [Download](./scripts/openssl-create-ipsec-certs.sh) the `openssl-create-ipsec-certs.sh` bash script.
 1. Navigate to the directory where you downloaded the script:
@@ -707,4 +707,4 @@ Follow these steps to generate a self-signed certificate for your IPsec manifest
    * **pcf-ipsec-peer-key.pem** --- this value can be used as the instance private key in the `instance_private_key` manifest field.
    * **pcf-ipsec-peer-cert.pem** --- this value can be used as the instance certificate in the `instance_certificate` manifest field.
 1. Because this certificate expires in 365 days, set a calendar reminder to rotate the certificate within the year.
-   For instructions on changing certificates, see [Rotating IPsec Certificates](credentials.html).
+   For instructions on changing certificates, see [Rotating <%= vars.product_short %> Certificates](credentials.html).

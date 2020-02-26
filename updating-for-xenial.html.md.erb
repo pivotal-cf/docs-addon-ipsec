@@ -1,24 +1,24 @@
 ---
-title: Updating IPsec Add-on for PCF to Run with Xenial Stemcells
+title: Updating Pivotal IPsec to Run with Xenial Stemcells
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-Pivotal Cloud Foundry (PCF) products and tiles that are released after July 2018 require
+<%= vars.platform_name %> products and tiles that are released after July 2018 require
 Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells.
-You need to verify that your IPsec Add-on for PCF deployment is configured correctly to support PCF products running on Xenial.
+You need to verify that your <%= vars.product_full %> deployment is configured correctly to support <%= vars.platform_name %> products running on Xenial.
 
-This topic describes how to determine if your existing deployment of IPsec Add-on can be deployed to VMs that run on Xenial.
-This topic also explains how to update your IPsec Add-on if it does not support Xenial.
+This topic describes how to determine if your existing deployment of <%= vars.product_short %> can be deployed to VMs that run on Xenial.
+This topic also explains how to update your <%= vars.product_short %> if it does not support Xenial.
 
-Follow the instructions on this page if you use IPsec Add-on with any PCF products or tiles
+Follow the instructions on this page if you use <%= vars.product_short %> with any <%= vars.platform_name %> products or tiles
 that use Xenial stemcells.
 See [Product Tiles that Use Xenial Stemcells](#which) below.
 
-##<a id="who-me"></a> Do I Need to Modify the IPsec Add-on?
+##<a id="who-me"></a> Do I Need to Modify <%= vars.product_short %>?
 
-IPsec Add-on v1.9.9 runs correctly on Xenial-based VMs if the IPsec runtime config
+<%= vars.product_short %> v1.9.9 runs correctly on Xenial-based VMs if the <%= vars.product_sho %> runtime config
 includes the `ubuntu-xenial` property.
 
 Review the following table and make any required changes before you upgrade to Xenial stemcells.
@@ -26,8 +26,8 @@ Review the following table and make any required changes before you upgrade to X
 <table class="nice">
     <col width="25%">
     <col width="75%">
-    <th>If you are using this version of the IPsec Add-on…</td>
-    <th>do the following…</td>
+    <th>If you are using this version of <%= vars.product_short %>…</th>
+    <th>do the following…</th>
     <tr>
       <td>1.9.9</td>
       <td>Verify that your runtime config file, <code>ipsec-addon.yml</code>, includes
@@ -36,36 +36,36 @@ stemcell:
 - os: ubuntu-trusty
 - os: ubuntu-xenial
 </pre>
-        If it does not, then follow the procedure, <a href="#add">Add the Xenial Stemcell Property to IPsec Add-on</a> below.</td>
+        If it does not, then follow the procedure, <a href="#add">Add the Xenial Stemcell Property to <%= vars.product_short %></a> below.</td>
           </tr>
           <tr>
             <td>v1.9.4 and earlier</td>
-            <td>Install IPsec Add-on v1.9.9.</td>
+            <td>Install <%= vars.product_short %> v1.9.9.</td>
           </tr>
 </table>
 
-If you use IPsec Add-on without adding the `ubuntu-xenial` property to the runtime config,
+If you use <%= vars.product_short %> without adding the `ubuntu-xenial` property to the runtime config,
 the VMs running on Xenial are not able to communicate with the rest of the system.
 
 ## <a id="which"></a> Product Tiles that Use Xenial Stemcells
 
-Ensure that you have added the `ubuntu-xenial` property to the IPsec Add-on runtime config
+Ensure that you have added the `ubuntu-xenial` property to <%= vars.product_short %> runtime config
 before you install any product tiles that use Xenial stemcells.
 
-For a list of PCF tile releases that now use Xenial,
-see [Tiles Using Xenial Stemcells in PCF](https://docs.pivotal.io/pivotalcf/stemcells/xenial-tiles.html).
+For a list of <%= vars.platform_name %> tile releases that now use Xenial,
+see [Tiles Using Xenial Stemcells in <%= vars.platform_name %>](https://docs.pivotal.io/pivotalcf/stemcells/xenial-tiles.html).
 
 
-##<a id="add"></a> Add the Xenial Stemcell Property to the IPsec Add-on
+##<a id="add"></a> Add the Xenial Stemcell Property to <%= vars.product_short %>
 
-If you use IPsec Add-on v1.9.9 without the `ubuntu-xenial`
+If you use <%= vars.product_short %> v1.9.9 without the `ubuntu-xenial`
 property in the runtime config, then you must add it to your
 existing `ipsec-addon.yml` and redeploy.  Follow these steps:
 
 1. SSH into the <%= vars.ops_manager %> VM.
    For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
-2. To retrieve and save the IPsec add-on runtime config, run the following command:
+2. To retrieve and save the <%= vars.product_short %> runtime config, run the following command:
 
     ```
     bosh -e BOSH-ENVIRONMENT runtime-config –name ipsec > /tmp/ipsec-addon.yml
@@ -78,7 +78,7 @@ existing `ipsec-addon.yml` and redeploy.  Follow these steps:
     <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml </pre>
 
 
-3. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-xenial` under 
+3. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-xenial` under
     `properties: {}` as shown below:
 
 
