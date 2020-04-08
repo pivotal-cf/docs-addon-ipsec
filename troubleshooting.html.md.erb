@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Pivotal IPsec
+title: Troubleshooting <%= vars.product_full %>
 owner: Security Engineering
 ---
 
@@ -57,7 +57,7 @@ The MTU of the application containers must be at least 100 MTU lower than the MT
 Do one of the following:
 
 * Decrease the MTU of the application containers.
-    1. In the <%= vars.app_runtime %>  tile configuration, click **Networking**.
+    1. In the <%= vars.app_runtime %> tile configuration, click **Networking**.
     1. Decrease **Applications Network Maximum Transmission Unit (MTU) (in bytes)** from the default value of 1454 to 1354.
 
 
@@ -70,7 +70,7 @@ Do one of the following:
     ```
     Where:
     * `NETWORK-INTERFACE` is the network interface used to communicate with other VMs.
-    * `MTU-VALUE` is a value greater than 1500. Pivotal recommends a headroom of 100.
+    * `MTU-VALUE` is a value greater than 1500. VMware recommends a headroom of 100.
 
 	 For example:
 	 <pre class="terminal">
@@ -243,7 +243,7 @@ addons:
         ipsec_subnets:
         - 10.0.1.1/20
         no_ipsec_subnets:
-        - 10.0.1.10/32  # bosh director
+        - 10.0.1.10/32 # bosh director
         instance_certificate: |
           -----BEGIN CERTIFICATE-----
           MIIEMDCCAhigAwIBAgIRAIvrBY2TttU/LeRhO+V1t0YwDQYJKoZIhvcNAQELBQAw
@@ -264,9 +264,9 @@ addons:
 ```
 
 In the example above, the values that appear after the <code>ca_certificates</code>: key are contained within a list and are not just a single certificate.
-This entry must be followed by a line starting with <code>-</code>, and ending with <code>|</code>.  The lines following this contain the PEM encoded certificate(s).
+This entry must be followed by a line starting with <code>-</code>, and ending with <code>|</code>. The lines following this contain the PEM encoded certificate(s).
 
-The error message shown above indicating a problem with the <code>each\_with\_index</code> method provides a hint that the <code>- |</code> YAML syntax sequence is missing.  Use this syntax even in situations where there is only one CA certificate, for example a list of one entry.
+The error message shown above indicating a problem with the <code>each\_with\_index</code> method provides a hint that the <code>- |</code> YAML syntax sequence is missing. Use this syntax even in situations where there is only one CA certificate, for example a list of one entry.
 
 <hr>
 

@@ -1,5 +1,5 @@
 ---
-title: Upgrading Pivotal IPsec
+title: Upgrading <%= vars.product_full %>
 owner: Security Engineering
 ---
 
@@ -43,7 +43,7 @@ This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, a
 To upgrade <%= vars.product_short %> to a later version, do the following:
 
 1. Download the <%= vars.product_short %> software binary
-   from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
+   from the [VMware Tanzu Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 2. To copy the software binary to your <%= vars.ops_manager %> VM, run the following command:
 
@@ -61,12 +61,12 @@ To upgrade <%= vars.product_short %> to a later version, do the following:
 4. Retrieve the latest runtime config by running the following command:
 
     ```
-    bosh -e BOSH-ENVIRONMENT runtime-config  --name ipsec > PATH-TO-SAVE-THE-RUNTIME-CONFIG
+    bosh -e BOSH-ENVIRONMENT runtime-config --name ipsec > PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
     For example:
 
-    <pre class="terminal">bosh -e my-env runtime-config  --name ipsec > /tmp/ipsec.yml</pre>
+    <pre class="terminal">bosh -e my-env runtime-config --name ipsec > /tmp/ipsec.yml</pre>
 
 5. Upload the latest <%= vars.product_short %> release:
 

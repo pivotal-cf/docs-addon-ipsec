@@ -1,5 +1,5 @@
 ---
-title: Installing Pivotal IPsec
+title: Installing <%= vars.product_full %>
 owner: Security Engineering
 ---
 
@@ -33,10 +33,10 @@ For more information, see [<%= vars.product_short %> Load Balancer Issues](./tro
 
 * BOSH deployed through <%= vars.ops_manager %> v1.8 or later.
 
-* The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
+* The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %> tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
 by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %>** > **Networking**. <br><br>
-Pivotal recommends the following MTU values:
+VMware recommends the following MTU values:
 
     <table class="nice">
       <tr>
@@ -68,13 +68,13 @@ Pivotal recommends the following MTU values:
 
 ##<a id="bestpractices"></a>Best Practices
   * <%= vars.product_short %> might affect the functionality of other service tiles.
-    As a result, Pivotal recommends deploying <%= vars.app_runtime %>
+    As a result, VMware recommends deploying <%= vars.app_runtime %>
     and each service tile to different isolated subnets.
     Alternatively, you can minimally deploy all service tiles to a single isolated subnet,
-    apart from the <%= vars.app_runtime %>  subnet.
+    apart from the <%= vars.app_runtime %> subnet.
     Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
-  * For <%= vars.product_short %> on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
-    These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>.
+  * For <%= vars.product_short %> on Linux VMs, VMware recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
+    These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">VMware Tanzu Network</a>.
     If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
     see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting <%= vars.product_full %> topic to adjust MTU values.
 
@@ -268,7 +268,7 @@ YAML:
             <strong>ipsec\_subnets</strong>:
             \- 10.0.1.1/20
             <strong>no\_ipsec\_subnets</strong>:
-            \- 10.0.1.10/32  # bosh director
+            \- 10.0.1.10/32 # bosh director
             \- 10.0.1.4/32 # ops managers
             <strong>instance\_certificate</strong>: |
               -----BEGIN CERTIFICATE-----
@@ -319,7 +319,7 @@ YAML:
       <td><code><strong>version</strong></code></td>
       <td>
         <a name="version"></a>
-        Specify the version number of your <%= vars.product_short %> download from Pivotal Network.
+        Specify the version number of your <%= vars.product_short %> download from VMware Tanzu Network.
       </td>
     </tr>
     <tr>
@@ -327,7 +327,7 @@ YAML:
       <td>
         <a name="optional"></a>
         This value makes <%= vars.product_short %> enforcement optional.
-        To add <%= vars.product_short %> to an existing <%= vars.app_runtime %>  deployment, set this flag to <code>true</code>.
+        To add <%= vars.product_short %> to an existing <%= vars.app_runtime %> deployment, set this flag to <code>true</code>.
         After <%= vars.product_short %> has been successfully installed, set this flag back to <code>false</code> and redeploy.
         <p class="note warning"><strong>Warning:</strong> Communication between existing components fails
           if you try to add <%= vars.product_short %> to an existing deployment
@@ -350,7 +350,7 @@ YAML:
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
         along with any other IP addresses in your <%= vars.platform_name %> deployment to which you want to communicate without encryption.
-        Pivotal recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
+        VMware recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
         Subnets for <%= vars.platform_name %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
@@ -379,7 +379,7 @@ YAML:
         <a name="instance_certificate"></a>
         Copy in the signed certificate to be used by all your instance VMs.
         You must use one of the CAs in the <code>ca\_certificates</code> property to sign this certificate.
-        Pivotal recommends that you use a self-signed certificate.
+        VMware recommends that you use a self-signed certificate.
         For more information, see
         <a href="#self-signed">Generate a Self-Signed Certificate</a> below.
       </td>
@@ -554,7 +554,7 @@ To download the <%= vars.product_short %> binary, add your <%= vars.product_shor
 follow the steps below:
 <p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.platform_code %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
 
-1. Download the <%= vars.product_short %> software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
+1. Download the <%= vars.product_short %> software binary from the [VMware Tanzu Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 1. Copy the software binary to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
@@ -607,7 +607,7 @@ follow the steps below:
         ...
     </pre>
 
-1. If you have already deployed <%= vars.app_runtime %>  or are adding <%= vars.product_short %> to an existing deployment:
+1. If you have already deployed <%= vars.app_runtime %> or are adding <%= vars.product_short %> to an existing deployment:
   1. Set the `optional` flag to `true`.
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
@@ -623,14 +623,14 @@ follow the steps below:
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
 1. Click **Apply Changes**.
 
-1. If the <%= vars.app_runtime %>  tile is not yet installed:
+1. If the <%= vars.app_runtime %> tile is not yet installed:
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
-  1. Deploy <%= vars.app_runtime %>  by following the installation instructions for your IaaS.
+  1. Deploy <%= vars.app_runtime %> by following the installation instructions for your IaaS.
      For more information, see [Installing <%= vars.platform_name %>](http://docs.pivotal.io/pivotalcf/installing/index.html).
 
-1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. Pivotal recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
+1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. VMware recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
 ##<a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
