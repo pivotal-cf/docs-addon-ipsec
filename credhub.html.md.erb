@@ -94,13 +94,39 @@ owner: Security Engineering
 
   1) Use credhub cli to ensure the new cert variable names are not already used
 
+  	1) SSH into the Opsman VM
+
+  	1) Target the credhub api server (The credhub api is the bosh director)
+
+  	Ex:
+	<pre class="terminal">
+  	credhub api --server 10.0.0.5:8844 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+	Setting the target url: https://10.0.0.5:8844
+	</pre>
+
+  	1) Retrieve the UAA admin credential and login to Credhub
+
+  	Login to Ops Manager, navigate to the "Credentials" tab on the BOSH Director tile. Open "Uaa Admin User Credentials" to retrieve the credentials
+
+  	Ex:
+	<pre class="terminal">
+  	~$ credhub login
+	username: admin
+	password: ********************************
+	Login Successful
+	</pre>
+
+	<pre class="terminal">
   	 credhub find -n /ipsec_addon/root_ca_2
   	 No credentials exist which match the provided parameters
+	</pre>
 
+	<pre class="terminal">
 	 credhub find -n /ipsec_addon/instance_cert_2
 	 No credentials exist which match the provided parameters
+	</pre>
 
-	 If the certs exist use a different name.
+	If the certs exist use a different name.
 
   1) Add a new set of ca cert, instance cert, and private key
 
@@ -153,7 +179,7 @@ owner: Security Engineering
     1) Update the runtime config and apply changes to the entire foundation
        Verify the output when updating the runtime-config:
 
-		<pre>   
+		<pre class="terminal">   
 		  addons:
 		  - name: ipsec-addon
 		    properties:
@@ -196,7 +222,7 @@ owner: Security Engineering
 
     1) Update the runtime config and apply changes to the entire foundation
        Verify the output when updating the runtime-config:
-		<pre>   
+		<pre class="terminal">   
 		  addons:
 		  - name: ipsec-addon
 		    properties:
@@ -254,7 +280,7 @@ owner: Security Engineering
 
     1) Update the runtime config and apply changes to the entire foundation
        Verify the output when updating the runtime-config:
-		<pre>   
+		<pre class="terminal">   
 		  addons:
 		  - name: ipsec-addon
 		    properties:
