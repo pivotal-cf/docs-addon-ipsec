@@ -1,15 +1,15 @@
 ---
-title: Troubleshooting Pivotal IPsec
+title: Troubleshooting IPsec
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
 This topic provides instructions to verify that strongSwan-based <%= vars.product_full %> works
-with your <%= vars.platform_name %> deployment and general recommendations
+with your <%= vars.app_runtime %> deployment and general recommendations
 for troubleshooting <%= vars.product_short %>.
 
-## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with <%= vars.platform_name %>
+## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with <%= vars.app_runtime %>
 
 To verify that <%= vars.product_short %> works between two hosts, you can check that traffic is encrypted in the deployment with `tcpdump`, perform the ping test, and check the logs with the steps below.
 
@@ -70,7 +70,7 @@ Do one of the following:
     ```
     Where:
     * `NETWORK-INTERFACE` is the network interface used to communicate with other VMs.
-    * `MTU-VALUE` is a value greater than 1500. Pivotal recommends a headroom of 100.
+    * `MTU-VALUE` is a value greater than 1500. VMware recommends a headroom of 100.
 
 	 For example:
 	 <pre class="terminal">
@@ -326,7 +326,7 @@ No future change is possible.  Bailing out early after 0.001s.
 
 #### Explanation
 
-Clock global is trying to call an API of an app hosted in <%= vars.platform_code %>.
+Clock global is trying to call an API of an app hosted in <%= vars.app_runtime %>.
 This API call is routed through your external load balancer to Gorouter, which
 fails if you are using Network Load Balancers (NLB).
 

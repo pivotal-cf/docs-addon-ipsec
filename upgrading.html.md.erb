@@ -1,5 +1,5 @@
 ---
-title: Upgrading Pivotal IPsec
+title: Upgrading IPsec
 owner: Security Engineering
 ---
 
@@ -32,7 +32,7 @@ This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, a
 </table>
 
 
-<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.platform_code %> v1.12 or later,
+<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.ops_manager %> v1.12 or later,
    you must use named runtime configs.
    If you have not already split your runtime config into multiple named files,
    do so before upgrading <%= vars.product_full %>.
@@ -43,7 +43,7 @@ This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, a
 To upgrade <%= vars.product_short %> to a later version, do the following:
 
 1. Download the <%= vars.product_short %> software binary
-   from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
+   from the [<%= vars.product_network %>](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 2. To copy the software binary to your <%= vars.ops_manager %> VM, run the following command:
 

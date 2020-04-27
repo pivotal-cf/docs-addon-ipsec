@@ -1,6 +1,6 @@
 # docs-addon-ipsec
 
-This repo contains the source materials for the Pivotal IPsec documentation.
+This repo contains the source materials for the IPsec documentation.
 
 ## Branches
 
@@ -20,6 +20,4 @@ The book repo for this product is [docs-book-ipsec](https://github.com/pivotal-c
 
 ## Style Guide
 
-Product name is Pivotal IPsec. Notice that the "s" is lowercase.
-
-It is okay to use "IPsec" for short after initial use of "Pivotal IPsec" on the page.
+Product name is IPsec. Notice that the "s" is lowercase.

@@ -1,5 +1,5 @@
 ---
-title: Pivotal IPsec
+title: IPsec
 owner: Security Engineering
 ---
 
@@ -10,7 +10,7 @@ owner: Security Engineering
 <strong><%= modified_date %></strong>
 
 This guide describes <%= vars.product_full %>, which secures data transmissions
-inside [<%= vars.platform_name %>](https://network.pivotal.io/products/pivotal-cf).
+inside [<%= vars.app_runtime_full %>](https://network.pivotal.io/products/pivotal-cf).
 Topics covered in this guide include <%= vars.product_full %> installation and configuration,
 troubleshooting, and certificate rotation.
 
@@ -42,7 +42,7 @@ The following table provides version and version-support information about <%= v
         <td>Month DD, 2019</td>
     </tr>
     <tr>
-        <td>Compatible <%= vars.ops_manager_full %> versions</td>
+        <td>Compatible <%= vars.ops_manager %> versions</td>
         <td>2.3, 2.4, 2.5, 2.6, and 2.7</td>
     </tr>
     <tr>
@@ -97,7 +97,7 @@ The following table provides version and version-support information about <%= v
 
 * <%= vars.product_full %> is not compatible with VMware NSX-T Container Plug-in for <%= vars.app_runtime_full %>.
 
-* Pivotal recommends configuring <%= vars.product_full %> to use a self-signed certificate to sign instance certificates.
-  Pivotal does not recommend using a certificate signed by a public or third-party CA.
+* VMware recommends configuring <%= vars.product_full %> to use a self-signed certificate to sign instance certificates.
+  VMware does not recommend using a certificate signed by a public or third-party CA.
 
 * <%= vars.product_full %> is not supported on Windows.
