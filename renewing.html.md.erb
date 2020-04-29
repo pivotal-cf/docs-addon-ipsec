@@ -38,7 +38,7 @@ To renew expired <%= vars.product_short %> certificates, do the following:
 
    or
 
-   Generate and store the certificates in Credhub. Please refer to the [IPsec Credhub Page](./credhub.html)
+   Generate and store the certificates in Credhub. Please refer to the [IPsec Credhub Page](./credhub.html) for more details
 
 3. In the runtime `config.yml` file saved from step 1, update the `optional` field to `true` and update the certificate fields with new certificates.
    For more information about these fields,
@@ -64,6 +64,47 @@ To renew expired <%= vars.product_short %> certificates, do the following:
             ...
             -----END CERTIFICATE-----
     </pre>
+
+    If you wish to transition to Credhub Certificate follow the steps on the [IPsec Credhub Page](./credhub.html) page
+    
+    Example:
+    <pre>
+    <strong>variables:</strong>
+    \- name: <strong>/ipsec_addon/root_ca_1</strong>
+       type: certificate
+       options:
+          is_ca: true
+          common_name: ipsec_addon_root_ca_1
+
+    \- name: <strong>/ipsec_addon/instance_cert_1</strong>
+       type: certificate
+       options:
+         ca: <strong>/ipsec_addon/root_ca_1</strong>
+         common_name: ipsec_addon_instance_cert_1
+
+    addons:
+      \- name: ipsec-addon
+          <strong>jobs</strong>:
+          \- <strong>name</strong>: ipsec
+            release: ipsec
+            properties:
+              ipsec:
+                <strong>optional</strong>: true
+                <strong>ipsec\_subnets</strong>:
+                \- 10.0.1.1/20
+                <strong>no\_ipsec\_subnets</strong>:
+                \- 10.0.1.10/32  # bosh director
+                \- 10.0.1.4/32 # ops managers
+                <strong>instance\_certificate</strong>: ((/ipsec_addon/instance_cert_1.private_key))
+                <strong>instance\_private\_key</strong>: ((/ipsec_addon/instance_cert_1.certificate))
+                <strong>ca\_certificates</strong>:
+                  \- ((/ipsec_addon/root_ca_1.certificate))
+          include:
+            stemcell:
+            - <strong>os</strong>: ubuntu-trusty
+            - <strong>os</strong>: ubuntu-xenial
+    </pre>
+
 
 4. Update the runtime config by running the following command:
 
