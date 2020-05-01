@@ -18,8 +18,7 @@ have a default lifetime of one year.  Regardless of their specific lifetime, all
 it is important for the operations team to plan accordingly and remember to rotate <%= vars.product_short %> certificates before they actually expire.
 
 <p class="note"><strong>Note:</strong> Rotating the certificates while they are still valid
-   ensures the maximum availability of the Cloud Foundry platform and avoids any unscheduled interruption in service.
-</p>
+  avoids any unscheduled interruption in service.</p>
 
 ##<a id="renew-certs"></a>Renew Expired <%= vars.product_short %> Certificates
 
@@ -36,9 +35,9 @@ To renew expired <%= vars.product_short %> certificates, do the following:
    For development or test environments, you can use self-signed certificates.
    For information about self-signed certificates, see [Generate a Self-Signed Certificate](./installing.html#self-signed).
 
-   or
+   or:
 
-   Generate and store the certificates in Credhub. Please refer to the [IPsec Credhub Page](./credhub.html) for more details
+   generate and store the certificates in CredHub. For more information see [CredHub Manifest Setup](./credhub.html).
 
 3. In the runtime `config.yml` file saved from step 1, update the `optional` field to `true` and update the certificate fields with new certificates.
    For more information about these fields,
@@ -65,8 +64,9 @@ To renew expired <%= vars.product_short %> certificates, do the following:
             -----END CERTIFICATE-----
     </pre>
 
-    If you wish to transition to Credhub Certificate follow the steps on the [IPsec Credhub Page](./credhub.html) page
-    
+    If you want to use a CredHub Certificate, follow the steps in
+    [CredHub Manifest Setup](./credhub.html).
+
     Example:
     <pre>
     <strong>variables:</strong>
