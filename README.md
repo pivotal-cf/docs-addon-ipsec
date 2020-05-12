@@ -16,7 +16,7 @@ This repo contains the source materials for the IPsec documentation.
 
 ## Book Repo
 
-The book repo for this product is [docs-book-ipsec](https://github.com/pivotal-cf/docs-book-identity).
+The book repo for this product is [docs-book-ipsec](https://github.com/pivotal-cf/docs-book-ipsec).
 
 ## Style Guide
 
