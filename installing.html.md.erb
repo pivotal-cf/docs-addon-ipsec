@@ -1,5 +1,5 @@
 ---
-title: Installing Pivotal IPsec
+title: Installing IPsec
 owner: Platform Security & Compliance Team
 ---
 
@@ -36,7 +36,7 @@ For more information, see [<%= vars.product_short %> Load Balancer Issues](./tro
 * The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
 by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %>** > **Networking**. <br><br>
-Pivotal recommends the following MTU values:
+VMware recommends the following MTU values:
 
     <table class="nice">
       <tr>
@@ -68,12 +68,12 @@ Pivotal recommends the following MTU values:
 
 ##<a id="bestpractices"></a>Best Practices
   * <%= vars.product_short %> might affect the functionality of other service tiles.
-    As a result, Pivotal recommends deploying <%= vars.app_runtime %>
+    As a result, VMware recommends deploying <%= vars.app_runtime %>
     and each service tile to different isolated subnets.
     Alternatively, you can minimally deploy all service tiles to a single isolated subnet,
     apart from the <%= vars.app_runtime %>  subnet.
     Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
-  * For <%= vars.product_short %> on Linux VMs, Pivotal recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
+  * For <%= vars.product_short %> on Linux VMs, VMware recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
     These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>.
     If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
     see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting <%= vars.product_full %> topic to adjust MTU values.
@@ -350,7 +350,7 @@ YAML:
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
         along with any other IP addresses in your <%= vars.platform_name %> deployment to which you want to communicate without encryption.
-        Pivotal recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
+        VMware recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
         Subnets for <%= vars.platform_name %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
@@ -379,7 +379,7 @@ YAML:
         <a name="instance_certificate"></a>
         Copy in the signed certificate to be used by all your instance VMs.
         You must use one of the CAs in the <code>ca\_certificates</code> property to sign this certificate.
-        Pivotal recommends that you use a self-signed certificate.
+        VMware recommends that you use a self-signed certificate.
         For more information, see
         <a href="#self-signed">Generate a Self-Signed Certificate</a> below.
 
@@ -643,7 +643,7 @@ follow the steps below:
   1. Deploy <%= vars.app_runtime %>  by following the installation instructions for your IaaS.
      For more information, see [Installing <%= vars.platform_name %>](http://docs.pivotal.io/pivotalcf/installing/index.html).
 
-1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. Pivotal recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
+1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. VMware recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
 ##<a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
