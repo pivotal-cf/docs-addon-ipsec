@@ -74,7 +74,7 @@ VMware recommends the following MTU values:
     apart from the <%= vars.app_runtime %>  subnet.
     Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
   * For <%= vars.product_short %> on Linux VMs, VMware recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
-    These stemcells are available on <a href="https://network.pivotal.io/products/stemcells">Pivotal Network</a>.
+    These stemcells are available on <a href="https://network.pivotal.io/products/stemcells"><%= vars.product_network %></a>.
     If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
     see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting <%= vars.product_full %> topic to adjust MTU values.
 
@@ -319,7 +319,7 @@ YAML:
       <td><code><strong>version</strong></code></td>
       <td>
         <a name="version"></a>
-        Specify the version number of your <%= vars.product_short %> download from Pivotal Network.
+        Specify the version number of your <%= vars.product_short %> download from <%= vars.product_network %>.
       </td>
     </tr>
     <tr>
@@ -567,7 +567,7 @@ To download the <%= vars.product_short %> binary, add your <%= vars.product_shor
 follow the steps below:
 <p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.platform_code %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
 
-1. Download the <%= vars.product_short %> software binary from the [Pivotal Network](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
+1. Download the <%= vars.product_short %> software binary from the [<%= vars.product_network %>](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 1. Copy the software binary to your <%= vars.ops_manager %> instance.
 <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
