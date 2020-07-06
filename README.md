@@ -1,6 +1,6 @@
 # docs-addon-ipsec
 
-This repo contains the source materials for the IPsec documentation.
+This repo contains the source materials for the IPsec for VMware Tanzu documentation.
 
 ## Branches
 
@@ -23,4 +23,5 @@ This repo contains the source materials for the IPsec documentation.
 
 ## Style Guide
 
-Product name is IPsec. Notice that the "s" is lowercase.
+Product name is IPsec for VMware Tanzu. Notice that the "s" is lowercase.
+Subsequent mentions on a page may be shortened to "IPsec"
