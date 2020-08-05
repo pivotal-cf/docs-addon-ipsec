@@ -379,13 +379,12 @@ YAML:
         <a name="instance_certificate"></a>
         Copy in the signed certificate to be used by all your instance VMs.
         You must use one of the CAs in the <code>ca\_certificates</code> property to sign this certificate.
+        <br><br>
         VMware recommends that you use a self-signed certificate.
         For more information, see
         <a href="#self-signed">Generate a Self-Signed Certificate</a> below.
-
-        or:
-
-        To generate and store certificates in CredHub, see [CredHub Manifest Setup](credhub.html).
+        <br>
+        Alternatively, to generate and store certificates in CredHub, see [CredHub Manifest Setup](credhub.html).
 
       </td>
     </tr>
@@ -395,10 +394,8 @@ YAML:
         <a name="instance_private_key"></a>
         Copy in the private key that corresponds to the <code>instance\_certificate</code> above.
         This key must not use a pass phrase.
-
-        or:
-
-        to generate and store certificates in CredHub, see [CredHub Manifest Setup](credhub.html).
+        <br><br>
+        Alternatively, to generate and store certificates in CredHub, see [CredHub Manifest Setup](credhub.html).
 
       </td>
     </tr>
@@ -436,9 +433,7 @@ YAML:
            also called the common name and set with <code>CN=</code>.
            The root <b>must</b> be the first certificate of the chain.
         </p>
-
-        To generate and store certificates in CredHub, see [CredHub Manifest Setup](credhub.html).
-
+        Alternatively, to generate and store certificates in CredHub, see [CredHub Manifest Setup](credhub.html).
       </td>
     </tr>
     <tr>
