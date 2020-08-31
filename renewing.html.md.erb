@@ -30,12 +30,11 @@ To renew expired <%= vars.product_short %> certificates, do the following:
     bosh -e BOSH-ENVIRONMENT runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
-2. Generate a new set of certificates.
-
+1. Generate a new set of certificates.
    For development or test environments, you can use self-signed certificates.
    For information about self-signed certificates, see [Generate a Self-Signed Certificate](./installing.html#self-signed).
 
-3. In the runtime `config.yml` file saved from step 1, update the `optional` field to `true` and update the certificate fields with new certificates.
+1. In the runtime `config.yml` file saved from step 1, update the `optional` field to `true` and update the certificate fields with new certificates.
    For more information about these fields,
    see the field descriptions under [Create the <%= vars.product_short %> Manifest](./installing.html#create-mfest).
     <pre>
@@ -60,16 +59,17 @@ To renew expired <%= vars.product_short %> certificates, do the following:
             -----END CERTIFICATE-----
     </pre>
 
-4. Update the runtime config by running the following command:
+1. Update the runtime config by running the following command:
 
     ```
     bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
-5. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
-6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
+1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
    For more information about this <%= vars.ops_manager %> page,
    see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
-7. Click **Apply Changes**.
-8. Remove the `optional: true` set in step 3.
-9. Repeat steps 4 to 7.
+1. Click **Apply Changes**.
+1. Set the `optional` field in the `config.yml` back to `false`.
+1. Repeat steps 4 to 6 to update the runtime config again.
+1. Click **Apply Changes**.
