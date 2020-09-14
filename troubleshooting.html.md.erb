@@ -5,11 +5,11 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to verify that strongSwan-based <%= vars.product_full %> works
-with your <%= vars.app_runtime %> deployment and general recommendations
+This topic provides instructions to verify that strongSwan-based <%= vars.product_full %>
+works with your deployment and general recommendations
 for troubleshooting <%= vars.product_short %>.
 
-## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with <%= vars.app_runtime %>
+## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with Your Deployment
 
 To verify that <%= vars.product_short %> works between two hosts, you can check that traffic is encrypted in the deployment with `tcpdump`, perform the ping test, and check the logs with the steps below.
 
@@ -326,7 +326,7 @@ No future change is possible.  Bailing out early after 0.001s.
 
 #### Explanation
 
-Clock global is trying to call an API of an app hosted in <%= vars.app_runtime %>.
+Clock global is trying to call an API of an app hosted in <%= vars.app_runtime_full %>.
 This API call is routed through your external load balancer to Gorouter, which
 fails if you are using Network Load Balancers (NLB).
 

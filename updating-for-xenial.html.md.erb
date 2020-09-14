@@ -5,15 +5,16 @@ owner: Security Engineering
 
 <strong><%= modified_date %></strong>
 
-VMware products and tiles that are released after July 2018 require
+<%= vars.ops_manager %> products and tiles that are released after July 2018 require
 Ubuntu Xenial stemcells instead of Ubuntu Trusty stemcells.
-You need to verify that your <%= vars.product_full %> deployment is configured correctly to support <%= vars.ops_manager %> products running on Xenial.
+You need to verify that your <%= vars.product_full %> deployment is configured
+correctly to support products running on Xenial.
 
 This topic describes how to determine if your existing deployment of <%= vars.product_short %> can be deployed to VMs that run on Xenial.
 This topic also explains how to update your <%= vars.product_short %> if it does not support Xenial.
 
-Follow the instructions on this page if you use <%= vars.product_short %> with any <%= vars.ops_manager %> products or tiles
-that use Xenial stemcells.
+Follow the instructions on this page if you use <%= vars.product_short %> with any
+products or tiles that use Xenial stemcells.
 See [Product Tiles that Use Xenial Stemcells](#which) below.
 
 ##<a id="who-me"></a> Do I Need to Modify <%= vars.product_short %>?
@@ -52,8 +53,8 @@ the VMs running on Xenial are not able to communicate with the rest of the syste
 Ensure that you have added the `ubuntu-xenial` property to <%= vars.product_short %> runtime config
 before you install any product tiles that use Xenial stemcells.
 
-For a list of <%= vars.ops_manager %>  tile releases that now use Xenial,
-see [Tiles Using Xenial Stemcells](https://docs.pivotal.io/pivotalcf/stemcells/xenial-tiles.html).
+For a list of <%= vars.ops_manager %> tile releases that now use Xenial,
+see [Tiles Using Xenial Stemcells](https://docs.pivotal.io/platform/stemcells/xenial-tiles.html).
 
 
 ##<a id="add"></a> Add the Xenial Stemcell Property to <%= vars.product_short %>
