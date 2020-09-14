@@ -35,7 +35,7 @@ For more information, see [<%= vars.product_short %> Load Balancer Issues](./tro
 
 * The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
-by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime %>** > **Networking**. <br><br>
+by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime_abbr %>** > **Networking**. <br><br>
 VMware recommends the following MTU values:
 
     <table class="nice">
@@ -68,10 +68,10 @@ VMware recommends the following MTU values:
 
 ##<a id="bestpractices"></a>Best Practices
   * <%= vars.product_short %> might affect the functionality of other service tiles.
-    As a result, VMware recommends deploying <%= vars.app_runtime %>
+    As a result, VMware recommends deploying <%= vars.app_runtime_abbr %>
     and each service tile to different isolated subnets.
     Alternatively, you can minimally deploy all service tiles to a single isolated subnet,
-    apart from the <%= vars.app_runtime %>  subnet.
+    apart from the <%= vars.app_runtime_abbr %>  subnet.
     Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
   * For <%= vars.product_short %> on Linux VMs, VMware recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
     These stemcells are available on <a href="https://network.pivotal.io/products/stemcells"><%= vars.product_network %></a>.
@@ -328,7 +328,7 @@ YAML:
       <td>
         <a name="optional"></a>
         This value makes <%= vars.product_short %> enforcement optional.
-        To add <%= vars.product_short %> to an existing <%= vars.app_runtime %>  deployment, set this flag to <code>true</code>.
+        To add <%= vars.product_short %> to an existing deployment, set this flag to <code>true</code>.
         After <%= vars.product_short %> has been successfully installed, set this flag back to <code>false</code> and redeploy.
         <p class="note warning"><strong>Warning:</strong> Communication between existing components fails
           if you try to add <%= vars.product_short %> to an existing deployment
@@ -609,7 +609,7 @@ follow the steps below:
         ...
     </pre>
 
-1. If you have already deployed <%= vars.app_runtime %>  or are adding <%= vars.product_short %> to an existing deployment:
+1. If you have already deployed <%= vars.app_runtime_abbr %> or are adding <%= vars.product_short %> to an existing deployment:
   1. Set the `optional` flag to `true`.
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
@@ -625,18 +625,18 @@ follow the steps below:
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
 1. Click **Apply Changes**.
 
-1. If the <%= vars.app_runtime %>  tile is not yet installed:
+1. If the <%= vars.app_runtime_abbr %>  tile is not yet installed:
   1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
-  1. Deploy <%= vars.app_runtime %>  by following the installation instructions for your IaaS.
+  1. Deploy <%= vars.app_runtime_abbr %> by following the installation instructions for your IaaS.
      For more information, see [Architecture and Installation Overview](http://docs.pivotal.io/pivotalcf/installing/index.html).
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. VMware recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
 ##<a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
-After installing <%= vars.product_short %> and deploying <%= vars.app_runtime %> , perform the following steps to verify your <%= vars.product_short %> installation:
+After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_abbr %>, perform the following steps to verify your <%= vars.product_short %> installation:
 
 1. List the job VMs in your deployment by running the following command:
 
