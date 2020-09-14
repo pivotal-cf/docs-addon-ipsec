@@ -170,7 +170,7 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 
 1. Navigate to **EC2 Dashboard** > **Security Groups**.
 
-2. Select the Security Group with the description **<%= vars.app_runtime %> VMs Security Group** and click **Edit**.
+2. Select the Security Group with the description **PCF VMs Security Group** and click **Edit**.
 
 3. Create the following **Inbound Rules**.
 <table border="1" class="nice">
@@ -204,8 +204,8 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 </tr>
 </table>
 
-  <p class="note"><strong>Note:</strong> The default <strong><%= vars.app_runtime %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
-    If your <%= vars.app_runtime %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
+  <p class="note"><strong>Note:</strong> The default <strong>PCF VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
+    If your PCF subnet is deployed to a different CIDR block, adjust the source as needed.</p>
 
 ###<a id="openstack"></a>Configure Network Security for OpenStack
 
@@ -351,8 +351,8 @@ YAML:
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
         along with any other IP addresses in your deployment to which you want to communicate without encryption.
-        VMware recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
-        Subnets for <%= vars.platform_name %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
+        VMware recommends that you list the subnets that are used for PCF managed services.
+        Subnets for PCF managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
           If you have an external load balancer such as F5, add it to the
