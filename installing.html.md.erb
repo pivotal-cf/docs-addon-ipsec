@@ -29,7 +29,7 @@ or OpenStack as your IaaS.
 <%= vars.product_short %> does not work with NLBs.
 For more information, see [<%= vars.product_short %> Load Balancer Issues](./troubleshooting.html#ipsec-load-balancer-issues).
 
-* <%= vars.platform_name %> operator administration rights
+* <%= vars.ops_manager %> operator administration rights
 
 * BOSH deployed through <%= vars.ops_manager %> v1.8 or later.
 
@@ -349,7 +349,7 @@ YAML:
       <td>
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
-        along with any other IP addresses in your <%= vars.platform_name %> deployment to which you want to communicate without encryption.
+        along with any other IP addresses in your deployment to which you want to communicate without encryption.
         VMware recommends that you list the subnets that are used for <%= vars.platform_name %> managed services.
         Subnets for <%= vars.platform_name %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
@@ -631,7 +631,7 @@ follow the steps below:
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
   1. Deploy <%= vars.app_runtime %>  by following the installation instructions for your IaaS.
-     For more information, see [Installing <%= vars.platform_name %>](http://docs.pivotal.io/pivotalcf/installing/index.html).
+     For more information, see [Architecture and Installation Overview](http://docs.pivotal.io/pivotalcf/installing/index.html).
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. VMware recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
