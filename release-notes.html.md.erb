@@ -9,6 +9,28 @@ owner: Platform Security & Compliance Team
 
 This topic contains release notes for <%= vars.product_full %>.
 
+##<a id="1-9-25"></a>  v1.9.31
+
+**Release Date:** November 12, 2020
+
+### Features
+
+New features and changes in this release:
+
+* ** Support for certificate rotation via [`maestro`](https://docs.pivotal.io/ops-manager/2-10/security/pcf-infrastructure/advanced-certificate-rotation.html) cli
+
+### Known Issues
+
+There are no known issues for this release.
+
+### Fixed Issues
+
+This release fixes the following issues:
+
+* Large deployments (~ 300 VMs) failed due to stale security associations(SAs).
+  The ipsec job now flushes ip transforms immidiately after starting the charon process.
+
+
 ##<a id="1-9-25"></a>  v1.9.25
 
 **Release Date:** June 2, 2020
