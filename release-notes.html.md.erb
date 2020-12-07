@@ -19,16 +19,14 @@ New features and changes in this release:
 * **Support for certificate rotation using CredHub Maestro:**
 For more information, see [Advanced Certificate Rotation with CredHub Maestro](https://docs.pivotal.io/ops-manager/2-10/security/pcf-infrastructure/advanced-certificate-rotation.html).
 
-
-### Known Issues
-There are no known issues for this release.
-
-
 ### Fixed Issues
 This release fixes the following issue:
 
 * Large deployments (~ 300 VMs) failed due to stale security associations (SAs).
   The `ipsec` job now runs an `ip xfrm state flush` immediately after starting the charon process.
+
+### Known Issues
+There are no known issues for this release.
 
 
 ##<a id="1-9-25"></a>  v1.9.25
