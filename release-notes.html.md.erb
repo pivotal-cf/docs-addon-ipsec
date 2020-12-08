@@ -22,7 +22,7 @@ For more information, see [Advanced Certificate Rotation with CredHub Maestro](h
 ### Fixed Issues
 This release fixes the following issue:
 
-* Large deployments (~ 300 VMs) failed due to stale security associations (SAs).
+* Large deployments, with a size of approximately 300 VMs, failed due to stale security associations (SAs).
   The `ipsec` job now runs an `ip xfrm state flush` immediately after starting the charon process.
 
 ### Known Issues
