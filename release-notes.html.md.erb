@@ -9,6 +9,20 @@ owner: Platform Security & Compliance Team
 
 This topic contains release notes for <%= vars.product_full %>.
 
+##<a id="1-9-31"></a>  v1.9.32
+
+**Release Date:** February 23, 2020
+
+### Fixed Issues
+This release fixes the following issue:
+
+* This release fixes the issue where NATS clients can not connect to NATS VM when rotating certificates
+
+### Known Issues
+
+There are no known issues for this release.
+
+
 ##<a id="1-9-31"></a>  v1.9.31
 
 **Release Date:** December 4, 2020
@@ -26,7 +40,7 @@ This release fixes the following issue:
   The `ipsec` job now runs an `ip xfrm state flush` immediately after starting the charon process.
 
 ### Known Issues
-There are no known issues for this release.
+* When rotating certificates, the NATS VMs come back online but not all clients can reconnect.
 
 
 ##<a id="1-9-25"></a>  v1.9.25
