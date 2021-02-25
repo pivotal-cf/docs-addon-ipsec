@@ -10,7 +10,7 @@ owner: Platform Security & Compliance Team
 This topic contains release notes for <%= vars.product_full %>.
 
 
-## <a id="1-9-31"></a>  v1.9.32
+## <a id="1-9-32"></a>  v1.9.32
 
 **Release Date:** February 24, 2021
 
@@ -46,7 +46,9 @@ The `ipsec` job now runs an `ip xfrm state flush` immediately after starting the
 
 ### Known Issues
 
-* When rotating certificates, the NATS VMs come back online but not all clients can reconnect.
+This release has the following issue:
+
+* **NATS clients connection:** NATS clients fail to connect to the NATS VM when rotating certificates
 
 
 ##<a id="1-9-25"></a>  v1.9.25
