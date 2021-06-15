@@ -98,4 +98,6 @@ The following table provides version and version-support information about <%= v
 
 * <%= vars.product_full %> is not supported on Windows.
 
-* <%= vars.product_full %> cannot be configured to encrypt Container to Container traffic.
+* Container-to-container traffic is not encrypted unless the underlying network is also encrypted.
+  Both the overlay network for container-to-container networking and the underlying, physical network
+  for Diego Cell to Diego Cell networking must be included in the `ipsec_subnets` section of the IPsec manifest.
