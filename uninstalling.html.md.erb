@@ -19,9 +19,10 @@ If your flag is already set this way, you can continue with the uninstallation w
 To set the `optional` flag to `true`, do the following:
 
 1. Retrieve the latest runtime config by running the following command:
-  <pre>
+  
+    ```
     bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+    ```
 
     Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location that you want to save the runtime configuration.
 
@@ -33,9 +34,10 @@ To set the `optional` flag to `true`, do the following:
 1. In the runtime config, set the `optional` flag to `true` under <%= vars.product_short %> properties.
 
 1. Update the runtime config by running the following command:
-    <pre>
+
+    ```
     bosh -e my-env update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
-    </pre>
+    ```
 
     Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
@@ -63,9 +65,10 @@ then you can remove the <%= vars.product_short %> properties.
 To do this, follow the steps below:
 
 1. Retrieve the latest runtime config by running the following command:
-  <pre>
+  
+    ```
     bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
-  </pre>
+    ```
 
     Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location that you want to save the runtime configuration.
 
@@ -77,9 +80,10 @@ To do this, follow the steps below:
 1. In the runtime config, remove all <%= vars.product_short %> properties under the `releases:` and `addons:` sections.
 
 1. Update the runtime config by running the following command:
-    <pre>
+    
+    ```      
     bosh -e my-env update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
-    </pre>
+    ```
 
     Where `PATH-TO-SAVE-THE-RUNTIME-CONFIG` is the location of the runtime configuration you are updating.
 
@@ -102,7 +106,7 @@ To verify the uninstallation of <%= vars.product_short %> is successful, follow 
 
 1. Use `bosh ssh` to SSH into one of the VMs in your deployment.
 For more information,
-see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
+see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh).
 
 1. Run `monit summary`. If <%= vars.product_short %> has uninstalled successfully,
 it does not show the `ipsec` process.
