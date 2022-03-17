@@ -138,30 +138,30 @@ the protocols listed in the table below:
 To configure your Azure environment for <%= vars.product_short %>, do the following:
 
 1. Confirm that your network allows the protocols listed in the table below.
-<table>
-  <tr>
-    <th width="33%">Protocol Name</th>
-    <th width="33%">Protocol Number</th>
-    <th width="33%">Port(s)</th>
-  </tr>
-  <tr>
-    <td>AH</td>
-    <td>51</td>
-    <td>Any</td>
-  </tr>
-  <tr>
-    <td>ESP</td>
-    <td>50</td>
-    <td>Any</td>
-  </tr>
-  <tr>
-    <td>UDP</td>
-    <td>17</td>
-    <td>500</td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <th width="33%">Protocol Name</th>
+      <th width="33%">Protocol Number</th>
+      <th width="33%">Port(s)</th>
+    </tr>
+    <tr>
+      <td>AH</td>
+      <td>51</td>
+      <td>Any</td>
+    </tr>
+    <tr>
+      <td>ESP</td>
+      <td>50</td>
+      <td>Any</td>
+    </tr>
+    <tr>
+      <td>UDP</td>
+      <td>17</td>
+      <td>500</td>
+    </tr>
+  </table>
 
-1. Adjust the MTU value to `1438`. For instructions, see <a href="./troubleshooting.html#ipsec-installation-issues">Explanation: Packet Loss</a>.
+2. Adjust the MTU value to `1438`. For instructions, see <a href="./troubleshooting.html#ipsec-installation-issues">Explanation: Packet Loss</a>.
 
 
 ###<a id="aws"></a>Configure Network Security for AWS
@@ -173,36 +173,36 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 2. Select the Security Group with the description **<%= vars.app_runtime_abbr %> VMs Security Group** and click **Edit**.
 
 3. Create the following **Inbound Rules**.
-<table border="1" class="nice">
-<tr>
-  <th>Type</th>
-  <th>Protocol Name</th>
-  <th>Protocol Number</th>
-  <th>Port Range</th>
-  <th>Source</th>
-</tr>
-<tr>
-  <td>Custom Protocol</td>
-  <td>AH</td>
-  <td>51</td>
-  <td>All</td>
-  <td>10.0.0.0/16</td>
-</tr>
-<tr>
-  <td>Custom Protocol</td>
-  <td>ESP</td>
-  <td>50</td>
-  <td>All</td>
-  <td>10.0.0.0/16</td>
-</tr>
-<tr>
-  <td>Custom UDP Rule</td>
-  <td>UDP</td>
-  <td>17</td>
-  <td>500</td>
-  <td>10.0.0.0/16</td>
-</tr>
-</table>
+  <table border="1" class="nice">
+  <tr>
+    <th>Type</th>
+    <th>Protocol Name</th>
+    <th>Protocol Number</th>
+    <th>Port Range</th>
+    <th>Source</th>
+  </tr>
+  <tr>
+    <td>Custom Protocol</td>
+    <td>AH</td>
+    <td>51</td>
+    <td>All</td>
+    <td>10.0.0.0/16</td>
+  </tr>
+  <tr>
+    <td>Custom Protocol</td>
+    <td>ESP</td>
+    <td>50</td>
+    <td>All</td>
+    <td>10.0.0.0/16</td>
+  </tr>
+  <tr>
+    <td>Custom UDP Rule</td>
+    <td>UDP</td>
+    <td>17</td>
+    <td>500</td>
+    <td>10.0.0.0/16</td>
+  </tr>
+  </table>
 
   <p class="note"><strong>Note:</strong> The default <strong><%= vars.app_runtime_abbr %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
     If your <%= vars.app_runtime_abbr %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
@@ -218,32 +218,32 @@ To configure your Mirantis OpenStack environment for <%= vars.product_short %>, 
 1. Select the security group and click **Manage Rules**.
 
 1. Create the following **Ingress and Egress Rules**. Adjust the source CIDR as needed for your environment.
-<table border="1" class="nice">
-<tr>
-  <th>Protocol Name</th>
-  <th>Protocol Number</th>
-  <th>Port Range</th>
-  <th>Source</th>
-</tr>
-<tr>
-  <td>ESP</td>
-  <td>50</td>
-  <td>Any</td>
-  <td>0.0.0.0/0</td>
-</tr>
-<tr>
-  <td>AH</td>
-  <td>51</td>
-  <td>Any</td>
-  <td>0.0.0.0/0</td>
-</tr>
-<tr>
-  <td>UDP</td>
-  <td>17</td>
-  <td>500</td>
-  <td>0.0.0.0/0</td>
-</tr>
-</table>
+  <table border="1" class="nice">
+  <tr>
+    <th>Protocol Name</th>
+    <th>Protocol Number</th>
+    <th>Port Range</th>
+    <th>Source</th>
+  </tr>
+  <tr>
+    <td>ESP</td>
+    <td>50</td>
+    <td>Any</td>
+    <td>0.0.0.0/0</td>
+  </tr>
+  <tr>
+    <td>AH</td>
+    <td>51</td>
+    <td>Any</td>
+    <td>0.0.0.0/0</td>
+  </tr>
+  <tr>
+    <td>UDP</td>
+    <td>17</td>
+    <td>500</td>
+    <td>0.0.0.0/0</td>
+  </tr>
+  </table>
 
 ##<a id="create-mfest"></a>Create the <%= vars.product_short %> Manifest
 
@@ -561,16 +561,16 @@ follow the steps below:
 1. Download the <%= vars.product_short %> software binary from the [<%= vars.product_network %>](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
 1. Copy the software binary to your <%= vars.ops_manager %> instance.
-<pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+  <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-release.tar.gz ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. Copy the <%= vars.product_short %> runtime config file to your <%= vars.ops_manager %> instance.
-<pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-addon.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
+  <pre class="terminal">$ scp -i PATH-TO-PRIVATE-KEY ipsec-addon.yml ubuntu@YOUR-OPS-MANAGER-VM-IP:</pre>
 
 1. SSH into <%= vars.ops_manager %>.
-<pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
+  <pre class="terminal">$ ssh -i PATH-TO-PRIVATE-KEY ubuntu@YOUR-OPS-MANAGER-VM-IP</pre>
 
 1. On the <%= vars.ops_manager %> VM, navigate to the software binary location in your working directory.
-<pre class="terminal">$ cd PATH-TO-BINARY</pre>
+  <pre class="terminal">$ cd PATH-TO-BINARY</pre>
 
 1. Log in to the BOSH Director.
   1. On the <%= vars.ops_manager %> VM, create an alias in the BOSH CLI for your BOSH Director IP address. For example:
@@ -580,36 +580,36 @@ follow the steps below:
       <pre class="terminal">$ bosh -e my-env log-in</pre>
 
 1. Upload your release, specifying the path to the tarballed <%= vars.product_short %> binary, by running the following command:
-<pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/BINARY-NAME.tar</pre>
+  <pre class="terminal">$ bosh -e my-env upload-release PATH-TO-BINARY/BINARY-NAME.tar</pre>
 
 1. List the releases by running the following command, and confirm that the <%= vars.product_short %> binary file appears:
-<pre class="terminal">$ bosh -e my-env releases</pre>
+  <pre class="terminal">$ bosh -e my-env releases</pre>
 
 1. Download your current runtime config and save as `bosh-manifest.yml` by running the following command:
-<pre class="terminal">$ bosh -e my-env runtime-config > bosh-manifest.yml</pre>
+  <pre class="terminal">$ bosh -e my-env runtime-config > bosh-manifest.yml</pre>
 
 1. Update your runtime configuration to include <%= vars.product_short %>.
-<pre class="terminal">$ bosh -e my-env update-runtime-config --name=ipsec PATH/bosh-manifest.yml</pre>
+  <pre class="terminal">$ bosh -e my-env update-runtime-config --name=ipsec PATH/bosh-manifest.yml</pre>
 
 1. Verify your runtime configuration changes match what you specified in the <%= vars.product_short %> manifest file.
-<pre class="terminal"> $ bosh -e my-env runtime-config --name=ipsec</pre>
+  <pre class="terminal"> $ bosh -e my-env runtime-config --name=ipsec</pre>
 
     For example:
 
-    <pre class="terminal">
-    $ bosh -e my-env runtime-config --name=ipsec
-    Acting as user 'admin' on 'micro'
+      <pre class="terminal">
+      $ bosh -e my-env runtime-config --name=ipsec
+      Acting as user 'admin' on 'micro'
 
-    releases:
-     <span>-</span> {name: ipsec, version: 1.9.9}
+      releases:
+       <span>-</span> {name: ipsec, version: 1.9.9}
 
-    addons:
-     name: ipsec-addon
-      jobs:
-      <span>-</span> name: ipsec
-        release: ipsec
-        ...
-    </pre>
+      addons:
+       name: ipsec-addon
+        jobs:
+        <span>-</span> name: ipsec
+          release: ipsec
+          ...
+      </pre>
 
 1. If you have already deployed <%= vars.app_runtime_abbr %> or are adding <%= vars.product_short %> to an existing deployment:
   1. Set the `optional` flag to `true`.
