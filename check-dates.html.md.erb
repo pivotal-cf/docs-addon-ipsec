@@ -24,12 +24,18 @@ Follow the steps below to determine the expiration dates of your <%= vars.produc
     ```
 
     For example:
-    <pre class='terminal'>$ bosh runtime-config > /tmp/my-runtime-config.yml</pre>
+
+    ```
+    $ bosh runtime-config > /tmp/my-runtime-config.yml
+    ```
 
 3. Display the runtime configuration YAML file so that you can copy from it.
 
     For example:
-    <pre class='terminal'> $ cat /tmp/my-runtime-config.yml </pre>
+    
+    ```
+    $ cat /tmp/my-runtime-config.yml
+    ```
 
 4. Identify the section of the file that contains <%= vars.product_short %> properties, and locate the certificates:
 
@@ -67,14 +73,15 @@ Follow the steps below to determine the expiration dates of your <%= vars.produc
    but delete the leading white space before the `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` lines.
 
     For example,
-    <pre class='terminal'>
------BEGIN CERTIFICATE-----
-        MIIE/TCCAuWgAwIBAgIBATANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDEwNjYTEw
-        HhcNMTYwNTI2MjI1MDMzWhcNMjYwNTI2MjI1MDQyWjAOMQwwCgYDVQQDEwNjYTEw
-...
-        Axu2pbEoT1PrMd3HlAZ3AH8ZrMR3ScJKCW3wQFRX/Plj
------END CERTIFICATE-----
-     </pre>
+
+    ```
+    -----BEGIN CERTIFICATE-----
+            MIIE/TCCAuWgAwIBAgIBATANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDEwNjYTEw
+            HhcNMTYwNTI2MjI1MDMzWhcNMjYwNTI2MjI1MDQyWjAOMQwwCgYDVQQDEwNjYTEw
+    ...
+            Axu2pbEoT1PrMd3HlAZ3AH8ZrMR3ScJKCW3wQFRX/Plj
+    -----END CERTIFICATE-----
+    ```
 
 6. Save the file with the PEM extension, for example, `my-ipsec-ca-cert.pem`.
 
@@ -88,10 +95,10 @@ Follow the steps below to determine the expiration dates of your <%= vars.produc
 
     For example,
 
-    <pre class='terminal'>
+    ```
     $ openssl x509 -text -inform pem -in /tmp/my-ipsec-ca-cert.pem | grep "Not After"
              Not After : May 26 22:50:42 2026 GMT
-    </pre>
+    ```
 
     If the PEM file is correctly formatted,
     the output shows a line with the `Not After` date.
@@ -105,8 +112,8 @@ Follow the steps below to determine the expiration dates of your <%= vars.produc
 
     Keep in mind the lead time to obtain new certificates and the time to perform a deployment to apply them.
 
-    For information, see [Rotating Active <%= vars.product_short %> Certificates](credentials.html).
+    For more information, see [Rotating Active <%= vars.product_short %> Certificates](credentials.html).
 
 10. For security hygiene, delete three temporary files that you created:
-   the downloaded copy of the `runtime-config.yml` which contains the private key
+   the downloaded copy of the `runtime-config.yml`, which contains the private key,
    and the two PEM files that contain the certificates.
