@@ -37,7 +37,8 @@ To renew expired <%= vars.product_short %> certificates, do the following:
 1. In the runtime `config.yml` file saved from step 1, update the `optional` field to `true` and update the certificate fields with new certificates.
    For more information about these fields,
    see the field descriptions under [Create the <%= vars.product_short %> Manifest](./installing.html#create-mfest).
-    <pre>
+
+    ```
     properties:
       ipsec:
         <strong>optional</strong>: true
@@ -57,7 +58,7 @@ To renew expired <%= vars.product_short %> certificates, do the following:
             EXAMPLEAvGgAwIBAgIBATANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDEwl0ZXN0
             ...
             -----END CERTIFICATE-----
-    </pre>
+    ```
 
 1. Update the runtime config by running the following command:
 
