@@ -82,11 +82,11 @@ VMware recommends the following MTU values:
 
 To configure network security, do one of the following procedures for your IaaS:
 
-  + [Configure Network Security for Google Cloud Platform](#gcp), below
-  + [Configure Network Security for vSphere](#vsphere), below
-  + [Configure Network Security for Azure](#azure), below
-  + [Configure Network Security for AWS](#aws), below
-  + [Configure Network Security for OpenStack](#openstack), below
+  + [Configure Network Security for Google Cloud Platform](#gcp)
+  + [Configure Network Security for vSphere](#vsphere)
+  + [Configure Network Security for Azure](#azure)
+  + [Configure Network Security for AWS](#aws)
+  + [Configure Network Security for OpenStack](#openstack)
 
 ###<a id="gcp"></a>Configure Network Security for Google Cloud Platform
 
@@ -138,28 +138,28 @@ the protocols listed in the table below:
 To configure your Azure environment for <%= vars.product_short %>, do the following:
 
 1. Confirm that your network allows the protocols listed in the table below.
-  <table>
-    <tr>
-      <th width="33%">Protocol Name</th>
-      <th width="33%">Protocol Number</th>
-      <th width="33%">Port(s)</th>
-    </tr>
-    <tr>
-      <td>AH</td>
-      <td>51</td>
-      <td>Any</td>
-    </tr>
-    <tr>
-      <td>ESP</td>
-      <td>50</td>
-      <td>Any</td>
-    </tr>
-    <tr>
-      <td>UDP</td>
-      <td>17</td>
-      <td>500</td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <th width="33%">Protocol Name</th>
+        <th width="33%">Protocol Number</th>
+        <th width="33%">Port(s)</th>
+      </tr>
+      <tr>
+        <td>AH</td>
+        <td>51</td>
+        <td>Any</td>
+      </tr>
+      <tr>
+        <td>ESP</td>
+        <td>50</td>
+        <td>Any</td>
+      </tr>
+      <tr>
+        <td>UDP</td>
+        <td>17</td>
+        <td>500</td>
+      </tr>
+    </table>
 
 2. Adjust the MTU value to `1438`. For instructions, see <a href="./troubleshooting.html#ipsec-installation-issues">Explanation: Packet Loss</a>.
 
@@ -173,36 +173,36 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 2. Select the Security Group with the description **<%= vars.app_runtime_abbr %> VMs Security Group** and click **Edit**.
 
 3. Create the following **Inbound Rules**.
-  <table border="1" class="nice">
-  <tr>
-    <th>Type</th>
-    <th>Protocol Name</th>
-    <th>Protocol Number</th>
-    <th>Port Range</th>
-    <th>Source</th>
-  </tr>
-  <tr>
-    <td>Custom Protocol</td>
-    <td>AH</td>
-    <td>51</td>
-    <td>All</td>
-    <td>10.0.0.0/16</td>
-  </tr>
-  <tr>
-    <td>Custom Protocol</td>
-    <td>ESP</td>
-    <td>50</td>
-    <td>All</td>
-    <td>10.0.0.0/16</td>
-  </tr>
-  <tr>
-    <td>Custom UDP Rule</td>
-    <td>UDP</td>
-    <td>17</td>
-    <td>500</td>
-    <td>10.0.0.0/16</td>
-  </tr>
-  </table>
+    <table border="1" class="nice">
+    <tr>
+      <th>Type</th>
+      <th>Protocol Name</th>
+      <th>Protocol Number</th>
+      <th>Port Range</th>
+      <th>Source</th>
+    </tr>
+    <tr>
+      <td>Custom Protocol</td>
+      <td>AH</td>
+      <td>51</td>
+      <td>All</td>
+      <td>10.0.0.0/16</td>
+    </tr>
+    <tr>
+      <td>Custom Protocol</td>
+      <td>ESP</td>
+      <td>50</td>
+      <td>All</td>
+      <td>10.0.0.0/16</td>
+    </tr>
+    <tr>
+      <td>Custom UDP Rule</td>
+      <td>UDP</td>
+      <td>17</td>
+      <td>500</td>
+      <td>10.0.0.0/16</td>
+    </tr>
+    </table>
 
   <p class="note"><strong>Note:</strong> The default <strong><%= vars.app_runtime_abbr %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
     If your <%= vars.app_runtime_abbr %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
@@ -218,32 +218,32 @@ To configure your Mirantis OpenStack environment for <%= vars.product_short %>, 
 1. Select the security group and click **Manage Rules**.
 
 1. Create the following **Ingress and Egress Rules**. Adjust the source CIDR as needed for your environment.
-  <table border="1" class="nice">
-  <tr>
-    <th>Protocol Name</th>
-    <th>Protocol Number</th>
-    <th>Port Range</th>
-    <th>Source</th>
-  </tr>
-  <tr>
-    <td>ESP</td>
-    <td>50</td>
-    <td>Any</td>
-    <td>0.0.0.0/0</td>
-  </tr>
-  <tr>
-    <td>AH</td>
-    <td>51</td>
-    <td>Any</td>
-    <td>0.0.0.0/0</td>
-  </tr>
-  <tr>
-    <td>UDP</td>
-    <td>17</td>
-    <td>500</td>
-    <td>0.0.0.0/0</td>
-  </tr>
-  </table>
+    <table border="1" class="nice">
+    <tr>
+      <th>Protocol Name</th>
+      <th>Protocol Number</th>
+      <th>Port Range</th>
+      <th>Source</th>
+    </tr>
+    <tr>
+      <td>ESP</td>
+      <td>50</td>
+      <td>Any</td>
+      <td>0.0.0.0/0</td>
+    </tr>
+    <tr>
+      <td>AH</td>
+      <td>51</td>
+      <td>Any</td>
+      <td>0.0.0.0/0</td>
+    </tr>
+    <tr>
+      <td>UDP</td>
+      <td>17</td>
+      <td>500</td>
+      <td>0.0.0.0/0</td>
+    </tr>
+    </table>
 
 ##<a id="create-mfest"></a>Create the <%= vars.product_short %> Manifest
 
@@ -254,7 +254,8 @@ To create the <%= vars.product_short %> manifest, add <%= vars.product_short %> 
 
 1. Create an <%= vars.product_short %> runtime config file called `ipsec-addon.yml` and add the following
 YAML:
-  <pre>
+      
+  ```
   <strong>releases:</strong>
   \- name: ipsec
       <strong>version</strong>: 1.x.x
@@ -308,7 +309,7 @@ YAML:
         stemcell:
         - <strong>os</strong>: ubuntu-trusty
         - <strong>os</strong>: ubuntu-xenial
-  </pre>
+  ```
 
 1. Replace the values listed in the template above as follows:
   <table>
