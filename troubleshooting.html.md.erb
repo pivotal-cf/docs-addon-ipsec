@@ -15,15 +15,15 @@ To verify that <%= vars.product_short %> works between two hosts, you can check 
 
 1. Check traffic encryption and perform the ping test. Select two hosts in your deployment with <%= vars.product_short %> enabled and note their IP addresses. These are referenced below as `IP-ADDRESS-1` and `IP-ADDRESS-2`.
 	1. SSH into `IP-ADDRESS-1`.
-	<pre class="terminal">$ ssh IP-ADDRESS-1</pre>
+		<pre class="terminal">$ ssh IP-ADDRESS-1</pre>
 	1. On the first host, run the following, and allow it to continue running.
-	<pre class="terminal">$ tcpdump host IP-ADDRESS-2</pre>
+		<pre class="terminal">$ tcpdump host IP-ADDRESS-2</pre>
 	1. From a separate command line, run the following:
-	<pre class="terminal">$ ssh IP-ADDRESS-2</pre>
+		<pre class="terminal">$ ssh IP-ADDRESS-2</pre>
 	1. On the second host, run the following:
-	<pre class="terminal">$ ping IP-ADDRESS-1</pre>
+		<pre class="terminal">$ ping IP-ADDRESS-1</pre>
 	1. Verify that the packet type is ESP. If the traffic shows `ESP` as the packet type, traffic is successfully encrypted. The output from `tcpdump` looks similar to the following:
-	<pre class="terminal">03:01:15.242731 IP IP-ADDRESS-2 > IP-ADDRESS-1: ESP(spi=0xcfdbb261,seq=0x3), length 100</pre>
+		<pre class="terminal">03:01:15.242731 IP IP-ADDRESS-2 > IP-ADDRESS-1: ESP(spi=0xcfdbb261,seq=0x3), length 100</pre>
 1. Open the `/var/log/daemon.log` file to obtain a detailed report, including information pertaining to the type of certificates you use, and to verify an established connection exists.
 1. Navigate to your Installation Dashboard, and click **Recent Install Logs** to view information regarding your most recent deployment. Search for "ipsec" and the status of the <%= vars.product_short %> job.
 1. Run `ipsec statusall` to return a detailed status report regarding your connections. The typical path for this binary: `/var/vcap/packages/strongswan-x.x.x/sbin`. `x.x.x` represents the version of strongSwan packaged into <%= vars.product_short %>.
@@ -127,17 +127,17 @@ When you generate the new certificates, ensure no certificates have a duplicate 
 
 #### Symptom
 * App fails to start with the following message:
-<pre class="terminal">FAILED
-Server error,
-status code: 500,
-error code: 10001,
-message: An unknown error occurred.</pre>
+	<pre class="terminal">FAILED
+	Server error,
+	status code: 500,
+	error code: 10001,
+	message: An unknown error occurred.</pre>
 The Cloud Controller log shows it is unable to communicate with Diego due to `getaddrinfo` failing.
 
 * Deployment fails with a similar error message:
-<pre class="terminal">FAILED
-diego_database-partition-620982d595434269a96a/0 (a643c6c0-bc43-411b-b011-58f49fb61a6f)' is not running after update. Review logs for failed jobs: etcd
-</pre>
+	<pre class="terminal">FAILED
+	diego_database-partition-620982d595434269a96a/0 (a643c6c0-bc43-411b-b011-58f49fb61a6f)' is not running after update. Review logs for failed jobs: etcd
+	</pre>
 
 
 #### Explanation: Split Brain `consul`
