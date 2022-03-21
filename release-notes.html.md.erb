@@ -184,7 +184,7 @@ New features and changes in this release:
   The `charon` <%= vars.product_short %> daemon job is now stopped in the BOSH `post-stop` lifecycle
   phase instead of the BOSH `stop` lifecycle phase.
   The `stop` phase is now a no-op.
-  This ensures that the network remains available and secure while all other
+  This ensures the network remains available and secure while all other
   BOSH jobs perform their stop processing.
 
 * Updates smoke tests to check connectivity using TCP protocol requests on port 22,
