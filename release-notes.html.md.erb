@@ -23,26 +23,7 @@ New features and changes in this release:
 
 This release fixes the following issues:
 
-* **Failed logging on Windows 2012 R2:** On Windows 2012 R2 where scheduled logging could not be
-created for the enablement of the following alerts: certificate expiration and optional
-<%= vars.product_short %> enforcement.
-
-* Subsequent deployments of <%= vars.product_short %> did not start due to existing stale process IDs.
-
-## <a id="1-9-4"></a>  v1.9.4
-
-**Release Date:** June 28, 2018
-
-### Features
-
-New features and changes in this release:
-
-* Starting with BOSH Director v265.1.0, the BOSH job lifecycle includes a `post-stop` phase.
-  The `charon` <%= vars.product_short %> daemon job is now stopped in the BOSH `post-stop` lifecycle
-  phase instead of the BOSH `stop` lifecycle phase.
-  The `stop` phase is now a no-op.
-  This ensures the network remains available and secure while all other
-  BOSH jobs perform their stop processing.
+*
 
 * Subsequent deployments of <%= vars.product_short %> did not start due to existing stale process ID's.
 
