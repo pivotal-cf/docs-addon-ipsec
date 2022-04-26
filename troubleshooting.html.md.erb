@@ -144,12 +144,12 @@ The Cloud Controller log shows it is unable to communicate with Diego due to `ge
 This error indicates a “split brain” issue with Consul.
 
 #### Solution
-Confirm this diagnosis by checking the `peers.json` file from /var/vcap/store/consul\_agent/raft. If it is null, then there might be a split brain. To fix this problem, follow these steps:
+Confirm this diagnosis by checking the `peers.json` file from `/var/vcap/store/consul_agent/raft`. If it is null, then there might be a split brain. To fix this problem, follow these steps:
 
 1. Run `monit stop` on all Consul servers:
 1. Run `rm -rf /var/vcap/store/consul_agent/` on all Consul servers.
 1. Run `monit start consul_agent` on all Consul servers one at a time.
-1. Restart the consul\_agent process on the Cloud Controller VM. You might need to restart consul\_agent on other VMs, as well.
+1. Restart the `consul_agent` process on the Cloud Controller VM. You might need to restart `consul_agent` on other VMs, as well.
 
 <hr>
 #### Symptom
