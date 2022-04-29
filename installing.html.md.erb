@@ -256,59 +256,59 @@ To create the <%= vars.product_short %> manifest, add <%= vars.product_short %> 
 YAML:
       
   ```
-  <strong>releases:</strong>
-  \- name: ipsec
-      <strong>version</strong>: 1.x.x
+  releases:
+  - name: ipsec
+      version: 1.x.x
   addons:
-  \- name: ipsec-addon
-      <strong>jobs</strong>:
-      \- <strong>name</strong>: ipsec
+  - name: ipsec-addon
+      jobs:
+      - name: ipsec
         release: ipsec
         properties:
           ipsec:
-            <strong>optional</strong>: false
-            <strong>ipsec\_subnets</strong>:
-            \- 10.0.1.1/20
-            <strong>no\_ipsec\_subnets</strong>:
-            \- 10.0.1.10/32  # bosh director
-            \- 10.0.1.4/32 # ops managers
-            <strong>instance\_certificate</strong>: |
+            optional: false
+            ipsec_subnets:
+            - 10.0.1.1/20
+            no_ipsec_subnets:
+            - 10.0.1.10/32  # bosh director
+            - 10.0.1.4/32 # ops managers
+            instance_certificate: |
               -----BEGIN CERTIFICATE-----
               EXAMPLExCERTIFICATExEXAMPLExCERTIFICATExEXAMPLExCERTIFICATE
               ...
               -----END CERTIFICATE-----
-            <strong>instance\_private\_key</strong>: |
+            instance_private_key: |
               -----BEGIN EXAMPLE RSA PRIVATE KEY-----
               EXAMPLExRSAxPRIVATExKEYxDATAxEXAMPLExRSAxPRIVATExKEYxDATA
               ...
               -----END EXAMPLE RSA PRIVATE KEY-----
-            <strong>ca\_certificates</strong>:
-              \- |
+            ca_certificates:
+              - |
                 -----BEGIN CERTIFICATE-----
                 EXAMPLExCERTIFICATExEXAMPLExCERTIFICATExEXAMPLExCERTIFICATE
                 ...
                 -----END CERTIFICATE-----
-              \- |
+              - |
                 -----BEGIN CERTIFICATE-----
                 EXAMPLExCERTIFICATExEXAMPLExCERTIFICATExEXAMPLExCERTIFICATE
                 ...
                 -----END CERTIFICATE-----
-            <strong>prestart\_timeout</strong>: 30
-            <strong>stop\_timeout</strong>: 30
-            <strong>esp\_proposals</strong>: aes128gcm16!
-            <strong>ike\_proposals</strong>: aes128-sha256-modp2048!
-            <strong>log\_level</strong>: 1
-            <strong>ike\_version</strong>: ike
-            <strong>optional\_warn\_interval</strong>: 1
-            <strong>force\_udp\_encapsulation</strong>: false
-            <strong>instance\_certificate\_info\_period</strong>: 30
-            <strong>instance\_certificate\_warn\_period</strong>: 14
-            <strong>instance\_certificate\_error\_period</strong>: 7
-            <strong>instance\_certificate\_critical\_period</strong>: 3
+            prestart_timeout: 30
+            stop_timeout: 30
+            esp_proposals: aes128gcm16!
+            ike_proposals: aes128-sha256-modp2048!
+            log_level: 1
+            ike_version: ike
+            optional_warn_interval: 1
+            force_udp_encapsulation: false
+            instance_certificate_info_period: 30
+            instance_certificate_warn_period: 14
+            instance_certificate_error_period: 7
+            instance_certificate_critical_period: 3
       include:
         stemcell:
-        - <strong>os</strong>: ubuntu-trusty
-        - <strong>os</strong>: ubuntu-xenial
+        - os: ubuntu-trusty
+        - openssl: ubuntu-xenial
   ```
 
 1. Replace the values listed in the template above as follows:
@@ -338,7 +338,7 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td><code><strong>ipsec\_subnets</strong></code></td>
+      <td><code><strong>ipsec_subnets</strong></code></td>
       <td>
         <a name="ipsec_subnets"></a>
         List the subnets that you want to be encrypted.
@@ -347,40 +347,40 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td><code><strong>no\_ipsec\_subnets</strong></code></td>
+      <td><code><strong>no_ipsec_subnets</strong></code></td>
       <td>
         <a name="no_ipsec_subnets"></a>
         List the IP address of your BOSH Director and <%= vars.ops_manager %> VM,
         along with any other IP addresses in your deployment to which you want to communicate without encryption.
         VMware recommends that you list the subnets that are used for <%= vars.app_runtime_abbr %> managed services.
         Subnets for <%= vars.app_runtime_abbr %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
-        must be listed under <code>no\_ipsec\_subnets</code> and installed in a separate network.
+        must be listed under <code>no_ipsec_subnets</code> and installed in a separate network.
         <p class="note"><strong>Note: </strong>
           If you have an external load balancer such as F5, add it to the
-          <code>no\_ipsec\_subnets</code> property.
-          If you want to include it in the <code>ipsec\_subnet</code>, you must
+          <code>no_ipsec_subnets</code> property.
+          If you want to include it in the <code>ipsec_subnet</code>, you must
           configure it manually.
         </p>
         <p class="note warning"><strong>Warning:</strong>
-          IPs that are not in <code>ipsec\_subnets</code> or <code>no\_ipsec\_subnets</code>
+          IPs that are not in <code>ipsec_subnets</code> or <code>no_ipsec_subnets</code>
           have no default behavior and cannot communicate with other internal VMs.
-          You must specify internal IPs in <code>ipsec\_subnets</code> or
-          <code>no\_ipsec\_subnets</code>.
+          You must specify internal IPs in <code>ipsec_subnets</code> or
+          <code>no_ipsec_subnets</code>.
         </p>
         <p class="note warning"><strong>Warning:</strong>
           In GCP, if you use the default router for DNS instead of the Google public
           DNS at <code>8.8.8.8</code>, you must add the IP address of the default
-          router in your subnet to <code>no\_ipsec\_subnets</code>.
+          router in your subnet to <code>no_ipsec_subnets</code>.
           For example, <code>10.0.0.1/32</code>.
         </p>
       </td>
     </tr>
     <tr>
-      <td> <code><strong>instance\_certificate</strong></code></td>
+      <td> <code><strong>instance_certificate</strong></code></td>
       <td>
         <a name="instance_certificate"></a>
         Copy in the signed certificate to be used by all your instance VMs.
-        You must use one of the CAs in the <code>ca\_certificates</code> property to sign this certificate.
+        You must use one of the CAs in the <code>ca_certificates</code> property to sign this certificate.
         <br><br>
         VMware recommends that you use a self-signed certificate.
         For more information, see
@@ -389,16 +389,16 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td><code><strong>instance\_private\_key</strong></code></td>
+      <td><code><strong>instance_private_key</strong></code></td>
       <td>
         <a name="instance_private_key"></a>
-        Copy in the private key that corresponds to the <code>instance\_certificate</code> above.
+        Copy in the private key that corresponds to the <code>instance_certificate</code> above.
         This key must not use a pass phrase.
         <br><br>
       </td>
     </tr>
     <tr>
-      <td><code><strong>ca\_certificates</strong></code></td>
+      <td><code><strong>ca_certificates</strong></code></td>
       <td>
         <a name="ca-certs"></a>
         Copy in CA certificates for the instance VM to trust during the validation process.
@@ -406,9 +406,9 @@ YAML:
         <br><br>
         <%= vars.product_short %> <strong>v1.8.12</strong> and later supports the CA certificate chain.
         Concatenate the contents of the root and the intermediate certificates
-        as one of the list items in <strong>ca\_certificates</strong>,
+        as one of the list items in <strong>ca_certificates</strong>,
         with the root CA at the top:
-        <pre><strong>ca\_certificates</strong>:
+        <pre><strong>ca_certificates</strong>:
          - |
            -----BEGIN CERTIFICATE-----
            ... <strong>&#60;ROOT&#62;</strong>
@@ -434,11 +434,11 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td><code><strong>prestart\_timeout</strong></code></td>
+      <td><code><strong>prestart_timeout</strong></code></td>
       <td>Use this to modify the 30-second default prestart timeout value. This value limits the number of seconds allowed for <%= vars.product_short %> to start before failing the attempt.</td>
     </tr>
     <tr>
-      <td><code><strong>stop\_timeout</strong></code></td>
+      <td><code><strong>stop_timeout</strong></code></td>
       <td>
         Use this to modify the 30-second default post stop timeout value.
         When <%= vars.product_short %> stops, communication between VMs is not encrypted and might cause errors.
@@ -446,7 +446,7 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td><code><strong>log\_level</strong></code></td>
+      <td><code><strong>log_level</strong></code></td>
       <td>
         <a name="log_level"></a>
         You can specify the IKE daemon numerical log level, ranging from <code>-1</code> to <code>4</code>.
@@ -454,7 +454,7 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td><code><strong>optional\_warn\_interval</strong></code></td>
+      <td><code><strong>optional_warn_interval</strong></code></td>
       <td>
         <a name="optional_warn_interval"></a>
         The interval in hours of warning when <code>optional</code> property is set to true.
@@ -463,40 +463,40 @@ YAML:
       </td>
     </tr>
     <tr>
-      <td> <code><strong>force\_udp\_encapsulation</strong></code>
+      <td> <code><strong>force_udp_encapsulation</strong></code>
       <a name="force_udp_encapsulation"></a></td>
       <td>
         Available on Linux-only deployments.
         If set to <code>true</code> it forces UDP encapsulation for ESP packets.
         <p class="note warning"><strong>Warning:</strong> Setting this property to <code>true</code> in
           mixed deployments causes the deployment to fail.
-          If you do not have a Linux-only deployment, you must set <code>force\_udp\_encapsulation</code>
+          If you do not have a Linux-only deployment, you must set <code>force_udp_encapsulation</code>
           to <code>false</code>. </p>
       </td>
     </tr>
     <tr>
-      <td><code><strong>instance\_certificate<br>\_info\_period</strong></code></td>
+      <td><code><strong>instance_certificate<br>_info_period</strong></code></td>
       <td>
         If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes an <code>[INFO]</code> message in the logs.
       </td>
     </tr>
     <tr>
-      <td><code><strong>instance\_certificate<br>\_warn\_period</strong></code></td>
+      <td><code><strong>instance_certificate<br>_warn_period</strong></code></td>
       <td>
         If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes a <code>[WARN]</code> message in the logs.
       </td>
     </tr>
     <tr>
-      <td><code><strong>instance\_certificate<br>\_error\_period</strong></code></td>
+      <td><code><strong>instance_certificate<br>_error_period</strong></code></td>
       <td>
         If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes an <code>[ERROR]</code> message in the logs.
       </td>
     </tr>
     <tr>
-      <td><code><strong>instance\_certificate<br>\_critical\_period</strong></code></td>
+      <td><code><strong>instance_certificate<br>_critical_period</strong></code></td>
       <td>
         If the instance certificate expires during the set period in days, the <%= vars.product_short %>
         release writes a <code>[CRITICAL]</code> message in the logs.
@@ -517,8 +517,8 @@ If you want to use different proposals, modify the `ipsec-addon.yml` using the f
       <th colspan="2">Linux (ipsec-addon)</th>
     </tr>
     <tr>
-      <th>ike\_proposals</th>
-      <th>esp\_proposals</th>
+      <th>ike_proposals</th>
+      <th>esp_proposals</th>
     </tr>
     <tr>
       <td>128 Bit Encryption (default)</td>
@@ -541,13 +541,13 @@ See the `ipsec-addon.yml` file example above.
     </tr>
 
     <tr>
-      <td><code><strong>ike\_proposals</strong></code></td>
+      <td><code><strong>ike_proposals</strong></code></td>
       <td> You can modify the IKE (Main Mode) encryption and integrity algorithms, and the Diffie-Hellman group.
-        The default, <code>aes128-sha256-modp2048!</code>, is 128 bit AES-CBC for encryption, SHA2\_256\_128 HMAC for integrity, and Group 14 for Diffie-Hellman.
+        The default, <code>aes128-sha256-modp2048!</code>, is 128 bit AES-CBC for encryption, SHA2_256_128 HMAC for integrity, and Group 14 for Diffie-Hellman.
       </td>
     </tr>
     <tr>
-      <td><code><strong>esp\_proposals</strong></code></td>
+      <td><code><strong>esp_proposals</strong></code></td>
       <td>You can modify the ESP (Quick Mode) encryption and integrity algorithms.
         The default, <code>aes128gcm16!</code>, is 128 bit AES-GCM with 128 bit ICV for both encryption and integrity.</td>
     </tr>
@@ -672,7 +672,7 @@ After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_ab
     The Monit daemon 5.2.5 uptime: 18h 32m
     ...
     Process 'ipsec'                     running
-    System 'system\_localhost'           running
+    System 'system_localhost'           running
     </pre>
 
 
@@ -684,7 +684,7 @@ After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_ab
     For example:
     <pre class="terminal">
     $ /var/vcap/packages/strongswan-5.6.3/sbin/ipsec statusall
-    Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86\_64):
+    Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86_64):
       uptime: 18 hours, since Mar 16 23:58:50 2016
       malloc: sbrk 2314240, mmap 0, used 1182400, free 1131840
       worker threads: 11 of 16 idle, 5/0/0/0 working, job queue: 0/0/0/0, scheduled: 206

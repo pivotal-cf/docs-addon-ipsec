@@ -41,19 +41,19 @@ To renew expired <%= vars.product_short %> certificates, do the following:
     ```
     properties:
       ipsec:
-        <strong>optional</strong>: true
-        <strong>instance\_certificate</strong>: |
+        optional: true
+        instance_certificate: |
           -----BEGIN CERTIFICATE-----
           EXAMPLEAhigAwIBAgIRAIvrBY2TttU/LeRhO+V1t0YwDQYJKoZIhvcNAQELBQAw
           ...
           -----END CERTIFICATE-----
-        <strong>instance\_private\_key</strong>: |
+        instance_private_key: |
           -----BEGIN EXAMPLE RSA PRIVATE KEY-----
           EXAMPLExRSAxPRIVATExKEYxDATAxEXAMPLExRSAxPRIVATExKEYxDATA
           ...
           -----END EXAMPLE RSA PRIVATE KEY-----
-        <strong>ca\_certificates</strong>:
-          \- |
+        ca_certificates:
+          - |
             -----BEGIN CERTIFICATE-----
             EXAMPLEAvGgAwIBAgIBATANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDEwl0ZXN0
             ...
