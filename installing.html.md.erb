@@ -75,7 +75,7 @@ VMware recommends the following MTU values:
     Some service tiles do not support <%= vars.product_short %> and must be placed in a non-<%= vars.product_short %> subnet.
   * For <%= vars.product_short %> on Linux VMs, VMware recommends any Ubuntu stemcells for vSphere, OpenStack, and HVM stemcells for AWS.
     These stemcells are available on <a href="https://network.pivotal.io/products/stemcells"><%= vars.product_network %></a>.
-    If you use PV stemcells obtained from <a href="https://bosh.io">bosh.io</a>,
+    If you use PV stemcells obtained from <a href="https://bosh.io/docs">bosh.io</a>,
     see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting <%= vars.product_full %> topic to adjust MTU values.
 
 ##<a id="config-network"></a>Configure Network Security
@@ -555,7 +555,7 @@ See the `ipsec-addon.yml` file example above.
 
 To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your BOSH manifest, and deploy <%= vars.product_short %>,
 follow the steps below:
-<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.ops_manager %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs.html">Generic Configs</a> in the BOSH documentation.</p>
+<p class="note breaking"><strong>Breaking Change: </strong> If you are using <%= vars.app_runtime_abbr %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs">Generic Configs</a> in the BOSH documentation.</p>
 
 1. Download the <%= vars.product_short %> software binary from the [<%= vars.product_network %>](https://network.pivotal.io/products/p-ipsec-addon) to your local machine.
 
