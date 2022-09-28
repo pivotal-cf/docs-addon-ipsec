@@ -1,0 +1,72 @@
+---
+title: Updating IPsec to Run with Jammy Stemcells
+owner: Security Engineering
+---
+
+<strong><%= modified_date %></strong>
+
+<%= vars.ops_manager %> products and tiles that are released after October 2022 support
+Ubuntu Jammy stemcells.
+
+Follow the instructions on this page if you use IPsec with any products or tiles that use Jammy stemcells.
+
+If you use <%= vars.product_short %> without adding the `ubuntu-jammy` property to the runtime config,
+the VMs running on Jammy are not able to communicate with the rest of the system.
+
+## <a id="which"></a> Product Tiles that Use Jammy Stemcells
+
+Ensure that you have added the `ubuntu-jammy` property to <%= vars.product_short %> runtime config
+before you install any product tiles that use Jammy stemcells.
+
+##<a id="add"></a> Add the Jammy Stemcell Property to <%= vars.product_short %>
+
+1. SSH into the <%= vars.ops_manager %> VM.
+   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+
+2. To retrieve and save the <%= vars.product_short %> runtime config, run the following command:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT runtime-config –name ipsec > /tmp/ipsec-addon.yml
+    ```
+
+    Where `BOSH-ENVIRONMENT` is the alias you set for the BOSH Director.
+
+    For example:
+
+    <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml </pre>
+
+
+3. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-jammy` under
+    `properties: {}` as shown below:
+
+
+    ```
+    addons:
+    - name: ipsec-addon
+      jobs:
+      - name: ipsec
+        release: ipsec
+        properties: {}
+      include:
+        stemcell:
+        - os: ubuntu-xenial
+        - os: ubuntu-jammy
+    ```
+
+4. To update the runtime config, run the following command:
+
+    ```
+    bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec /tmp/ipsec-addon.yml
+    ```
+
+    For example:
+
+    <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec-addon /tmp/ipsec-addon.yml</pre>
+
+5. Navigate to the Installation Dashboard in <%= vars.ops_manager %>.
+
+6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
+   For more information about this <%= vars.ops_manager %> page,
+   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+
+7. Click **Apply Changes**.
