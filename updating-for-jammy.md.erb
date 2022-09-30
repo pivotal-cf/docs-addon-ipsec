@@ -11,21 +11,23 @@ Ubuntu Jammy stemcells.
 Follow the instructions on this page if you use IPsec with any products or tiles that use Jammy stemcells.
 
 If you use <%= vars.product_short %> without adding the `ubuntu-jammy` property to the runtime config,
-the VMs running on Jammy are not able to communicate with the rest of the system.
+the VMs running on Jammy cannot communicate with the rest of the system.
 
 ## <a id="which"></a> Product Tiles that Use Jammy Stemcells
 
-Ensure that you have added the `ubuntu-jammy` property to <%= vars.product_short %> runtime config
+You must add the `ubuntu-jammy` property to <%= vars.product_short %> runtime config
 before you install any product tiles that use Jammy stemcells.
 
-##<a id="add"></a> Add the Jammy Stemcell Property to <%= vars.product_short %>
+## <a id="add"></a> Add the Jammy Stemcell Property to <%= vars.product_short %>
+
+To add the `ubuntu-jammy` property to <%= vars.product_short %>:
 
 1. SSH into the <%= vars.ops_manager %> VM.
    For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 
-2. To retrieve and save the <%= vars.product_short %> runtime config, run the following command:
+1. To retrieve and save the <%= vars.product_short %> runtime config, run:
 
-    ```
+    ```console
     bosh -e BOSH-ENVIRONMENT runtime-config –name ipsec > /tmp/ipsec-addon.yml
     ```
 
@@ -33,14 +35,11 @@ before you install any product tiles that use Jammy stemcells.
 
     For example:
 
-    <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml </pre>
+    <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml</pre>
 
+1. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-jammy` under `properties: {}` as shown below:
 
-3. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-jammy` under
-    `properties: {}` as shown below:
-
-
-    ```
+    ```yaml
     addons:
     - name: ipsec-addon
       jobs:
@@ -53,9 +52,9 @@ before you install any product tiles that use Jammy stemcells.
         - os: ubuntu-jammy
     ```
 
-4. To update the runtime config, run the following command:
+1. To update the runtime config, run the following command:
 
-    ```
+    ```console
     bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec /tmp/ipsec-addon.yml
     ```
 
@@ -63,10 +62,6 @@ before you install any product tiles that use Jammy stemcells.
 
     <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec-addon /tmp/ipsec-addon.yml</pre>
 
-5. Navigate to the Installation Dashboard in <%= vars.ops_manager %>.
+1. Navigate to the Installation Dashboard in <%= vars.ops_manager %> and click **Review Pending Changes**.
 
-6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
-   For more information about this <%= vars.ops_manager %> page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
-
-7. Click **Apply Changes**.
+1. Click **Apply Changes**.
