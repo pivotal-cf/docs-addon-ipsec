@@ -9,6 +9,23 @@ owner: Platform Security & Compliance Team
 
 This topic contains release notes for <%= vars.product_full %>.
 
+## <a id='1-9-39'></a> v1.9.39
+
+**Release Date**: November 11, 2022
+
+### Maintenance Changes
+
+* **OpenSSL:** Upgraded to v1.0.2zf to address [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292) and [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068).
+* **Strongswan:** Downgraded to v5.9.3 - we have observed some compatibility issues with v5.9.5, so have downgraded whilst we address the issue.
+
+### Fixed Issues
+
+* Fixed where the OpenSSL being used was available in the Stemcell as opposed to v1.0.2
+
+### Known Issues
+
+There are no known issues for this release.
+
 ## <a id='1-9-38'></a> v1.9.38
 
 **Release Date**: April 13, 2022
