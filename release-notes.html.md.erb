@@ -15,16 +15,19 @@ This topic contains release notes for <%= vars.product_full %>.
 
 ### Maintenance Changes
 
-* **OpenSSL:** Upgraded to v1.0.2zf to address [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292) and [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068).
-* **Strongswan:** Downgraded to v5.9.3 - we have observed some compatibility issues with v5.9.5, so have downgraded whilst we address the issue.
+* **OpenSSL:** Upgraded to v1.0.2zf to address
+  [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292) and
+  [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068)
+* **Strongswan:** Downgraded to v5.9.3 while compatibility issues with v5.9.5 are being addressed
 
 ### Fixed Issues
 
-* Fixed where the OpenSSL being used was available in the Stemcell as opposed to v1.0.2
+* <%= vars.product_full %> now uses the FIPS-certified version of OpenSSL instead of the OpenSSL
+  version supplied in Stemcell
 
 ### Known Issues
 
-There are no known issues for this release.
+There are no known issues in this release.
 
 ## <a id='1-9-38'></a> v1.9.38
 
@@ -51,7 +54,7 @@ Maintenance changes in this release:
   * High [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711)
   * High [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712)
 * **Strongswan:** Upgraded to v5.9.3.
-* **GMP:** Upgraded to v6.2.1 
+* **GMP:** Upgraded to v6.2.1
 
 ### Known Issues
 
