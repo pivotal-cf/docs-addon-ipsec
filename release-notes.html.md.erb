@@ -9,44 +9,45 @@ owner: Platform Security & Compliance Team
 
 This topic contains release notes for <%= vars.product_full %>.
 
-## <a id='1-9-39'></a> v1.9.39
+## Releases
+### <a id='1-9-39'></a> v1.9.39
 
 **Release Date**: November 11, 2022
 
-### Maintenance Changes
+#### Maintenance Changes
 
 * **OpenSSL:** Upgraded to v1.0.2zf to address
   [CVE-2022-1292](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1292) and
   [CVE-2022-2068](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2068)
 * **Strongswan:** Downgraded to v5.9.3 while compatibility issues with v5.9.5 are being addressed
 
-### Fixed Issues
+#### Fixed Issues
 
 * <%= vars.product_full %> now uses the FIPS-certified version of OpenSSL instead of the OpenSSL
   version supplied in Stemcell
 
-### Known Issues
+#### Known Issues
 
 There are no known issues in this release.
 
-## <a id='1-9-38'></a> v1.9.38
+### <a id='1-9-38'></a> v1.9.38
 
 **Release Date**: April 13, 2022
 
-### Maintenance Changes
+#### Maintenance Changes
 
 * **OpenSSL:** Upgraded to v1.0.2zd to address [CVE-2022-0778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0778).
 * **Strongswan:** Upgraded to v5.9.5.
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
-## <a id="1-9-37"></a>  v1.9.37
+### <a id="1-9-37"></a>  v1.9.37
 
 **Release Date:** November 1, 2021
 
-### Maintenance Changes
+#### Maintenance Changes
 
 Maintenance changes in this release:
 
@@ -56,15 +57,15 @@ Maintenance changes in this release:
 * **Strongswan:** Upgraded to v5.9.3.
 * **GMP:** Upgraded to v6.2.1
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
-## <a id="1-9-35"></a>  v1.9.35
+### <a id="1-9-35"></a>  v1.9.35
 
 **Release Date:** April 9, 2021
 
-### Maintenance Changes
+#### Maintenance Changes
 
 Maintenance changes in this release:
 
@@ -73,37 +74,37 @@ Maintenance changes in this release:
  * High [CVE-2021-23840](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840)
  * Medium [CVE-2021-23841](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841)
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
-## <a id="1-9-32"></a>  v1.9.32
+### <a id="1-9-32"></a>  v1.9.32
 
 **Release Date:** February 24, 2021
 
-### Fixed Issues
+#### Fixed Issues
 
 This release fixes the following issue:
 
 * **NATS clients connection:** NATS clients failed to connect to NATS VM when rotating certificates
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
 
-## <a id="1-9-31"></a>  v1.9.31
+### <a id="1-9-31"></a>  v1.9.31
 
 **Release Date:** December 4, 2020
 
-### Features
+#### Features
 
 New features and changes in this release:
 
 * **Support for certificate rotation using CredHub Maestro:**
 For more information, see [Advanced Certificate Rotation with CredHub Maestro](https://docs.pivotal.io/ops-manager/2-10/security/pcf-infrastructure/advanced-certificate-rotation.html).
 
-### Fixed Issues
+#### Fixed Issues
 
 This release fixes the following issue:
 
@@ -111,33 +112,33 @@ This release fixes the following issue:
 Large deployments, with a size of approximately 300 VMs, failed due to stale security associations (SAs).
 The `ipsec` job now runs an `ip xfrm state flush` immediately after starting the charon process.
 
-### Known Issues
+#### Known Issues
 
 This release has the following issue:
 
 * **NATS clients connection:** NATS clients fail to connect to the NATS VM when rotating certificates
 
 
-##<a id="1-9-25"></a>  v1.9.25
+###<a id="1-9-25"></a>  v1.9.25
 
 **Release Date:** June 2, 2020
 
-### Features
+#### Features
 
 New features and changes in this release:
 
 * **Updates strongSwan to v5.8.4**. For more information, see [strongSwan 5.8.4 Released](https://www.strongswan.org/blog/2020/03/30/strongswan-5.8.4-released.html) in the strongSwan documentation.
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
 
-##<a id="1-9-21"></a>  v1.9.21
+###<a id="1-9-21"></a>  v1.9.21
 
 **Release Date:** October 17, 2019
 
-### Features
+#### Features
 
 New features and changes in this release:
 
@@ -145,32 +146,32 @@ New features and changes in this release:
 This now works for all IaaSes, including vSphere.
 
 
-##<a id="1-9-19"></a>  v1.9.19
+###<a id="1-9-19"></a>  v1.9.19
 
 **Release Date:** August 14, 2019
 
-### Features
+#### Features
 
 New features and changes in this release:
 
 * **Updates strongSwan to v5.8.0:** For more information, see [strongSwan 5.8.0 Released](https://www.strongswan.org/blog/2019/05/20/strongswan-5.8.0-released.html) in the strongSwan documentation.
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
 
-##<a id="1-9-13"></a>  v1.9.13
+###<a id="1-9-13"></a>  v1.9.13
 
 **Release Date:** November 19, 2018
 
-### Features
+#### Features
 
 New features and changes in this release:
 
 * **Updates strongSwan to v5.7.1**. For more information, see [strongSwan 5.7.1 Released](https://www.strongswan.org/blog/2018/10/01/strongswan-5.7.1-released.html) in the strongSwan documentation.
 
-### Fixed Issues
+#### Fixed Issues
 
 This release fixes the following issues:
 
@@ -181,21 +182,21 @@ Now, <%= vars.product_short %> does not deploy if there are duplicate common nam
 numbers in the certificate chain.
 For more information, see this troubleshooting [symptom](./troubleshooting.html#duplicate).
 
-### Known Issues
+#### Known Issues
 
 There are no known issues for this release.
 
-##<a id="1-9-9"></a>  v1.9.9
+###<a id="1-9-9"></a>  v1.9.9
 
 **Release Date:** August 23, 2018
 
-### Features
+#### Features
 
 New features and changes in this release:
 
 * **Updates strongSwan to v5.6.3**. For more information, see [strongSwan 5.6.3 Released](https://www.strongswan.org/blog/2018/05/28/strongswan-5.6.3-released.html) in the strongSwan documentation.
 
-### Fixed Issues
+#### Fixed Issues
 
 This release fixes the following issues:
 
@@ -205,11 +206,11 @@ created for the enablement of the following alerts: certificate expiration and o
 
 * Subsequent deployments of <%= vars.product_short %> did not start due to existing stale process IDs.
 
-## <a id="1-9-4"></a>  v1.9.4
+### <a id="1-9-4"></a>  v1.9.4
 
 **Release Date:** June 28, 2018
 
-### Features
+#### Features
 
 New features and changes in this release:
 
@@ -227,7 +228,7 @@ rather than issuing an ICMP ping request to the remote host.
 * Updates smoke tests to skip the connectivity check on localhost, because strongSwan
 does not create a transform when the source and destination addresses are equal.
 
-## <a id="view"></a> View Release Notes for Another Version
+### <a id="view"></a> View Release Notes for Another Version
 
 To view the release notes for another product version, select the version from
 the dropdown at the top of this page.
