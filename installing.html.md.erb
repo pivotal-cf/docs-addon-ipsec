@@ -676,84 +676,96 @@ After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_ab
     </pre>
 
 
-1. Confirm that <%= vars.product_short %> is running. If <%= vars.product_short %> is running, the following commands will provide uptime and connections information:
+1. Confirm that <%= vars.product_short %> is running by using the following commands
+to get uptime and connections information:
 
-    - `swanctl --stats`
-    - `swanctl --list-conns
+    - For <%= vars.product_short %> v1.9.40 and later, run:
 
-    For example:
-    <pre class="terminal">
-    $ /var/vcap/packages/strongswan/sbin/swanctl --stats
-    plugin 'openssl' failed to load: libcrypto.so.1.0.2: cannot open shared object file: No such file or directory
-    uptime: 79 minutes, since Feb 17 16:25:20 2023
-    worker threads: 16 total, 11 idle, working: 4/0/1/0
-    job queues: 0/0/0/0
-    jobs scheduled: 12
-    IKE_SAs: 4 total, 0 half-open
-    mallinfo: sbrk 2494464, mmap 0, used 797184, free 1697280
-    loaded plugins: charon aes sha1 sha2 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pem gmp xcbc cmac hmac attr kernel-netlink socket-default vici openssl
+        ```
+        swanctl --stats
+        ```
+        ```
+        swanctl --list-conns
+        ```
 
-    $ /var/vcap/packages/strongswan/sbin/swanctl --list-conns
-    plugin 'openssl' failed to load: libcrypto.so.1.0.2: cannot open shared object file: No such file or directory
-    ipsec: IKEv2, no reauthentication, rekeying every 14400s, dpd delay 10s
-      local:  10.0.4.8/32
-      remote: 10.0.0.0/8
-      local public key authentication:
-        id: CN=ipsec_addon_instance_cert_1
-        certs: CN=ipsec_addon_instance_cert_1
-      remote public key authentication:
-      ipsec: TRANSPORT, rekeying every 3600s, dpd action is restart
-        local:  10.0.4.8/32
-        remote: 10.0.0.0/8
-    no-ipsec: IKEv1/2, no reauthentication, rekeying every 14400s
-      local:  10.0.4.8/32
-      remote: 10.0.8.0/24
-      remote: 10.0.0.5/32
-      remote: 10.0.0.2/32
-      remote: 10.0.12.0/24
-      local unspecified authentication:
-      remote unspecified authentication:
-      no-ipsec: PASS, no rekeying
-        local:  10.0.4.8/32
-        remote: 10.0.8.0/24 10.0.0.5/32 10.0.0.2/32 10.0.12.0/24
-    $
-    </pre>
+        For example:
+        <pre class="terminal">
+        $ /var/vcap/packages/strongswan/sbin/swanctl --stats
+        plugin 'openssl' failed to load: libcrypto.so.1.0.2: cannot open shared object file: No such file or directory
+        uptime: 79 minutes, since Feb 17 16:25:20 2023
+        worker threads: 16 total, 11 idle, working: 4/0/1/0
+        job queues: 0/0/0/0
+        jobs scheduled: 12
+        IKE_SAs: 4 total, 0 half-open
+        mallinfo: sbrk 2494464, mmap 0, used 797184, free 1697280
+        loaded plugins: charon aes sha1 sha2 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pem gmp xcbc cmac hmac attr kernel-netlink socket-default vici openssl
 
-    Note that before <%= vars.product_short %> version 1.9.40, the appropriate command was `PATH-TO-IPSEC/ipsec statusall`. For example:
+        $ /var/vcap/packages/strongswan/sbin/swanctl --list-conns
+        plugin 'openssl' failed to load: libcrypto.so.1.0.2: cannot open shared object file: No such file or directory
+        ipsec: IKEv2, no reauthentication, rekeying every 14400s, dpd delay 10s
+          local:  10.0.4.8/32
+          remote: 10.0.0.0/8
+          local public key authentication:
+            id: CN=ipsec_addon_instance_cert_1
+            certs: CN=ipsec_addon_instance_cert_1
+          remote public key authentication:
+          ipsec: TRANSPORT, rekeying every 3600s, dpd action is restart
+            local:  10.0.4.8/32
+            remote: 10.0.0.0/8
+        no-ipsec: IKEv1/2, no reauthentication, rekeying every 14400s
+          local:  10.0.4.8/32
+          remote: 10.0.8.0/24
+          remote: 10.0.0.5/32
+          remote: 10.0.0.2/32
+          remote: 10.0.12.0/24
+          local unspecified authentication:
+          remote unspecified authentication:
+          no-ipsec: PASS, no rekeying
+            local:  10.0.4.8/32
+            remote: 10.0.8.0/24 10.0.0.5/32 10.0.0.2/32 10.0.12.0/24
+        $
+        </pre>
 
-    <pre class="terminal">
-    $ /var/vcap/packages/strongswan-5.6.3/sbin/ipsec statusall
-    Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86_64):
-      uptime: 18 hours, since Mar 16 23:58:50 2016
-      malloc: sbrk 2314240, mmap 0, used 1182400, free 1131840
-      worker threads: 11 of 16 idle, 5/0/0/0 working, job queue: 0/0/0/0, scheduled: 206
-      loaded plugins: charon aes sha1 sha2 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pem gmp xcbc cmac hmac attr kernel-netlink socket-default stroke
-    Listening IP addresses:
-      10.10.5.66
-    Connections:
-    ipsec-10.10.4.0/24:  %any...%any  IKEv1/2
-    ipsec-10.10.4.0/24:   local:  [CN=test-cert-1-ca-1] uses public key authentication
-    ipsec-10.10.4.0/24:    cert:  "CN=test-cert-1-ca-1"
-    ipsec-10.10.4.0/24:   remote: uses public key authentication
-    ipsec-10.10.9.0/24:   child:  10.10.5.66/32 === 10.10.9.0/24 TRANSPORT
-    no-ipsec-10.10.4.1/32:  %any...%any  IKEv1/2
-    no-ipsec-10.10.4.1/32:   local:  uses public key authentication
-    no-ipsec-10.10.4.1/32:   remote: uses public key authentication
-    no-ipsec-10.10.4.1/32:   child:  dynamic === 10.10.4.1/32 PASS
-    Shunted Connections:
-    no-ipsec-10.10.4.1/32:  dynamic === 10.10.4.1/32 PASS
-    no-ipsec-10.10.5.1/32:  dynamic === 10.10.5.1/32 PASS
-    no-ipsec-10.10.6.1/32:  dynamic === 10.10.6.1/32 PASS
-    Routed Connections:
-    ipsec-10.10.9.0/24{6}:  ROUTED, TRANSPORT, reqid 6
-    ipsec-10.10.9.0/24{6}:   10.10.5.66/32 === 10.10.9.0/24
-    ipsec-10.10.8.0/24{5}:  ROUTED, TRANSPORT, reqid 5
-    ipsec-10.10.4.0/24{1}:   10.10.5.66/32 === 10.10.4.0/24
-    Security Associations (45 up, 0 connecting):
-    ipsec-10.10.4.0/24[459]: ESTABLISHED 13 seconds ago, 10.10.5.66[CN=test-cert-1-ca-1]...10.10.4.38[CN=test-cert-1-ca-1]
-    ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
-    ...
-    </pre>
+    - For <%= vars.product_short %> v1.9.39 and earlier, run:
+
+        ```
+        PATH-TO-IPSEC/ipsec statusall
+        ```
+
+        For example:
+        <pre class="terminal">
+        $ /var/vcap/packages/strongswan-5.6.3/sbin/ipsec statusall
+        Status of IKE charon daemon (strongSwan 5.6.3, Linux 3.19.0-56-generic, x86_64):
+          uptime: 18 hours, since Mar 16 23:58:50 2016
+          malloc: sbrk 2314240, mmap 0, used 1182400, free 1131840
+          worker threads: 11 of 16 idle, 5/0/0/0 working, job queue: 0/0/0/0, scheduled: 206
+          loaded plugins: charon aes sha1 sha2 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pem gmp xcbc cmac hmac attr kernel-netlink socket-default stroke
+        Listening IP addresses:
+          10.10.5.66
+        Connections:
+        ipsec-10.10.4.0/24:  %any...%any  IKEv1/2
+        ipsec-10.10.4.0/24:   local:  [CN=test-cert-1-ca-1] uses public key authentication
+        ipsec-10.10.4.0/24:    cert:  "CN=test-cert-1-ca-1"
+        ipsec-10.10.4.0/24:   remote: uses public key authentication
+        ipsec-10.10.9.0/24:   child:  10.10.5.66/32 === 10.10.9.0/24 TRANSPORT
+        no-ipsec-10.10.4.1/32:  %any...%any  IKEv1/2
+        no-ipsec-10.10.4.1/32:   local:  uses public key authentication
+        no-ipsec-10.10.4.1/32:   remote: uses public key authentication
+        no-ipsec-10.10.4.1/32:   child:  dynamic === 10.10.4.1/32 PASS
+        Shunted Connections:
+        no-ipsec-10.10.4.1/32:  dynamic === 10.10.4.1/32 PASS
+        no-ipsec-10.10.5.1/32:  dynamic === 10.10.5.1/32 PASS
+        no-ipsec-10.10.6.1/32:  dynamic === 10.10.6.1/32 PASS
+        Routed Connections:
+        ipsec-10.10.9.0/24{6}:  ROUTED, TRANSPORT, reqid 6
+        ipsec-10.10.9.0/24{6}:   10.10.5.66/32 === 10.10.9.0/24
+        ipsec-10.10.8.0/24{5}:  ROUTED, TRANSPORT, reqid 5
+        ipsec-10.10.4.0/24{1}:   10.10.5.66/32 === 10.10.4.0/24
+        Security Associations (45 up, 0 connecting):
+        ipsec-10.10.4.0/24[459]: ESTABLISHED 13 seconds ago, 10.10.5.66[CN=test-cert-1-ca-1]...10.10.4.38[CN=test-cert-1-ca-1]
+        ipsec-10.10.4.0/24{1527}:   10.10.5.66/32 === 10.10.4.38/32
+        ...
+        </pre>
 
 ##<a id="self-signed"></a>Generate a Self-Signed Certificate with OpenSSL
 
