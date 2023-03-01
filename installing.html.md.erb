@@ -679,13 +679,13 @@ After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_ab
 1. Confirm that <%= vars.product_short %> is running by using the following commands
 to get uptime and connections information:
 
-    - For <%= vars.product_short %> v1.9.40 and later, run:
+    - For <%= vars.product_short %> v1.9.40 and later, run these commands:
 
         ```
-        swanctl --stats
+        /var/vcap/packages/strongswan/sbin/swanctl --stats
         ```
         ```
-        swanctl --list-conns
+        /var/vcap/packages/strongswan/sbin/swanctl --list-conns
         ```
 
         For example:
