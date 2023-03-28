@@ -8,7 +8,7 @@ owner: Platform Security & Compliance Team
 This topic describes how to prepare your network for <%= vars.product_full %>,
 create an <%= vars.product_short %> runtime config, and add <%= vars.product_short %> to your deployment.
 
-##<a id="overview"></a>Overview
+## <a id="overview"></a>Overview
 
 To install <%= vars.product_short %>, you must do the following:
 
@@ -17,15 +17,13 @@ To install <%= vars.product_short %>, you must do the following:
   1. [Download and Deploy <%= vars.product_short %>](#download-deploy)
   1. [Verify Your <%= vars.product_short %> Installation](#verify)
 
-
-##<a id="prereqs"></a>Prerequisites
+## <a id="prereqs"></a>Prerequisites
 
 Before you install <%= vars.product_short %>, you must have the following:
 
-* For Deployments utilizing the Ubuntu-Jammy Stemcell, the Stemcell needs to be updated to at least Version `1.93`.
+* Stemcell v1.93 or later for deployments that use the Ubuntu Jammy Stemcell.
 
-* Google Cloud Platform (GCP), vSphere, Azure, Amazon Web Services (AWS),
-or OpenStack as your IaaS.
+* Google Cloud Platform (GCP), vSphere, Azure, Amazon Web Services (AWS), or OpenStack as your IaaS.
 
 * In your IaaS, external load balancers that are not Network Load Balancers (NLB).
 <%= vars.product_short %> does not work with NLBs.
