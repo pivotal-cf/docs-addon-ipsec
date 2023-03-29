@@ -22,6 +22,10 @@ This topic contains release notes for <%= vars.product_full %>.
   * [CVE-2023-0215](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0215)
   * [CVE-2022-4304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4304)
 
+#### Known Issues
+
+It has been observed that in some deployments IPsec misbehaves when the Jammy stemcell within the interval `v1.18` to `v1.83` (inclusive) are used. So we recommend using IPsec with Jammy stemcell `v1.93` onwards.
+
 ### <a id='1-9-40'></a> v1.9.40
 
 **Release Date**: January 11, 2023
