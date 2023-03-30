@@ -15,7 +15,7 @@ This topic also explains how to update your <%= vars.product_short %> if it does
 
 Follow the instructions on this page if you use <%= vars.product_short %> with any
 products or tiles that use Xenial stemcells.
-See [Product Tiles that Use Xenial Stemcells](#which) below.
+See [Add the Xenial Stemcell Property to <%= vars.product_short %>](#add) below.
 
 ##<a id="who-me"></a> Do I Need to Modify <%= vars.product_short %>?
 
@@ -48,12 +48,10 @@ stemcell:
 If you use <%= vars.product_short %> without adding the `ubuntu-xenial` property to the runtime config,
 the VMs running on Xenial are not able to communicate with the rest of the system.
 
-## <a id="which"></a> Product Tiles that Use Xenial Stemcells
+## <a id="add"></a> Add the Xenial Stemcell Property to <%= vars.product_short %>
 
 Ensure that you have added the `ubuntu-xenial` property to <%= vars.product_short %> runtime config
 before you install any product tiles that use Xenial stemcells.
-
-##<a id="add"></a> Add the Xenial Stemcell Property to <%= vars.product_short %>
 
 If you use <%= vars.product_short %> v1.9.9 without the `ubuntu-xenial`
 property in the runtime config, then you must add it to your
