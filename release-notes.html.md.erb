@@ -12,7 +12,7 @@ This topic contains release notes for <%= vars.product_full %>.
 ## Releases
 ### <a id='1-9-43'></a> v1.9.43
 
-**Release Date**: March 27, 2023
+**Release Date**: April 12, 2023
 
 #### Maintenance Changes
 
@@ -24,8 +24,11 @@ This topic contains release notes for <%= vars.product_full %>.
 
 #### Known Issues
 
-It has been observed that in some deployments IPsec misbehaves when the Jammy stemcell within the interval `v1.18` to `v1.83` (inclusive) are used. So we recommend using IPsec with Jammy stemcell `v1.93` onwards.
-For more information please see [this](https://community.pivotal.io/s/article/IPSec-Add-On-connectivity-Issues-on-Jammy-1-18-1-83?language=en_US) KB article.
+* In some deployments, IPsec has undesired behavior when used with Jammy stemcells v1.18 to v1.83 (inclusive). 
+NATS communication failure causes BOSH jobs such as `route_registrar`, `nats-tls-healthcheck`, 
+`nats-tls-wrapper`, and `nats-wrapper` to fail. This causes the BOSH deployment to fail.
+VMware recommends using IPsec with Jammy stemcell v1.93 and later.
+For more information, see the [VMware Tanzu Support documentation](https://community.pivotal.io/s/article/IPSec-Add-On-connectivity-Issues-on-Jammy-1-18-1-83?language=en_US).
 
 ### <a id='1-9-40'></a> v1.9.40
 
