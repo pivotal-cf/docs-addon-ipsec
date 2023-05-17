@@ -1,11 +1,11 @@
 ---
-title: Uninstalling IPsec
-owner: Security Engineering
+title: Uninstalling IPsec for VMware Tanzu
+owner: Platform Security & Compliance Team
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to uninstall <%= vars.product_full %> from your deployment, and how to verify the uninstallation.
+This topic tells you how to uninstall <%= vars.product_full %> from your deployment, and how to verify it has uninstalled.
 
 
 ##<a id="uninstall"></a>Uninstall <%= vars.product_short %> Add-on
@@ -19,7 +19,7 @@ If your flag is already set this way, you can continue with the uninstallation w
 To set the `optional` flag to `true`, do the following:
 
 1. Retrieve the latest runtime config by running the following command:
-  
+
     ```
     bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
@@ -65,7 +65,7 @@ then you can remove the <%= vars.product_short %> properties.
 To do this, follow the steps below:
 
 1. Retrieve the latest runtime config by running the following command:
-  
+
     ```
     bosh -e my-env runtime-config > PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
@@ -80,8 +80,8 @@ To do this, follow the steps below:
 1. In the runtime config, remove all <%= vars.product_short %> properties under the `releases:` and `addons:` sections.
 
 1. Update the runtime config by running the following command:
-    
-    ```      
+
+    ```
     bosh -e my-env update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
