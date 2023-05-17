@@ -1,11 +1,11 @@
 ---
-title: Checking Certificate Dates
+title: Checking Certificate Dates for IPsec for VMware Tanzu
 owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to check the expiration dates of <%= vars.product_full %> certificates.
+This topic tells you how to check the expiration dates of <%= vars.product_full %> certificates.
 
 The following procedure describes how to download the runtime configuration file and
 extract the two <%= vars.product_short %> certificates into temporary files. Then, the files are input to the OpenSSL tool.
@@ -32,7 +32,7 @@ Follow the steps below to determine the expiration dates of your <%= vars.produc
 3. Display the runtime configuration YAML file so that you can copy from it.
 
     For example:
-    
+
     ```
     $ cat /tmp/my-runtime-config.yml
     ```
