@@ -1,6 +1,6 @@
 ---
-title: Release Notes
-owner: Platform Security & Compliance Team
+title: Release Notes for IPsec for VMware Tanzu
+owner: Security Engineering
 ---
 
 <strong><%= modified_date %></strong>
@@ -24,8 +24,8 @@ This topic contains release notes for <%= vars.product_full %>.
 
 #### Known Issues
 
-* In some deployments, IPsec has undesired behavior when used with Jammy stemcells v1.18 to v1.83 (inclusive). 
-NATS communication failure causes BOSH jobs such as `route_registrar`, `nats-tls-healthcheck`, 
+* In some deployments, IPsec has undesired behavior when used with Jammy stemcells v1.18 to v1.83 (inclusive).
+NATS communication failure causes BOSH jobs such as `route_registrar`, `nats-tls-healthcheck`,
 `nats-tls-wrapper`, and `nats-wrapper` to fail. This causes the BOSH deployment to fail.
 VMware recommends using IPsec with Jammy stemcell v1.93 and later.
 For more information, see the [VMware Tanzu Support documentation](https://community.pivotal.io/s/article/IPSec-Add-On-connectivity-Issues-on-Jammy-1-18-1-83?language=en_US).
