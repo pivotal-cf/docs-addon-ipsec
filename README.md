@@ -14,7 +14,7 @@ In this README:
 
 ## Branches in this Content Repo
 
-The master branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
+The main branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
 
 * Unreleased features
 * Doc bug fixes
@@ -24,7 +24,7 @@ Then, if necessary, immediately cherry-pick/copy any changes that you want to pu
 
 | Branch name | Use for… |
 |-------------| ------|
-| master      | doc in development, publishes to https://docs-staging.vmware.com/en/draft/IPsec-for-VMware-Tanzu/2.0/documentation/GUID-index.html |
+| main      | doc in development, publishes to https://docs-staging.vmware.com/en/draft/IPsec-for-VMware-Tanzu/2.0/documentation/GUID-index.html |
 | 1.9         | live docs for v1.9, publishes to https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html |
 | 1.8         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.8.pdf) |
 | 1.7         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.7.pdf) |  
@@ -34,10 +34,10 @@ Then, if necessary, immediately cherry-pick/copy any changes that you want to pu
 
 ## Releasing a New Minor Version
 
-Because **master** is the latest and greatest documentation, the process would be to cut a **x.x** branch
-for the version that **master** was targeting during that time.
+Because **main** is the latest and greatest documentation, the process would be to cut a **x.x** branch
+for the version that **main** was targeting during that time.
 
-After this point, **master** will then be the target for the next version of the IPsec product.
+After this point, **main** will then be the target for the next version of the IPsec product.
 
 
 ## Partials
