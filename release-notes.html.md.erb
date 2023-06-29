@@ -158,6 +158,7 @@ This release fixes the following issue:
 * **Deployment failure due to stale security associations:**
 Large deployments, with a size of approximately 300 VMs, failed due to stale security associations (SAs).
 The `ipsec` job now runs an `ip xfrm state flush` immediately after starting the charon process.
+* Handles duplicates certs subject/serial against the serial/subject of all the CAs
 
 #### Known Issues
 
