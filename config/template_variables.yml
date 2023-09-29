@@ -41,4 +41,4 @@ template_variables:
   windows_runtime_full: VMware Tanzu Application Service for VMs &#91;Windows&#93;
   windows_runtime_abbr: TAS for VMs &#91;Windows&#93;
 
-  ops_manager: Ops Manager
+  ops_manager: Tanzu Operations Manager

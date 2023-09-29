@@ -104,7 +104,7 @@ To configure your Google Cloud Platform (GCP) environment for <%= vars.product_s
 
 ###<a id="vsphere"></a>Configure Network Security for vSphere
 
-<p class="note"><strong>Note:</strong> <%= vars.product_short %> is not compatible with VMware NSX-T Container Plug-in for <%= vars.app_runtime_full %>.</p>
+<p class="note"><span class="note__title">Note</span> <%= vars.product_short %> is not compatible with VMware NSX-T Container Plug-in for <%= vars.app_runtime_full %>.</p>
 
 To configure your vSphere environment for <%= vars.product_short %>, confirm that your network allows
 the protocols listed in the table below:
@@ -204,12 +204,12 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
     </tr>
     </table>
 
-  <p class="note"><strong>Note:</strong> The default <strong><%= vars.app_runtime_abbr %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
+  <p class="note"><span class="note__title">Note</span> The default <strong><%= vars.app_runtime_abbr %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
     If your <%= vars.app_runtime_abbr %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
 
 ###<a id="openstack"></a>Configure Network Security for OpenStack
 
-<p class="note"><strong>Note:</strong> The following network configuration is optimized for Mirantis OpenStack, but other OpenStack distributions have a similar workflow.</p>
+<p class="note"><span class="note__title">Note</span> The following network configuration is optimized for Mirantis OpenStack, but other OpenStack distributions have a similar workflow.</p>
 
 To configure your Mirantis OpenStack environment for <%= vars.product_short %>, perform the following steps:
 
@@ -355,7 +355,7 @@ YAML:
         VMware recommends that you list the subnets that are used for <%= vars.app_runtime_abbr %> managed services.
         Subnets for <%= vars.app_runtime_abbr %> managed services that do not support <%= vars.product_short %>, such as <%= vars.ops_manager %> or service tiles,
         must be listed under <code>no_ipsec_subnets</code> and installed in a separate network.
-        <p class="note"><strong>Note: </strong>
+        <p class="note"><span class="note__title">Note</span>
           If you have an external load balancer such as F5, add it to the
           <code>no_ipsec_subnets</code> property.
           If you want to include it in the <code>ipsec_subnet</code>, you must
@@ -427,7 +427,8 @@ YAML:
            ... <strong>&#60;SECOND ROOT&#62;</strong>
            -----END CERTIFICATE-----
         </pre>
-        <p class="note"><strong>Note:</strong> The root and the intermediate certificates cannot have the same subjectName,
+        <p class="note important">
+        <span class="note__title">Important</span> The root and the intermediate certificates cannot have the same subjectName,
            also called the common name and set with <code>CN=</code>.
            The root <b>must</b> be the first certificate of the chain.
         </p>
@@ -653,7 +654,7 @@ After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_ab
     bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX
     ```
 
-    <p class="note"><strong>Note:</strong> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
+    <p class="note"><span class="note__title">Note</span> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
 
 1. Enter the root environment with root privileges by running:
 
