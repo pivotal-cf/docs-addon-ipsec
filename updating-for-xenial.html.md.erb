@@ -17,7 +17,7 @@ Follow the instructions on this page if you use <%= vars.product_short %> with a
 products or tiles that use Xenial stemcells.
 See [Add the Xenial Stemcell Property to <%= vars.product_short %>](#add) below.
 
-##<a id="who-me"></a> Do I Need to Modify <%= vars.product_short %>?
+## <a id="who-me"></a> Do I Need to Modify <%= vars.product_short %>?
 
 <%= vars.product_short %> v1.9.9 runs correctly on Xenial-based VMs if the <%= vars.product_short %> runtime config
 includes the `ubuntu-xenial` property.
@@ -55,10 +55,12 @@ before you install any product tiles that use Xenial stemcells.
 
 If you use <%= vars.product_short %> v1.9.9 without the `ubuntu-xenial`
 property in the runtime config, then you must add it to your
-existing `ipsec-addon.yml` and redeploy.  Follow these steps:
+existing `ipsec-addon.yml` and redeploy.
+
+Follow these steps:
 
 1. SSH into the <%= vars.ops_manager %> VM.
-   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
 2. To retrieve and save the <%= vars.product_short %> runtime config, run the following command:
 
@@ -74,7 +76,7 @@ existing `ipsec-addon.yml` and redeploy.  Follow these steps:
 
 
 3. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-xenial` under
-    `properties: {}` as shown below:
+    `properties: {}` as shown in the following:
 
 
     ```
@@ -100,10 +102,10 @@ existing `ipsec-addon.yml` and redeploy.  Follow these steps:
 
     <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec-addon /tmp/ipsec-addon.yml</pre>
 
-5. Navigate to the Installation Dashboard in <%= vars.ops_manager %>.
+5. Go to the Installation Dashboard in <%= vars.ops_manager %>.
 
 6. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
    For more information about this <%= vars.ops_manager %> page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+   see [Reviewing your pending product changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 7. Click **Apply Changes**.

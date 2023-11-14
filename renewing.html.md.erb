@@ -8,7 +8,7 @@ owner: Security Engineering
 This topic describes the basic process that you can use to renew any already expired certificates contained in
 the <%= vars.product_full %> manifest.
 
-##<a id="about-expiration"></a>About Certificate Expiration
+## <a id="about-expiration"></a>About Certificate Expiration
 
 <%= vars.product_short %> relies upon X.509 certificates to secure the communications between communicating peers.
 
@@ -20,7 +20,7 @@ it is important for the operations team to plan accordingly and remember to rota
 <p class="note"><span class="note__title">Note</span> Rotating the certificates while they are still valid
    ensures the maximum availability of the Cloud Foundry platform and avoids any unscheduled interruption in service.</p>
 
-##<a id="renew-certs"></a>Renew Expired <%= vars.product_short %> Certificates
+## <a id="renew-certs"></a>Renew Expired <%= vars.product_short %> Certificates
 
 To renew expired <%= vars.product_short %> certificates, do the following:
 
@@ -65,11 +65,11 @@ To renew expired <%= vars.product_short %> certificates, do the following:
     bosh -e BOSH-ENVIRONMENT update-runtime-config --name=ipsec PATH-TO-SAVE-THE-RUNTIME-CONFIG
     ```
 
-1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+1. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
    For more information about this <%= vars.ops_manager %> page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+   see [Reviewing your pending product changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 1. Click **Apply Changes**.
 1. Set the `optional` field in the `config.yml` back to `false`.
-1. Repeat steps 4 to 6 to update the runtime config again.
+1. Repeat steps 4 through 6 to update the runtime config again.
 1. Click **Apply Changes**.

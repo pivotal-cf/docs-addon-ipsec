@@ -14,7 +14,7 @@ Follow the instructions in this topic if you use <%= vars.product_short %> with 
 If you use <%= vars.product_short %> without adding the `ubuntu-jammy` property to the runtime config,
 the VMs running on Jammy cannot communicate with the rest of the system.
 
-## <a id="which"></a> Product Tiles that Use Jammy Stemcells
+## <a id="which"></a> Product Tiles that use Jammy Stemcells
 
 You must add the `ubuntu-jammy` property to <%= vars.product_short %> runtime config
 before you install any product tiles that use Jammy stemcells.
@@ -24,7 +24,7 @@ before you install any product tiles that use Jammy stemcells.
 To add the `ubuntu-jammy` property to <%= vars.product_short %>:
 
 1. SSH into the <%= vars.ops_manager %> VM.
-   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
 1. To retrieve and save the <%= vars.product_short %> runtime config, run:
 
@@ -38,7 +38,7 @@ To add the `ubuntu-jammy` property to <%= vars.product_short %>:
 
     <pre class="terminal">$ bosh -e my-env runtime-config –name ipsec-addon > /tmp/ipsec-addon.yml</pre>
 
-1. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-jammy` under `properties: {}` as shown below:
+1. Edit the `ipsec-addon.yml` file to add `- os: ubuntu-jammy` under `properties: {}` as shown in the following:
 
     ```yaml
     addons:
@@ -63,6 +63,6 @@ To add the `ubuntu-jammy` property to <%= vars.product_short %>:
 
     <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec-addon /tmp/ipsec-addon.yml</pre>
 
-1. Navigate to the Installation Dashboard in <%= vars.ops_manager %> and click **Review Pending Changes**.
+1. Go to the Installation Dashboard in <%= vars.ops_manager %> and click **Review Pending Changes**.
 
 1. Click **Apply Changes**.

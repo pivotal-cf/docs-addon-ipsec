@@ -8,11 +8,11 @@ owner: Platform Security & Compliance Team
 This topic tells you how to uninstall <%= vars.product_full %> from your deployment, and how to verify it has uninstalled.
 
 
-##<a id="uninstall"></a>Uninstall <%= vars.product_short %> Add-on
-To uninstall the <%= vars.product_short %> Add-on, follow the steps below:
+## <a id="uninstall"></a>Uninstall <%= vars.product_short %> Add-on
+To uninstall the <%= vars.product_short %> Add-on, complete the following steps:
 
 
-###<a id="uninstall-flag"></a>(Optional) Set Optional Flag to True
+### <a id="uninstall-flag"></a>(Optional) Set Optional Flag to True
 When uninstalling <%= vars.product_short %>, the `optional` flag must be set to `true` in the runtime config of the current deployment before the properties can be removed.
 If your flag is already set this way, you can continue with the uninstallation with the procedure [Remove <%= vars.product_short %> Properties](#uninstall-properties) below.
 
@@ -46,18 +46,18 @@ To set the `optional` flag to `true`, do the following:
       $ bosh -e my-env update-runtime-config --name=ipsec /runtime/config/
     </pre>
 
-1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+1. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
 
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
    For more information about this <%= vars.ops_manager %> page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+   see [Reviewing your pending product changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. Click **Apply Changes**.
 
 1. Wait for the installation to complete.
 
 
-###<a id="uninstall-properties"></a>Remove <%= vars.product_short %> Properties
+### <a id="uninstall-properties"></a>Remove <%= vars.product_short %> Properties
 
 After your `optional` flag is set to `true` in your runtime config,
 then you can remove the <%= vars.product_short %> properties.
@@ -92,12 +92,11 @@ To do this, follow the steps below:
       $ bosh -e my-env update-runtime-config --name=ipsec /runtime/config/
     </pre>
 
-1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+1. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
 
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
    For more information about this <%= vars.ops_manager %> page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
-
+   see [Reviewing your pending product changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html)
 1. Click **Apply Changes**.
 
 
@@ -106,7 +105,7 @@ To verify the uninstallation of <%= vars.product_short %> is successful, follow 
 
 1. Use `bosh ssh` to SSH into one of the VMs in your deployment.
 For more information,
-see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh).
+see [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
 1. Run `monit summary`. If <%= vars.product_short %> has uninstalled successfully,
 it does not show the `ipsec` process.
