@@ -12,8 +12,6 @@ troubleshooting, and certificate rotation.
 
 Your org might require <%= vars.product_short %> if you transmit sensitive data.
 
-## <a id="overview"></a> Overview
-
 <%= vars.product_full %> provides security to the network layer of the OSI model with a
 [strongSwan](https://www.strongswan.org/) implementation of <%= vars.product_short %>.
 It provides a strongSwan job in FIPS mode to each BOSH-deployed VM.
@@ -22,17 +20,19 @@ It provides a strongSwan job in FIPS mode to each BOSH-deployed VM.
 It secures network traffic within a Cloud Foundry deployment
 and provides internal system protection if a malicious actor breaches your firewall.
 
-## <a id='snapshot'></a> Product Snapshot
+## <a id='snapshot'></a> Product snapshot
 
 The following table provides version and version-support information about <%= vars.product_full %>.
 
-<table class="nice">
+<table class=“table”>
+    <thead>
     <th>Element</th>
     <th>Details</th>
     <tr>
         <td>Version</td>
         <td>v1.9.52</td>
     </tr>
+    </thead>
     <tr>
         <td>Release date</td>
         <td>November 2, 2023</td>
