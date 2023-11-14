@@ -9,17 +9,19 @@ This topic tells you how to upgrade <%= vars.product_full %>.
 
 <%= partial vars.path_to_partials + "/upgrade-planner" %>
 
-##<a id="assume"></a>Assumption about <%= vars.ops_manager %> Versions
+## <a id="assume"></a>Assumption about <%= vars.ops_manager %> Versions
 
 This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, and runtime config.
 
-<table>
+<table class=“table”>
+  <thead>
   <tr>
     <th><%= vars.ops_manager %> Version</th>
     <th>BOSH CLI Version</th>
     <th>Runtime Config</th>
     <th>More information</th>
   </tr>
+  </thead>
   <tr>
     <td>1.12 and later</td>
     <td>CLI v2+</td>
@@ -38,7 +40,7 @@ This topic assumes the following about your <%= vars.ops_manager %>, BOSH CLI, a
    do so before upgrading <%= vars.product_full %>.
    For general information about named runtime config files, see <a href="https://bosh.io/docs/configs">Configs</a>.</p>
 
-##<a id="upgrade"></a>Upgrade <%= vars.product_short %></a>
+## <a id="upgrade"></a>Upgrade <%= vars.product_short %></a>
 
 To upgrade <%= vars.product_short %> to a later version, do the following:
 
@@ -56,7 +58,7 @@ To upgrade <%= vars.product_short %> to a later version, do the following:
     <pre class="terminal">$ cp -i ~/.ssh/my-key.pem ~/Downloads/ipsec-1.8.14.tgz ubuntu<span>@</span>192.168.0.2: </pre>
 
 3. SSH into the <%= vars.ops_manager %> VM.
-   For how to do this, see [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/ops-manager/2-7/install/ssh-login.html).
+   For how to do this, see [Logging in to Tanzu Operations Manager VMs with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 
 4. Retrieve the latest runtime config by running the following command:
 
@@ -95,10 +97,10 @@ To upgrade <%= vars.product_short %> to a later version, do the following:
 
     <pre class="terminal">bosh -e my-env update-runtime-config --name=ipsec /tmp/ipsec.yml </pre>
 
-8. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+8. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
 
 9. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
    For more information about this <%= vars.ops_manager %> page,
-   see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-7/install/review-pending-changes.html).
+   see [Reviewing your pending product changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 10. Click **Apply Changes**.

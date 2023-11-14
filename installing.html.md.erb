@@ -634,7 +634,7 @@ complete the following steps:
   1. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   For more information about this <%= vars.ops_manager %> page,
-  see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+  see [Reviewing your pending product changes in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
   1. Click **Apply Changes**
   1. Wait for the installation to complete.
   1. Set the `optional` flag to `false`.
@@ -650,13 +650,13 @@ complete the following steps:
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
   1. Deploy <%= vars.app_runtime_abbr %> by following the installation instructions for your IaaS.
-     For more information, see [Architecture and Installation Overview](http://docs.pivotal.io/pivotalcf/installing/index.html).
+     For more information, see [Installing Tanzu Operations Manager overview](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-install-index.html).
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. VMware recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
 ## <a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
-After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_abbr %>, perform the following steps to verify your <%= vars.product_short %> installation:
+After you install <%= vars.product_short %> and deploy <%= vars.app_runtime_abbr %>, complete the following steps to verify your <%= vars.product_short %> installation:
 
 1. List the job VMs in your deployment by running the following command:
 

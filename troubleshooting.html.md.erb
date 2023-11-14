@@ -9,7 +9,7 @@ This topic gives you instructions to verify that strongSwan-based <%= vars.produ
 works with your deployment and provides general recommendations
 for troubleshooting.
 
-## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with Your Deployment
+## <a id='verify-ipsec'></a>Verify that <%= vars.product_short %> Works with your deployment
 
 To verify that <%= vars.product_short %> works between two hosts, you can check that traffic is encrypted in the deployment with `tcpdump`, perform the ping test, and check the logs with the steps below.
 
@@ -91,7 +91,7 @@ Unresponsive applications or incomplete responses, particularly for large payloa
 Scale your deployment by allocating more processing power to your VM CPU or GPUs, which, additionally, decreases the packet encryption time. One way to increase network performance is to compress the data prior to encryption. This approach increases performance by reducing the amount of data transferred.
 
 <hr>
-####<a name='duplicate'></a> Symptom
+#### <a name='duplicate'></a> Symptom
 
 <%= vars.product_short %> fails to deploy with one of the following errors:
 
@@ -164,7 +164,8 @@ The <%= vars.product_short %> BOSH job is not running on either VM. This problem
 #### Solution
 Set up a networking restriction on host VMs to only allow <%= vars.product_short %> protocol and block the normal TCP/UDP traffic. For example, in AWS, configure a network security group with the minimal networking setting as shown below and block all other TCP and UDP ports.
 
-<table border='1' class='nice'>
+<table class=“table”>
+<thead>
 	<caption>Additional AWS Configuration</caption>
 <tr>
 <th>Type</th>
@@ -172,6 +173,7 @@ Set up a networking restriction on host VMs to only allow <%= vars.product_short
 <th>Port Range</th>
 <th>Source</th>
 </tr>
+</thead>
 <tr>
 <td>Custom Protocol</td>
 <td>AH (51)</td>
@@ -266,10 +268,10 @@ addons:
           -----END CERTIFICATE-----
 ```
 
-In the example above, the values that appear after the <code>ca_certificates</code>: key are contained within a list and are not just a single certificate.
+In the previous example, the values that appear after the <code>ca_certificates</code>: key are contained within a list and are not just a single certificate.
 This entry must be followed by a line starting with <code>-</code>, and ending with <code>|</code>.  The lines following this contain the PEM encoded certificate(s).
 
-The error message shown above indicating a problem with the <code>each\_with\_index</code> method provides a hint that the <code>- |</code> YAML syntax sequence is missing.  Use this syntax even in situations where there is only one CA certificate, for example a list of one entry.
+The error message previously shown indicates a problem with the <code>each\_with\_index</code> method provides a hint that the <code>- |</code> YAML syntax sequence is missing.  Use this syntax even in situations where there is only one CA certificate, for example a list of one entry.
 
 <hr>
 
