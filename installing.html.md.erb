@@ -8,8 +8,6 @@ owner: Security Engineering
 This topic tells you how to prepare your network for <%= vars.product_full %>,
 create an <%= vars.product_short %> runtime config, and add <%= vars.product_short %> to your deployment.
 
-## <a id="overview"></a>Overview
-
 To install <%= vars.product_short %>, you must do the following:
 
   1. [Configure Network Security](#config-network)
@@ -36,13 +34,16 @@ For more information, see [<%= vars.product_short %> Load Balancer Issues](./tro
 * The Maximum Transmission Unit (MTU) for your IaaS set in the <%= vars.app_runtime_full %>  tile.
 You can find the **Applications Network Maximum Transmission Unit (MTU) (in bytes)** setting
 by navigating to **<%= vars.ops_manager %>** > **<%= vars.app_runtime_abbr %>** > **Networking**. <br><br>
+
 VMware recommends the following MTU values:
 
-    <table class="nice">
+<table class=“table”>
+      <thead>
       <tr>
         <th>IaaS</th>
         <th>Recommended MTU Value</th>
       </tr>
+      </thead>
       <tr>
         <td>GCP</td>
         <td><code>1354</code></td>
@@ -66,7 +67,7 @@ VMware recommends the following MTU values:
     </table>
 
 
-##<a id="bestpractices"></a>Best Practices
+## <a id="bestpractices"></a>Best Practices
   * <%= vars.product_short %> might affect the functionality of other service tiles.
     As a result, VMware recommends deploying <%= vars.app_runtime_abbr %>
     and each service tile to different isolated subnets.
@@ -78,7 +79,7 @@ VMware recommends the following MTU values:
     If you use PV stemcells obtained from <a href="https://bosh.io/docs">bosh.io</a>,
     see the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting <%= vars.product_full %> topic to adjust MTU values.
 
-##<a id="config-network"></a>Configure Network Security
+## <a id="config-network"></a>Configure Network Security
 
 To configure network security, do one of the following procedures for your IaaS:
 
@@ -88,7 +89,7 @@ To configure network security, do one of the following procedures for your IaaS:
   + [Configure Network Security for AWS](#aws)
   + [Configure Network Security for OpenStack](#openstack)
 
-###<a id="gcp"></a>Configure Network Security for Google Cloud Platform
+### <a id="gcp"></a>Configure Network Security for Google Cloud Platform
 
 To configure your Google Cloud Platform (GCP) environment for <%= vars.product_short %>, do the following:
 
@@ -102,19 +103,21 @@ To configure your Google Cloud Platform (GCP) environment for <%= vars.product_s
   1. Click **Create**.
   1. Adjust the MTU value to `1354` by performing the procedure in the <a href="./troubleshooting.html#ipsec-installation-issues">Packet Loss</a> section of the Troubleshooting <%= vars.product_full %> topic.
 
-###<a id="vsphere"></a>Configure Network Security for vSphere
+### <a id="vsphere"></a>Configure Network Security for vSphere
 
 <p class="note"><span class="note__title">Note</span> <%= vars.product_short %> is not compatible with VMware NSX-T Container Plug-in for <%= vars.app_runtime_full %>.</p>
 
 To configure your vSphere environment for <%= vars.product_short %>, confirm that your network allows
 the protocols listed in the table below:
 
-<table>
+<table class=“table”>
+<thead>
   <tr>
     <th width="33%">Protocol Name</th>
     <th width="33%">Protocol Number</th>
     <th width="33%">Port(s)</th>
   </tr>
+  </thead>
   <tr>
     <td>AH</td>
     <td>51</td>
@@ -133,17 +136,19 @@ the protocols listed in the table below:
 </table>
 
 
-###<a id="azure"></a>Configure Network Security for Azure
+### <a id="azure"></a>Configure Network Security for Azure
 
 To configure your Azure environment for <%= vars.product_short %>, do the following:
 
 1. Confirm that your network allows the protocols listed in the table below.
-    <table>
+  <table class=“table”>
+  <thead>
       <tr>
         <th width="33%">Protocol Name</th>
         <th width="33%">Protocol Number</th>
         <th width="33%">Port(s)</th>
       </tr>
+      </thead>
       <tr>
         <td>AH</td>
         <td>51</td>
@@ -164,16 +169,17 @@ To configure your Azure environment for <%= vars.product_short %>, do the follow
 2. Adjust the MTU value to `1438`. For instructions, see <a href="./troubleshooting.html#ipsec-installation-issues">Explanation: Packet Loss</a>.
 
 
-###<a id="aws"></a>Configure Network Security for AWS
+### <a id="aws"></a>Configure Network Security for AWS
 
 To configure your AWS environment for <%= vars.product_short %>, do the following:
 
-1. Navigate to **EC2 Dashboard** > **Security Groups**.
+1. Go to **EC2 Dashboard** > **Security Groups**.
 
 2. Select the Security Group with the description **<%= vars.app_runtime_abbr %> VMs Security Group** and click **Edit**.
 
 3. Create the following **Inbound Rules**.
-    <table border="1" class="nice">
+    <table class=“table”>
+    <thead>
     <tr>
       <th>Type</th>
       <th>Protocol Name</th>
@@ -181,6 +187,7 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
       <th>Port Range</th>
       <th>Source</th>
     </tr>
+    </thead>
     <tr>
       <td>Custom Protocol</td>
       <td>AH</td>
@@ -207,24 +214,26 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
   <p class="note"><span class="note__title">Note</span> The default <strong><%= vars.app_runtime_abbr %> VMs Security Group</strong> is typically specified with a subnet of <code>10.0.0.0/16</code>.
     If your <%= vars.app_runtime_abbr %> subnet is deployed to a different CIDR block, adjust the source as needed.</p>
 
-###<a id="openstack"></a>Configure Network Security for OpenStack
+### <a id="openstack"></a>Configure Network Security for OpenStack
 
 <p class="note"><span class="note__title">Note</span> The following network configuration is optimized for Mirantis OpenStack, but other OpenStack distributions have a similar workflow.</p>
 
 To configure your Mirantis OpenStack environment for <%= vars.product_short %>, perform the following steps:
 
-1. Navigate to **Project / Access & Security**.
+1. Go to **Project / Access & Security**.
 
 1. Select the security group and click **Manage Rules**.
 
 1. Create the following **Ingress and Egress Rules**. Adjust the source CIDR as needed for your environment.
-    <table border="1" class="nice">
+    <table class=“table”>
+    <thead>
     <tr>
       <th>Protocol Name</th>
       <th>Protocol Number</th>
       <th>Port Range</th>
       <th>Source</th>
     </tr>
+    </thead>
     <tr>
       <td>ESP</td>
       <td>50</td>
@@ -245,7 +254,7 @@ To configure your Mirantis OpenStack environment for <%= vars.product_short %>, 
     </tr>
     </table>
 
-##<a id="create-mfest"></a>Create the <%= vars.product_short %> Manifest
+## <a id="create-mfest"></a>Create the <%= vars.product_short %> Manifest
 
 To add <%= vars.product_short %> to VMs in your deployment, you must create a runtime config file named `ipsec-addon.yml`.
 The `ipsec-addon.yml` configures <%= vars.product_short %> add-on properties for Linux VMs.
@@ -312,11 +321,13 @@ YAML:
   ```
 
 1. Replace the values listed in the template above as follows:
-  <table>
+    <table class=“table”>
+    <thead>
     <tr>
       <th width="35%">Property</th>
       <th>Instructions</th>
     </tr>
+    </thead>
     <tr>
       <td><code><strong>version</strong></code></td>
       <td>
@@ -504,17 +515,20 @@ YAML:
   </table>
 
 
-####<a id="proposals"></a>(Optional) Configure Custom Deployment Proposals
+#### <a id="proposals"></a>(Optional) Configure Custom Deployment Proposals
 
-The manifest templates given above configure a default proposal for the `ipsec-addon.yml`.
+The manifest templates previously shown configure a default proposal for the `ipsec-addon.yml`.
+
 If you want to use different proposals, modify the `ipsec-addon.yml` using the following table:
 
 1. Select the encryption type from the first row.
-  <table>
+  <table class=“table”>
+  <thead>
     <tr>
       <th rowspan="2">Encryption Type</th>
       <th colspan="2">Linux (ipsec-addon)</th>
     </tr>
+    </thead>
     <tr>
       <th>ike\_proposals</th>
       <th>esp\_proposals</th>
@@ -532,13 +546,14 @@ If you want to use different proposals, modify the `ipsec-addon.yml` using the f
   </table>
 
 1. Copy the properties from that row into `ipsec-addon.yml` accordingly.
-See the `ipsec-addon.yml` file example above.
-  <table>
+See the previous `ipsec-addon.yml` file example.
+  <table class=“table”>
+  <thead>
     <tr>
       <th width="35%">Property</th>
       <th>Instructions</th>
     </tr>
-
+    </thead>
     <tr>
       <td><code><strong>ike\_proposals</strong></code></td>
       <td> You can modify the IKE (Main Mode) encryption and integrity algorithms, and the Diffie-Hellman group.
@@ -552,10 +567,11 @@ See the `ipsec-addon.yml` file example above.
     </tr>
   </table>
 
-##<a id="download-deploy"></a>Download and Deploy <%= vars.product_short %>
+## <a id="download-deploy"></a>Download and Deploy <%= vars.product_short %>
 
-To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your BOSH manifest, and deploy <%= vars.product_short %>,
-follow the steps below:
+To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your
+BOSH manifest, and deploy <%= vars.product_short %>,
+complete the following steps:
 <p class="note breaking"><span class="note__title">Breaking change</span> If you are using <%= vars.app_runtime_abbr %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs">Generic Configs</a> in the BOSH documentation.</p>
 
 1. Download the <%= vars.product_short %> software binary from the [<%= vars.product_network %>](https://network.tanzu.vmware.com/products/p-ipsec-addon) to your local machine.
@@ -613,7 +629,7 @@ follow the steps below:
 
 1. If you have already deployed <%= vars.app_runtime_abbr %> or are adding <%= vars.product_short %> to an existing deployment:
   1. Set the `optional` flag to `true`.
-  1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+  1. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   For more information about this <%= vars.ops_manager %> page,
   see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
@@ -623,12 +639,12 @@ follow the steps below:
   1. Update the runtime config.
       <pre class="terminal">$ bosh -e my-env update-runtime-config --name=ipsec PATH/bosh-manifest.yml</pre>
 
-1. Navigate to your **Installation Dashboard**.
+1. Go to your **Installation Dashboard**.
 1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
 1. Click **Apply Changes**.
 
 1. If the <%= vars.app_runtime_abbr %>  tile is not yet installed:
-  1. Navigate to your **Installation Dashboard** in <%= vars.ops_manager %>.
+  1. Go to your **Installation Dashboard** in <%= vars.ops_manager %>.
   1. If you are using <%= vars.ops_manager %> v2.3 or later, click **Review Pending Changes**.
   1. Click **Apply Changes**
   1. Deploy <%= vars.app_runtime_abbr %> by following the installation instructions for your IaaS.
@@ -636,7 +652,7 @@ follow the steps below:
 
 1. The `bosh-manifest.yml` and `ipsec-addon.yml` files contain sensitive information. When the deployment process is completed, remove any unneeded copies of these files from the local workstation. VMware recommends that you use encryption or logical access controls to secure any archival copies of manifest files you want to retain.
 
-##<a id="verify"></a>Verify Your <%= vars.product_short %> Installation
+## <a id="verify"></a>Verify Your <%= vars.product_short %> Installation
 
 After installing <%= vars.product_short %> and deploying <%= vars.app_runtime_abbr %>, perform the following steps to verify your <%= vars.product_short %> installation:
 
@@ -766,12 +782,12 @@ to get uptime and connections information:
         ...
         </pre>
 
-##<a id="self-signed"></a>Generate a Self-Signed Certificate with OpenSSL
+## <a id="self-signed"></a>Generate a Self-Signed Certificate with OpenSSL
 
-Follow these steps to generate a self-signed certificate for your <%= vars.product_short %> manifest.
+Follow these steps to generate a self-signed certificate for your <%= vars.product_short %> manifest:
 
 1. Download the `openssl-create-ipsec-certs.sh` bash script from the [pivotal-cf/docs-addon-ipsec public repository](https://github.com/pivotal-cf/docs-addon-ipsec/tree/1.9/scripts) on GitHub.
-1. Navigate to the directory where you downloaded the script:
+1. Go to the directory where you downloaded the script:
   <pre class="terminal">$ cd ~/workspace</pre>
 1. Change the permissions of the script:
   <pre class="terminal">$ chmod u+x openssl-create-ipsec-certs.sh</pre>

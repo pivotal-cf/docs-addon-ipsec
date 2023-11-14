@@ -8,12 +8,12 @@ owner: Security Engineering
 This topic tells you how to check the expiration dates of <%= vars.product_full %> certificates.
 
 The following procedure describes how to download the runtime configuration file and
-extract the two <%= vars.product_short %> certificates into temporary files. Then, the files are input to the OpenSSL tool.
-The OpenSSL tool decodes the certificates and displays the expiration dates.
+extract the two <%= vars.product_short %> certificates into temporary files. Then, the files are input to
+the OpenSSL tool. The OpenSSL tool decodes the certificates and displays the expiration dates.
 
 ## <a id="check-dates"></a> Check Certificate Dates
 
-Follow the steps below to determine the expiration dates of your <%= vars.product_short %> certificates.
+Follow these steps to determine the expiration dates of your <%= vars.product_short %> certificates:
 
 1. Log in to BOSH Director.
 
@@ -106,7 +106,7 @@ Follow the steps below to determine the expiration dates of your <%= vars.produc
     If the PEM file is not correctly formatted,
     The output shows `unable to load certificate`.
 
-8. Repeat steps 5–7 for the instance_certificate.
+8. Repeat steps 5 through 7 for the instance_certificate.
 
 9. Review the `Not After` date and plan to replace the certificates accordingly.
 
