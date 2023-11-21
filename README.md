@@ -4,13 +4,17 @@ This repo contains the IPsec documentation.
 
 In this README: 
 
-- [Branches in this Content Repo](#branches-in-this-content-repo)
-- [Releasing a New Minor Version](#releasing-a-new-minor-version)
-- [Partials](#partials)
-- [Contributing to Documentation](#contributing-to-documentation)
-- [Publishing Docs](#publishing-docs)
-- [Troubleshooting Markdown](#troubleshooting-markdown)
-- [Style Guide](#style-guide)
+- [docs-addon-ipsec](#docs-addon-ipsec)
+  - [Branches in this Content Repo](#branches-in-this-content-repo)
+  - [Releasing a New Minor Version](#releasing-a-new-minor-version)
+  - [Partials](#partials)
+  - [Contributing to Documentation](#contributing-to-documentation)
+  - [Publishing Docs](#publishing-docs)
+    - [Prepare Markdown Files](#prepare-markdown-files)
+    - [In Docsdash](#in-docsdash)
+    - [Promoting to Pre-Prod and Prod](#promoting-to-pre-prod-and-prod)
+  - [Troubleshooting Markdown](#troubleshooting-markdown)
+  - [Style Guide](#style-guide)
 
 ## Branches in this Content Repo
 
@@ -24,8 +28,8 @@ Then, if necessary, immediately cherry-pick/copy any changes that you want to pu
 
 | Branch name | Use for… |
 |-------------| ------|
-| main      | doc in development, publishes to https://docs-staging.vmware.com/en/draft/IPsec-for-VMware-Tanzu/2.0/documentation/GUID-index.html |
-| 1.9         | live docs for v1.9, publishes to https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html |
+| master      | doc in development, publishes to https://docs-staging.vmware.com/en/draft/IPsec-for-VMware-Tanzu/2.0/documentation/GUID-index.html |
+| 1.9      | live doc, publishes to https://docs-staging.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html on stage and https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html on live site.|
 | 1.8         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.8.pdf) |
 | 1.7         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.7.pdf) |  
 | 1.6         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.6.pdf) |
