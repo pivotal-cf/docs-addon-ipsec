@@ -5,18 +5,18 @@ This repo contains the IPsec documentation.
 In this README: 
 
 - [docs-addon-ipsec](#docs-addon-ipsec)
-  - [Branches in this Content Repo](#branches-in-this-content-repo)
-  - [Releasing a New Minor Version](#releasing-a-new-minor-version)
+  - [Branches](#branches)
+  - [Releasing a new minor version](#releasing-a-new-minor-version)
   - [Partials](#partials)
-  - [Contributing to Documentation](#contributing-to-documentation)
-  - [Publishing Docs](#publishing-docs)
-    - [Prepare Markdown Files](#prepare-markdown-files)
+  - [Contributing to documentation](#contributing-to-documentation)
+  - [Publishing docs](#publishing-docs)
+    - [Prepare Markdown files](#prepare-markdown-files)
     - [In Docsdash](#in-docsdash)
-    - [Promoting to Pre-Prod and Prod](#promoting-to-pre-prod-and-prod)
+    - [Promoting to pre-prod and prod](#promoting-to-pre-prod-and-prod)
   - [Troubleshooting Markdown](#troubleshooting-markdown)
-  - [Style Guide](#style-guide)
+  - [Style guide](#style-guide)
 
-## Branches in this Content Repo
+## Branches
 
 The main branch is the tree-trunk, so **always** make changes you want carried forward in this branch. This includes:
 
@@ -28,7 +28,7 @@ Then, if necessary, immediately cherry-pick/copy any changes that you want to pu
 
 | Branch name | Use for… |
 |-------------| ------|
-| master      | doc in development, publishes to https://docs-staging.vmware.com/en/draft/IPsec-for-VMware-Tanzu/2.0/documentation/GUID-index.html |
+| master      | doc in development, publishes to https://docs-staging.vmware.com/en/draft/IPsec-for-VMware-Tanzu/1.10/documentation/GUID-index.html |
 | 1.9      | live doc, publishes to https://docs-staging.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html on stage and https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html on live site.|
 | 1.8         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.8.pdf) |
 | 1.7         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.7.pdf) |  
@@ -36,7 +36,7 @@ Then, if necessary, immediately cherry-pick/copy any changes that you want to pu
 | 1.5         | NOT IN USE (Published as PDF at https://docs.pivotal.io/archives/addon-ipsec-1.5.pdf) |
 
 
-## Releasing a New Minor Version
+## Releasing a new minor version
 
 Because **main** is the latest and greatest documentation, the process would be to cut a **x.x** branch
 for the version that **main** was targeting during that time.
@@ -49,7 +49,7 @@ After this point, **main** will then be the target for the next version of the I
 Cross-product partials (if any) for IPsec are single sourced from the [Docs Partials](https://github.com/pivotal-cf/docs-partials) repository.
 
 
-## Contributing to Documentation
+## Contributing to documentation
 
 If there is some documentation to add for an unreleased patch version of IPsec then create a branch off of the **live** branch
 you intend to modify and create a pull request against that branch.
@@ -67,14 +67,14 @@ pull request using a fork, see
 in the documentation team wiki.
 
 
-## Publishing Docs
+## Publishing docs
 
 - [docworks](https://docworks.vmware.com/) is the main tool for managing docs used by writers.
 - [docsdash](https://docsdash.vmware.com/) is a deployment UI which manages the promotion from
 staging to pre-prod to production. The process below describes how to upload our docs to staging,
 replacing the publication with the same version.
 
-### Prepare Markdown Files
+### Prepare Markdown files
 - Markdown files live in this repo.
 - Images should live in an `images` directory at the same level and linked with a relative link.
 - Each page requires an entry in [config/toc.md](config/toc.md) for the table of contents.
@@ -87,7 +87,7 @@ replacing the publication with the same version.
 
    There should be an entry with a blue link which says `Documentation` and points to staging.
 
-### Promoting to Pre-Prod and Prod
+### Promoting to pre-prod and prod
 
 **Prerequisite** Needs additional privileges - reach out to a manager on the docs team [#tanzu-docs](https://vmware.slack.com/archives/C055V2M0H) or ask a writer to do this step for you.
 
@@ -128,6 +128,6 @@ replacing the publication with the same version.
 | Symptom:| VMware publishing system doesn't accept code tags after the three back ticks.|
 | Solution: | Make sure you're not using `shell` or `bash` or `console` or `yaml` after back ticks.|
 
-## Style Guide
+## Style guide
 
 This is a word list for terminology and word usage specific to the IPsec docs.
