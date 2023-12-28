@@ -216,15 +216,15 @@ To configure your AWS environment for <%= vars.product_short %>, do the followin
 
 ### <a id="openstack"></a>Configure Network Security for OpenStack
 
-<p class="note"><span class="note__title">Note</span> The following network configuration is optimized for Mirantis OpenStack, but other OpenStack distributions have a similar workflow.</p>
+The following network configuration is optimized for Mirantis OpenStack, but other OpenStack distributions have a similar workflow.
 
 To configure your Mirantis OpenStack environment for <%= vars.product_short %>, perform the following steps:
 
 1. Go to **Project / Access & Security**.
 
-1. Select the security group and click **Manage Rules**.
+2. Select the security group and click **Manage Rules**.
 
-1. Create the following **Ingress and Egress Rules**. Adjust the source CIDR as needed for your environment.
+3. Create the following **Ingress and Egress Rules**. Adjust the source CIDR as needed for your environment.
     <table class=“table”>
     <thead>
     <tr>
@@ -342,7 +342,7 @@ YAML:
         This value makes <%= vars.product_short %> enforcement optional.
         To add <%= vars.product_short %> to an existing deployment, set this flag to <code>true</code>.
         After <%= vars.product_short %> has been successfully installed, set this flag back to <code>false</code> and redeploy.
-        <p class="note warning"><strong>Warning:</strong> Communication between existing components fails
+        <p class="note caution"><span class="note__title">Caution</span>Communication between existing components fails
           if you try to add <%= vars.product_short %> to an existing deployment
           without setting <code>optional</code> to <code>true</code>.
         </p>
@@ -372,13 +372,15 @@ YAML:
           If you want to include it in the <code>ipsec_subnet</code>, you must
           configure it manually.
         </p>
-        <p class="note warning"><strong>Warning:</strong>
-          IPs that are not in <code>ipsec_subnets</code> or <code>no_ipsec_subnets</code>
+        <p class="note caution">
+        <span class="note__title">Caution</span>
+          IPs that are not in <code>ipsec\_subnets</code> or <code>no\_ipsec\_subnets</code>
           have no default behavior and cannot communicate with other internal VMs.
           You must specify internal IPs in <code>ipsec_subnets</code> or
           <code>no_ipsec_subnets</code>.
         </p>
-        <p class="note warning"><strong>Warning:</strong>
+        <p class="note caution">
+        <span class="note__title">Caution</span>
           In GCP, if you use the default router for DNS instead of the Google public
           DNS at <code>8.8.8.8</code>, you must add the IP address of the default
           router in your subnet to <code>no_ipsec_subnets</code>.
@@ -480,7 +482,8 @@ YAML:
       <td>
         Available on Linux-only deployments.
         If set to <code>true</code> it forces UDP encapsulation for ESP packets.
-        <p class="note warning"><strong>Warning:</strong> Setting this property to <code>true</code> in
+        <p class="note caution">
+        <span class="note__title">Caution</span> Setting this property to <code>true</code> in
           mixed deployments causes the deployment to fail.
           If you do not have a Linux-only deployment, you must set <code>force_udp_encapsulation</code>
           to <code>false</code>. </p>
@@ -574,7 +577,8 @@ See the previous `ipsec-addon.yml` file example.
 To download the <%= vars.product_short %> binary, add your <%= vars.product_short %> runtime config to your
 BOSH manifest, and deploy <%= vars.product_short %>,
 complete the following steps:
-<p class="note breaking"><span class="note__title">Breaking change</span> If you are using <%= vars.app_runtime_abbr %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs">Generic Configs</a> in the BOSH documentation.</p>
+<p class="note breaking">
+<span class="note__title">Breaking change</span> If you are using <%= vars.app_runtime_abbr %> v1.12 or later, you must use named runtime configs. If you have not already split your runtime config into multiple named files, do so before upgrading <%= vars.product_full %>. For general information about named runtime config files, see <a href="https://bosh.io/docs/configs">Generic Configs</a> in the BOSH documentation.</p>
 
 1. Download the <%= vars.product_short %> software binary from the [<%= vars.product_network %>](https://network.tanzu.vmware.com/products/p-ipsec-addon) to your local machine.
 
@@ -670,7 +674,8 @@ After you install <%= vars.product_short %> and deploy <%= vars.app_runtime_abbr
     bosh -e BOSH-ENVIRONMENT -d DEPLOYMENT-NAME ssh JOB-NAME/INDEX
     ```
 
-    <p class="note"><span class="note__title">Note</span> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
+    <p class="note">
+    <span class="note__title">Note</span> The exact VM does not matter, because installing <%= vars.product_short %> loads <%= vars.product_short %> on all VMs deployed by <%= vars.ops_manager %>.</p>
 
 1. Enter the root environment with root privileges by running:
 
