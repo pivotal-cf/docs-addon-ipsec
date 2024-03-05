@@ -74,3 +74,35 @@ To renew expired <%= vars.product_short %> certificates, do the following:
 1. Set the `optional` field in the `config.yml` back to `false`.
 1. Repeat steps 4 through 6 to update the runtime config again.
 1. Click **Apply Changes**.
+
+##<a id="ha-scenario"></a>Highly Available (HA) clusters
+
+The IPSEC addon includes a setting named policy_optional that determines if using IPSEC for communication between the specified IP CIDRs is optional.
+If policy_optional is set to false, then it is mandatory that communication be via IPSEC among the specified IP CIDRs in the IPSEC manifest.
+This can present a unique scenario while rotating the expired IPSEC certificates for Highly Available (HA) clusters such as Tanzu Application Service's
+ deployment MySQL cluster. To workaround this, we can temporarily make IPSEC optional via BOSH CLI and then proceeding to rotating the certificates.
+
+ The workaround includes:
+1. BOSH SSH into instance
+1. monit stop ipsec
+1. Update IPSEC file to make policy_optional to true in the IPSEC config file strongswan.conf
+1. Run IPSEC lifecycle scripts
+1. Start IPSEC once
+
+This logic can be scripted.
+
+Please reference the following command for an example of how to make IPSEC optional temporarily to reestablish communication between impacted VMs in a TAS deployment with deployment name "cf-1631c63accc0c5ca075c".
+
+Please note to make any necessary adjustments to how BOSH CLI is used.
+
+  ```
+  bosh -d INSERT_YOUR_DEPLOYMENT_NAME ssh -c "
+  sudo monit stop ipsec
+  sudo sed -i 's/policy_optional = no/policy_optional = yes/g' /var/vcap/jobs/ipsec/etc/strongswan.conf
+  sudo /var/vcap/jobs/ipsec/bin/post-stop
+  sudo /var/vcap/jobs/ipsec/bin/pre-start
+  sleep 10
+  sudo monit start ipsec"
+  ```
+
+Once communication is reestablished - then rotation of the IPSEC certificates can take place after which you should reverse the above change to set policy_optional to 'no'.
